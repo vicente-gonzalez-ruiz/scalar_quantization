@@ -1,0 +1,3 @@
+[submodule "Makefile_templates"]
+	path = Makefile_templates
+	url = git@github.com:vicente-gonzalez-ruiz/Makefile_templates.git
