@@ -1,1 +1,1 @@
-include ../Makefile_templates/Makefile
+include $(HOME)/Makefile_templates/Makefile
