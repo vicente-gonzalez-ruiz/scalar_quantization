@@ -1,0 +1,320 @@
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "<none>"
+%%% End:
+
+\title{Quantization}
+
+\author{Vicente González Ruiz}
+
+\maketitle
+
+\section{\href{https://en.wikipedia.org/wiki/Quantization\_(signal\_processing)}{Basics}}
+\begin{itemize}
+\item
+  Let:
+
+  \begin{equation}
+    s_s(t)=s(nT_s),
+  \end{equation}
+
+  where \(n\in{\mathbb{Z}}\) and \(T_s\) is the sampling frequency in
+  Hertzs.
+\item
+  Quantizers discretize the amplitude of a
+  \href{https://en.wikipedia.org/wiki/Pulse-amplitude_modulation}{PAM
+  signal} \(s(nT_s)\), producing a
+  \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM signal}
+  and a loss of information.
+\item
+  The quantization process can be modeled as
+\end{itemize}
+
+\begin{equation}
+  s[n] = s(nT_s) + e(nT_s),
+\end{equation}
+
+being \(s[n]\) the the quantized signal and \(e(nT_s)\) the quantization
+error.
+
+\begin{itemize}
+\tightlist
+\item
+  Depending on the number of \(Q\) different possible values (or
+  \emph{bins}) for \(s[]\), we speak of a
+  \(q=\lceil\log_2(Q)\rceil\)-bits quantizer (this means that the output
+  of the quantizer are \(q\) bits for each sample, or that we have
+  \(2^q\) representation levels).
+\end{itemize}
+
+\section{Uniform (lineal) quantization}
+\begin{itemize}
+\item
+  All quantizers are defined from their set of
+  \(d_i; i\in {\mathbb{Z}}\) (decision levels) and
+  \(r_i; i\in {\mathbb{Z}}\) (representation levels). In a linear
+  quantizer, the quantization step \(\Delta\) satisfies that
+
+  \begin{equation}
+    \Delta=d_{i+1}-d_i=r_{i+1}-r_i.
+  \end{equation}
+
+  Notice that, for a given dynamic range of \(s\), \(Q\) is inversely
+  proportional to \(\Delta\), and viceversa.
+\item
+  In uniform quantizers, \(\Delta\) does not depends on the PAM sample
+  values.
+
+  Notice that in this quantizer, \(e(nTs)_\text{max}=\frac{\Delta}{2}\).
+  This is a \(q=\lceil\log_2(5)\rceil=3\)-bits quantizer (\(Q=8\)).
+\item
+  Uniform quantizers are used in most A/D (analogic/digital) converters,
+  were it is expected the generation of uniformely distributed sequences
+  of samples.
+\end{itemize}
+
+\subsection{Example (uniform quantization)}
+\href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/LZW/blob/master/uniform_quantization.ipynb}{IPython notebook}
+
+\section{Quantization + Encoding}
+\begin{itemize}
+\tightlist
+\item
+  When we quantize digital signals, these are sequences of digital
+  samples represented by symbols of a given alphabet, typically, a
+  subset of \({\mathbb{Z}}\) or \({\mathbb{N}}\). Therefore, both the
+  input and the output of the quantizer are indexes, not real values of
+  a sampled signal.
+\item
+  Therefore, in this context, \(\Delta\) represents the length of the
+  intervals of indexes what will be ignored.
+\end{itemize}
+
+\subsection{Example}
+Quantize
+\href{https://upload.wikimedia.org/wikipedia/commons/3/3a/Jfk_berlin_address_high.ogg}{Jfk\_berlin\_address\_high.ogg}
+using \(\Delta=2\). Compute the variance of both audio sequences.
+
+\section{Non-uniform quantization}
+\begin{itemize}
+\tightlist
+\item
+  In order to minimize the maximun, average or the total quantization
+  error, \(\Delta\) can be adapted to the characteristics of \(s\).
+\end{itemize}
+
+\subsection{Companded quantization}
+\begin{itemize}
+\item
+  Non-uniform quantizer.
+\item
+  \href{https://en.wikipedia.org/wiki/Companding}{Companding}:
+  COMpressing + exPANDING. The original signal is mapped through a
+  compressor, quantized using an uniform quantized, and re-mapped using
+  the corresponding expander. The result is a logarithmic quantization.
+\item
+  \href{https://en.wikipedia.org/wiki/\%CE\%9C-law_algorithm}{\(\mu\)-law}
+  example:
+\end{itemize}
+
+\href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/LZW/blob/master/companded_quantization.ipynb}{Companded quantization}
+
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_1.png}
+
+\section{PDF-optimized quantization}
+\begin{itemize}
+\item
+  Non-uniform quantizer.
+\item
+  if we known the probability distribution of the samples, we can select
+  a small \(\Delta\) for the most probable samples and viceversa.
+\end{itemize}
+
+\img{600}{graphics/cuantif_max-lloyd.png}
+
+\section{Adaptive quantization}
+\begin{itemize}
+\item
+  Useful when the characteristics of \(s\) (the variance, for example)
+  vary over time.
+\item
+  Typically, the quantizer varies \(\Delta\) depending on such
+  characteristics.
+\end{itemize}
+
+\section{Forward adaptive quantization}
+\begin{itemize}
+\item
+  Used for determining a suitable \(\Delta\) for blocks of samples.
+\item ~
+  \hypertarget{encoder}{%
+  \subsubsection{Encoder:}\label{encoder}}
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    While samples in \(s\):
+
+    \begin{enumerate}
+    \def\labelenumii{\arabic{enumii}.}
+    \tightlist
+    \item
+      Read into \(b\) the next \(B\) samples of \(s\).
+    \item
+      Determine \(\Delta\), minimizing the quantization error, and
+      output \(\Delta\) (or the data necessary for its determination).
+    \item
+      Quantize \(b\) and output it.
+    \end{enumerate}
+  \end{enumerate}
+\item ~
+  \hypertarget{decoder}{%
+  \subsubsection{Decoder:}\label{decoder}}
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    While data in input:
+
+    \begin{enumerate}
+    \def\labelenumii{\arabic{enumii}.}
+    \tightlist
+    \item
+      Read \(\Delta\) (or the data necessary for determining it, and in
+      this case, use the same algorithm that the used by the encoder).
+    \item
+      ``Dequantize'' \(b\) and output it (note that the dequantization
+      is only a way of calling the process of reverting the original
+      range of the quantized signal).
+    \end{enumerate}
+  \end{enumerate}
+\item
+  The selection of \(B\) is a trade-off between the increase in side
+  information needed by small block sizes and the loss of fidelity due
+  to large block sizes.
+\item
+  Forward adaptive quantization generates a
+  \(B\text{-samples}\times f_s\) delay (buffering), where \(f_s\) is the
+  sampling rate of \(s\).
+\end{itemize}
+
+\section{Backward adaptive quantization}
+\begin{itemize}
+\item
+  Only the previously quantized samples are available to use in adapting
+  the quantizer.
+\item
+  Idea: If happens that \(\Delta\) is smaller than it should be, the
+  input will fall in the outer levels of the quantizer a high number of
+  times. On the other hand, if \(\Delta\) is larger than it should be,
+  the samples will fall in the inner levels a high number of times.
+\item ~
+  \hypertarget{encoder}{%
+  \subsubsection{Encoder:}\label{encoder}}
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \(\Delta\leftarrow 2\).
+  \item
+    While \(s\) is not exhausted:
+
+    \begin{enumerate}
+    \def\labelenumii{\arabic{enumii}.}
+    \tightlist
+    \item
+      Quantize the next sample.
+    \item
+      Observe the output and refine \(\Delta\).
+    \end{enumerate}
+  \end{enumerate}
+\item ~
+  \hypertarget{decoder}{%
+  \subsubsection{Decoder:}\label{decoder}}
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \(\Delta\leftarrow 2\).
+  \item
+    While \(\hat{s}\) is not exhausted:
+
+    \begin{enumerate}
+    \def\labelenumii{\arabic{enumii}.}
+    \tightlist
+    \item
+      ``Dequantize'' the next sample.
+    \item
+      Step 2.B of the encoder.
+    \end{enumerate}
+  \end{enumerate}
+\end{itemize}
+
+\section{The Jayant quantizer~\cite{jayant1974digital}}
+\begin{itemize}
+\item
+  Adaptive quantization with a one word memory (\(\Delta_{(t-1)}\)).
+\item
+  A Jayant quantider defines the Step 2.B. as: Define a multiplier
+  \(M_l\) for each quantization level \(l\), where for the inner levels
+  \(M_l<1\) and for the outer levels \(M_l>1\), and compute:
+
+  \[
+    \Delta^{[n]} = \Delta^{[n-1]}{M_l}^{[n-1]},
+  \]
+
+  where \(\Delta^{[n-1]}\) was the previous quantization step and
+  \({M_l}^{[n-1]}\) the level multiplier for the \(n-1\)-th (previous)
+  sample. Thus, if the previous (\(n-1\)) quantization used a
+  \(\Delta^{[n-1]}\) too small (using outer quantization levels) then
+  \(\Delta^{[n]}\) will be larger and viceversa.
+\item
+  Depending on the multipliers \(M\), the quantizer will converge or
+  oscillate. In the first case, the quantizer will be good for small
+  variations of \(s\) but bad when a fast adaption to large changes in
+  \(s\) is required. In the second one, the quantizer will adapt quickly
+  to fast variations of \(s\) but will oscillate when \(s\) changles
+  slowly.
+\item
+  Most Jayant quantizers clip the computation of \(\Delta\) to avoid
+  generating a zero output quantizer in those contexts where \(s\) is
+  zero or very close to zero, and to improve the adaptation to smaller
+  samples after a sequence of bigger ones (avoiding to grow without
+  limit):
+
+  \[
+  \begin{array}{ll}
+    \text{if}~\Delta^{[n]}<\Delta_\text{min}~\text{then}~\Delta^{[n]} = \Delta_\text{min},\\
+    \text{if}~\Delta^{[n]}>\Delta_\text{max}~\text{then}~\Delta^{[n]} = \Delta_\text{max}.
+  \end{array}
+  \]
+\end{itemize}
+
+\section{Adapting with a scale factor}
+\begin{itemize}
+\item
+  A Jayant quantized adapts the quantization step to the dynamic range
+  of the signa using a set of multipiers. A similar effect can be
+  provided by dividing the input signal by a scale factor defined
+  iteratively as:
+
+  \begin{equation}
+    \alpha^{[n]} = \alpha^{[n-1]}M_l^{[n-1]}.
+  \end{equation}
+\end{itemize}
+
+\subsection{Example}
+Quantize
+\href{https://upload.wikimedia.org/wikipedia/commons/3/3a/Jfk_berlin_address_high.ogg}{Jfk\_berlin\_address\_high.ogg}
+using \(4\)-bits backward adaptive Jayant quantizer. Reproduce the
+quantized sequence and provide a subjective comparison with the original
+sequence.
+
+\bibliography{quantization}
