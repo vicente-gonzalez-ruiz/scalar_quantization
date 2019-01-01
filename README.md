@@ -1,1 +1,3 @@
-[Click me](https://cdn.rawgit.com/vicente-gonzalez-ruiz/Quantization/master/index.html).
+# Quantization
+
+[Click me](https://vicente-gonzalez-ruiz.github.io/quantization/).
