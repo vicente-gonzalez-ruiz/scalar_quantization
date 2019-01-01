@@ -13,11 +13,11 @@
 \begin{itemize}
 \item
   Let:
-
+  
   \begin{equation}
     s_s(t)=s(nT_s),
   \end{equation}
-
+  
   where \(n\in{\mathbb{Z}}\) and \(T_s\) is the sampling frequency in
   Hertzs.
 \item
@@ -54,7 +54,7 @@ error.
   \(d_i; i\in {\mathbb{Z}}\) (decision levels) and
   \(r_i; i\in {\mathbb{Z}}\) (representation levels). In a linear
   quantizer, the quantization step \(\Delta\) satisfies that
-
+  
   \begin{equation}
     \Delta=d_{i+1}-d_i=r_{i+1}-r_i.
   \end{equation}
@@ -64,21 +64,21 @@ error.
 \item
   In uniform quantizers, \(\Delta\) does not depends on the PAM sample
   values.
-
-  Notice that in this quantizer, \(e(nTs)_\text{max}=\frac{\Delta}{2}\).
-  This is a \(q=\lceil\log_2(5)\rceil=3\)-bits quantizer (\(Q=8\)).
+  
+  Notice that in this quantizer, $e(nTs)_{\text{max}}=\frac{\Delta}{2}$.
+  This is a $q=\lceil\log_2(5)\rceil=3$-bits quantizer $(Q=8)$.
 \item
   Uniform quantizers are used in most A/D (analogic/digital) converters,
   were it is expected the generation of uniformely distributed sequences
   of samples.
 \end{itemize}
 
-\subsection{Example (uniform quantization)}
-\href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/LZW/blob/master/uniform_quantization.ipynb}{IPython notebook}
+  \subsection{Example (uniform quantization)}
+\href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/uniform_quantization.ipynb}{IPython notebook}
 
 \section{Quantization + Encoding}
 \begin{itemize}
-\tightlist
+  \tightlist
 \item
   When we quantize digital signals, these are sequences of digital
   samples represented by symbols of a given alphabet, typically, a
@@ -97,7 +97,7 @@ using \(\Delta=2\). Compute the variance of both audio sequences.
 
 \section{Non-uniform quantization}
 \begin{itemize}
-\tightlist
+  \tightlist
 \item
   In order to minimize the maximun, average or the total quantization
   error, \(\Delta\) can be adapted to the characteristics of \(s\).
@@ -117,12 +117,12 @@ using \(\Delta=2\). Compute the variance of both audio sequences.
   example:
 \end{itemize}
 
-\href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/LZW/blob/master/companded_quantization.ipynb}{Companded quantization}
+\href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/companded_quantization.ipynb}{Companded quantization}
 
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_1.png}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_1.png}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_1.png}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_1.png}
+\img{600}{output_9_1.png}
+\img{600}{output_10_1.png}
+\img{600}{output_11_1.png}
+\img{600}{output_12_1.png}
 
 \section{PDF-optimized quantization}
 \begin{itemize}
@@ -291,8 +291,8 @@ using \(\Delta=2\). Compute the variance of both audio sequences.
 
   \[
   \begin{array}{ll}
-    \text{if}~\Delta^{[n]}<\Delta_\text{min}~\text{then}~\Delta^{[n]} = \Delta_\text{min},\\
-    \text{if}~\Delta^{[n]}>\Delta_\text{max}~\text{then}~\Delta^{[n]} = \Delta_\text{max}.
+    \text{if}~\Delta^{[n]}<\Delta_{\text{min}}~\text{then}~\Delta^{[n]} = \Delta_{\text{min}},\\
+    \text{if}~\Delta^{[n]}>\Delta_{\text{max}}~\text{then}~\Delta^{[n]} = \Delta_{\text{max}}.
   \end{array}
   \]
 \end{itemize}
