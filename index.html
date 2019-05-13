@@ -26,31 +26,7 @@ class="ecrm-1200">Vicente Gonz</span><span
 class="ecrm-1200">á</span><span 
 class="ecrm-1200">lez Ruiz</span></div><br />
 <div class="date" ><span 
-class="ecrm-1200">January 1, 2019</span></div>
-   </div>
-   <div class="tableofcontents">
-   <span class="sectionToc" >1 <a 
-href="#x1-10001" id="QQ2-1-1">Basics</a></span>
-<br />   <span class="sectionToc" >2 <a 
-href="#x1-20002" id="QQ2-1-2">Uniform (lineal) quantization</a></span>
-<br />   <span class="sectionToc" >3 <a 
-href="#x1-40003" id="QQ2-1-4">Quantization + Encoding</a></span>
-<br />   <span class="sectionToc" >4 <a 
-href="#x1-60004" id="QQ2-1-6">Non-uniform quantization</a></span>
-<br />   <span class="sectionToc" >5 <a 
-href="#x1-80005" id="QQ2-1-8">PDF-optimized quantization</a></span>
-<br />   <span class="sectionToc" >6 <a 
-href="#x1-90006" id="QQ2-1-9">Adaptive quantization</a></span>
-<br />   <span class="sectionToc" >7 <a 
-href="#x1-100007" id="QQ2-1-10">Forward adaptive quantization</a></span>
-<br />   <span class="sectionToc" >8 <a 
-href="#x1-130008" id="QQ2-1-13">Backward adaptive quantization</a></span>
-<br />   <span class="sectionToc" >9 <a 
-href="#x1-160009" id="QQ2-1-16">The Jayant quantizer [1]</a></span>
-<br />   <span class="sectionToc" >10 <a 
-href="#x1-1700010" id="QQ2-1-17">Adapting with a scale factor</a></span>
-<br />   <span class="likesectionToc" ><a 
-href="#x1-1900010.1" id="QQ2-1-19">References</a></span>
+class="ecrm-1200">May 13, 2019</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a><a 
@@ -59,9 +35,6 @@ href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)" >Basics</a
      <li class="itemize">Let:
      <table class="equation"><tr><td> <a 
  id="x1-1001r1"></a>
-                                                                  
-
-                                                                  
      <!--l. 17--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
@@ -121,6 +94,9 @@ class="MathClass-open">(</mo><mrow><mi
 class="MathClass-close">)</mo></mrow></mrow></math>,
      producing a <a 
 href="https://en.wikipedia.org/wiki/Pulse-code_modulation" >PCM signal</a> and a loss of information.
+                                                                  
+
+                                                                  
      </li>
      <li class="itemize">The quantization process can be modeled as</li></ul>
    <table class="equation"><tr><td> <a 
@@ -220,9 +196,6 @@ display="inline" ><mrow
 >q</mi></mrow></msup 
 ></mrow></math>
      representation levels).</li></ul>
-                                                                  
-
-                                                                  
 <!--l. 50--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
@@ -262,6 +235,9 @@ display="inline" ><mrow
      satisﬁes that
      <table class="equation"><tr><td> <a 
  id="x1-2001r3"></a>
+                                                                  
+
+                                                                  
      <!--l. 58--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
@@ -361,9 +337,6 @@ class="MathClass-close">)</mo></mrow></math>.
      <li class="itemize">Uniform quantizers are used in most A/D (analogic/digital) converters, were
      it is expected the generation of uniformely distributed sequences of
      samples.</li></ul>
-                                                                  
-
-                                                                  
 <!--l. 76--><p class="noindent" >
 </p>
    <h4 class="subsectionHead"><span class="titlemark">2.1   </span> <a 
@@ -388,6 +361,9 @@ display="inline" ><mrow
 >ℕ</mi></mrow></math>.
      Therefore, both the input and the output of the quantizer are indexes, not
      real values of a sampled signal.
+                                                                  
+
+                                                                  
      </li>
      <li class="itemize">Therefore, in this context, <!--l. 89--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
@@ -424,9 +400,6 @@ display="inline" ><mrow
 display="inline" ><mrow 
 ><mi 
 >s</mi></mrow></math>.</li></ul>
-                                                                  
-
-                                                                  
 <!--l. 106--><p class="noindent" >
 </p>
    <h4 class="subsectionHead"><span class="titlemark">4.1   </span> <a 
@@ -450,6 +423,9 @@ display="inline" ><mrow
 <!--l. 120--><p class="noindent" ><a 
 href="https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/companded_quantization.ipynb" >Ipython notebook</a>
 </p><!--l. 122--><p class="indent" >    <div style="text-align:center;"> <img width=600 src="output_9_1.png" /> </div>    <div style="text-align:center;"> <img width=600 src="output_10_1.png" /> </div>    <div style="text-align:center;"> <img width=600 src="output_11_1.png" /> </div>    <div style="text-align:center;"> <img width=600 src="output_12_1.png" /> </div> 
+                                                                  
+
+                                                                  
 </p><!--l. 127--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
@@ -476,9 +452,6 @@ display="inline" ><mrow
 ><mi 
 >s</mi></mrow></math>
      (the variance, for example) vary over time.
-                                                                  
-
-                                                                  
      </li>
      <li class="itemize">Typically, the quantizer varies <!--l. 144--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
@@ -504,6 +477,9 @@ display="inline" ><mrow
  id="x1-110007.0.1"></a>Encoder:</h5>
      <!--l. 154--><p class="noindent" ></a>
      </p><!--l. 156--><p class="noindent" >
+                                                                  
+
+                                                                  
          </p><ol  class="enumerate1" >
          <li 
   class="enumerate" id="x1-11002x1">While samples in <!--l. 160--><math 
@@ -554,9 +530,6 @@ display="inline" ><mrow
      </li>
      <li class="itemize">  <a 
  id="decoder">
-                                                                  
-
-                                                                  
      <h5 class="subsubsectionHead"><span class="titlemark">7.0.2   </span> <a 
  id="x1-120007.0.2"></a>Decoder:</h5>
      <!--l. 176--><p class="noindent" ></a>
@@ -595,6 +568,9 @@ display="inline" ><mrow
      sizes and the loss of ﬁdelity due to large block sizes.
      </li>
      <li class="itemize">Forward adaptive quantization generates a
+                                                                  
+
+                                                                  
      <!--l. 202--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
@@ -642,9 +618,6 @@ display="inline" ><mrow
 >Δ</mi></mrow></math>
      is larger than it should be, the samples will fall in the inner levels a high
      number of times.
-                                                                  
-
-                                                                  
      </li>
      <li class="itemize">  <a 
  id="encoder">
@@ -683,6 +656,9 @@ display="inline" ><mrow
      </li>
      <li class="itemize">  <a 
  id="decoder">
+                                                                  
+
+                                                                  
      <h5 class="subsubsectionHead"><span class="titlemark">8.0.2   </span> <a 
  id="x1-150008.0.2"></a>Decoder:</h5>
      <!--l. 239--><p class="noindent" ></a>
@@ -712,9 +688,6 @@ display="inline" ><mrow
   class="enumerate" id="x1-15008x2">Step 2.B of the encoder.</li></ol>
          </li></ol>
      </li></ul>
-                                                                  
-
-                                                                  
 <!--l. 260--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">9   </span> <a 
@@ -769,6 +742,9 @@ display="inline" ><mrow
 > <mo 
 class="MathClass-rel">&#x003E;</mo> <mn>1</mn></mrow></math>,
      and compute:
+                                                                  
+
+                                                                  
 <div class="par-math-display"><!--l. 269--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" ><mrow 
@@ -899,9 +875,6 @@ display="inline" ><mrow
 ><mi 
 >s</mi></mrow></math>
      changles slowly.
-                                                                  
-
-                                                                  
      </li>
      <li class="itemize">Most Jayant quantizers clip the computation of <!--l. 286--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
@@ -915,12 +888,15 @@ display="inline" ><mrow
 >s</mi></mrow></math>
      is zero or very close to zero, and to improve the adaptation to smaller
      samples after a sequence of bigger ones (avoiding to grow without limit):
+                                                                  
+
+                                                                  
 <div class="par-math-display"><!--l. 292--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" ><mrow 
 >
  <mtable  align="axis" style=""  
-equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
+equalrows="false" columnlines="none" equalcolumns="false" class="array"><mtr><mtd 
 class="array"  columnalign="left">  <mstyle 
 class="text"><mtext  >if</mtext></mstyle><mspace width="1em" class="nbsp" /><msup><mrow 
 ><mi 
@@ -950,8 +926,8 @@ class="MathClass-rel">=</mo> <msub><mrow
 ><mstyle 
 class="text"><mtext  >min</mtext></mstyle></mrow></msub 
 ><mo 
-class="MathClass-punc">,</mo>  </mtd>
-</mtr>  <mtr><mtd 
+class="MathClass-punc">,</mo> </mtd>
+</mtr><mtr><mtd 
 class="array"  columnalign="left"> <mstyle 
 class="text"><mtext  >if</mtext></mstyle><mspace width="1em" class="nbsp" /><msup><mrow 
 ><mi 
