@@ -1,8 +1,3 @@
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "<none>"
-%%% End:
-
 \title{Quantization}
 
 \author{Vicente González Ruiz}
@@ -119,10 +114,10 @@ using \(\Delta=2\). Compute the variance of both audio sequences.
 
 \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/companded_quantization.ipynb}{Ipython notebook}
 
-\imgw{600}{output_9_1.png}
-\imgw{600}{output_10_1.png}
-\imgw{600}{output_11_1.png}
-\imgw{600}{output_12_1.png}
+\svg{uniform}{600}
+\svg{ulaw-compressor}{600}
+\svg{ulaw-expander}{600}
+\svg{companded}{600}
 
 \section{PDF-optimized quantization}
 \begin{itemize}
@@ -133,7 +128,7 @@ using \(\Delta=2\). Compute the variance of both audio sequences.
   a small \(\Delta\) for the most probable samples and viceversa.
 \end{itemize}
 
-\imgw{600}{graphics/cuantif_max-lloyd.png}
+\svg{cuantif_max-lloyd}{600}
 
 \section{Adaptive quantization}
 \begin{itemize}
