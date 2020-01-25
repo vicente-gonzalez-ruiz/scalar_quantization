@@ -1,3 +1,5 @@
+% Emacs, this is -*-latex-*-
+
 \title{Quantization}
 
 \author{Vicente González Ruiz}
@@ -6,69 +8,103 @@
 
 \section{\href{https://en.wikipedia.org/wiki/Quantization\_(signal\_processing)}{Basics}}
 \begin{itemize}
+\tightlist
+
 \item
-  Let:
-  
+  Let
   \begin{equation}
     s_s(t)=s(nT_s),
   \end{equation}
-  
   where \(n\in{\mathbb{Z}}\) and \(T_s\) is the sampling frequency in
   Hertzs.
+
 \item
   Quantizers discretize the amplitude of a
   \href{https://en.wikipedia.org/wiki/Pulse-amplitude_modulation}{PAM
-  signal} \(s(nT_s)\), producing a
-  \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM signal}
-  and a loss of information.
+    signal} \(s(nT_s)\), producing a
+  \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM
+    signal} and a loss of information. In the general case,
+  quantization maps the real (analog) value of samples into a discrete
+  set~\cite{vetterli1995wavelets}.
+
 \item
   The quantization process can be modeled as
-\end{itemize}
+  \begin{equation}
+    s[n] = s(nT_s) + e(nT_s),
+  \end{equation}
+  being \(s[n]\) the the quantized signal and \(e(nT_s)\) the quantization
+  error.
 
-\begin{equation}
-  s[n] = s(nT_s) + e(nT_s),
-\end{equation}
+\item
+  Quantizers are defined from their set of \(d_i; i\in {\mathbb{Z}}\)
+  (decision levels) and \(r_i; i\in {\mathbb{Z}}\) (representation
+  levels). $\{r_i\}$ must be finite. % The set $\{r_i\}$ is called the
+                                     % codebook and the $r_i$ the
+                                     % codewords.
 
-being \(s[n]\) the the quantized signal and \(e(nT_s)\) the quantization
-error.
-
-\begin{itemize}
-\tightlist
 \item
   Depending on the number of \(Q\) different possible values (or
   \emph{bins}) for \(s[]\), we speak of a
   \(q=\lceil\log_2(Q)\rceil\)-bits quantizer (this means that the output
   of the quantizer are \(q\) bits for each sample, or that we have
   \(2^q\) representation levels).
+
 \end{itemize}
 
-\section{Uniform (lineal) quantization}
+\section{Scalar quantization}
+\begin{itemize}
+\item Lets denote $x=\{s_(nT_s)\}$ as the inputs of the quantizer and
+  $y=\{s[n]\}$ as the outputs.
+
+\item In a scalar quantizer, each input sample $x_i$ is individually
+  quantized as $y_i$, and the input range is divided into intervals
+  \begin{equation}
+    I_i=(d_{i-1}, d_i].
+  \end{equation}
+  
+\item The performance of the quantizer is measured as the distance
+  between the input $x$ and the output $y$
+  \begin{equation*}
+    d(x,y) = |x-y|^2.
+  \end{equation*}
+  Thus, the MSE is
+  \begin{equation}
+    D = E(|x-y|^2)=\sum_i\int_{x_{i-1}}^{x_i} (x-y_i)^2f_X(x)dx,
+  \end{equation}
+  where $d_X(x)$ is the probability density function (pdf) of $x$ and
+  $E(\cdot)$ the expectation.
+  
+\end{itemize}
+
+\section{Uniform (lineal) scalar quantization}
 \begin{itemize}
 \item
-  All quantizers are defined from their set of
-  \(d_i; i\in {\mathbb{Z}}\) (decision levels) and
-  \(r_i; i\in {\mathbb{Z}}\) (representation levels). In a linear
+  In a linear
   quantizer, the quantization step \(\Delta\) satisfies that
-  
   \begin{equation}
-    \Delta=d_{i+1}-d_i=r_{i+1}-r_i.
+    \Delta=d_{i+1}-d_i=r_{i+1}-r_i, \forall i.
   \end{equation}
-
   Notice that, for a given dynamic range of \(s\), \(Q\) is inversely
   proportional to \(\Delta\), and viceversa.
+
 \item
   In uniform quantizers, \(\Delta\) does not depends on the PAM sample
-  values.
-  
-  Notice that in this quantizer, $e(nTs)_{\text{max}}=\frac{\Delta}{2}$.
-  This is a $q=\lceil\log_2(5)\rceil=3$-bits quantizer $(Q=8)$.
+  values. Notice that in this quantizer,
+  $e(nTs)_{\text{max}}=\frac{\Delta}{2}$.  This is a
+  $q=\lceil\log_2(5)\rceil=3$-bits quantizer $(Q=8)$.
+
 \item
-  Uniform quantizers are used in most A/D (analogic/digital) converters,
-  were it is expected the generation of uniformely distributed sequences
-  of samples.
+  Uniform quantizers are used in most A/D (analogic/digital)
+  converters, were it is expected the generation of uniformely
+  distributed sequences of samples.
+
+\item
+  For the simple, the input intervals are of the form $(i-1/2,i+1/2]$
+    and $r_i=i$.
+
 \end{itemize}
 
-  \subsection{Example (uniform quantization)}
+\subsection{Example (uniform quantization)}
 \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/uniform_quantization.ipynb}{IPython notebook}
 
 \section{Quantization + Encoding}
@@ -312,4 +348,10 @@ using \(4\)-bits backward adaptive Jayant quantizer. Reproduce the
 quantized sequence and provide a subjective comparison with the original
 sequence.
 
-\bibliography{quantization}
+\section{Vector quantization}
+\begin{itemize}
+\item Samples are quantized in groups (vectors).
+\end{itemize}
+  
+
+\bibliography{quantization,DWT}
