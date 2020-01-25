@@ -44,19 +44,6 @@
     s(nT_s)+e(nT_s) & \text{otherwise}.
     \end{array}
   \end{equation}
-
-\end{itemize}
-
-\section{Scalar quantization}
-\begin{itemize}
-\item Lets denote $x=\{s_(nT_s)\}$ as the inputs of the quantizer and
-  $y=\{s[n]\}$ as the outputs.
-
-\item In a scalar quantizer, each input sample $x_i$ is individually
-  quantized as $y_i$, and the input range is divided into intervals
-  \begin{equation}
-    I_i=(d_{i-1}, d_i].
-  \end{equation}
   
 \item The performance of the quantizer is measured as the distance
   between the input $x$ and the output $y$
@@ -70,58 +57,70 @@
   where $d_X(x)$ is the probability density function (PDF) of $x$ and
   $E(\cdot)$ the expectation.
 
+\end{itemize}
+
+\section{Scalar quantization}
+\begin{itemize}
+\item For the sake of simplicity, lets denote $x=\{s(nT_s)\}$ as the
+  inputs of the quantizer and $y=\{s[n]\}$ as the outputs. In a scalar
+  quantizer, each input sample $x_i$ is individually quantized as
+  $y_i$.
+  
 \item The quantization error
   \begin{equation}
     e=y-x
   \end{equation}
-  is modeled as a noise process
-  which: (1) is uncorrelated to the input, (2) is white, and (3)
-  follows a uniform distribution. This is a fair approximation only if
-  $\Delta<<\sigma_x$~\cite{vetterli1995wavelets}.
+  can be modeled as a noise process which: (1) is uncorrelated to the
+  input, (2) is white, and (3) follows a uniform
+  distribution. However, notice that this is a fair approximation only
+  if $\Delta<<\sigma_x$~\cite{vetterli1995wavelets}.
 
 \end{itemize}
 
 \section{Uniform (lineal) scalar quantization}
 \begin{itemize}
+
 \item
-  In a linear
-  quantizer, the quantization step \(\Delta\) satisfies that
+  In an uniform quantizer, the quantization step \(\Delta\) satisfies
+  that the input range is divided into intervals
   \begin{equation}
     \Delta=d_{i+1}-d_i=r_{i+1}-r_i, \forall i.
   \end{equation}
-  Notice that, for a given dynamic range of \(s\), \(Q\) is inversely
-  proportional to \(\Delta\), and viceversa.
+  Notice that, all the intervals have the same size and that
+  \begin{equation}
+    Q=\frac{1}{\Delta}.
+  \end{equation}
+  It also holds that
+  \begin{equation}
+    \Delta=\frac{b-a}{Q}.
+  \end{equation}
 
 \item
-  In uniform quantizers, \(\Delta\) does not depends on the PAM sample
-  values. Notice that in this quantizer,
-  $e(nTs)_{\text{max}}=\frac{\Delta}{2}$.  This is a
-  $q=\lceil\log_2(5)\rceil=3$-bits quantizer $(Q=8)$.
+  Under the premise that $e$ is uniform, and considering that
+  $y_i=(x_{i-1}+x_i)/2$ (something quite reasonable when $x$ can be
+  considered also uniform) the average quantization error is
+  $\frac{Z}{4}$ ($\frac{Z}{2}$ is the meximum and $0$ is the minimum),
+  and for this particular case
+  \begin{equation}
+    \text{MSE} =
+    \frac{1}{\Delta}\int_{-\Delta/2}^{\Delta/2}e^2de=\frac{\Delta^2}{12}.
+  \end{equation}
 
-\item Besides $\Delta$, another design parameter of quantizers is the
-  definition of the boundaries $a$ and $b$, ($a<b$) that define the
-  low ($a$) and high ($b$) overload regions. % Ojo, medio duplicado
+%\item
+%  \(\Delta\) does not depends on the PAM sample
+%  values. Notice that in this quantizer,
+%  $e(nTs)_{\text{max}}=\frac{\Delta}{2}$.  This is a
+%  $q=\lceil\log_2(5)\rceil=3$-bits quantizer $(Q=8)$.
+
+%\item
+%  Besides $\Delta$, another design parameter of quantizers is the
+%  definition of the boundaries $a$ and $b$, ($a<b$) that define the
+%  low ($a$) and high ($b$) overload regions. % Ojo, medio duplicado
   
 \item
   Uniform quantizers are used in most A/D (analogic/digital)
   converters, were it is expected the generation of uniformely
   distributed sequences of samples.
-
-\item
-  For the simple, the input intervals are of the form $(i-1/2,i+1/2]$
-    and $r_i=i$.
-
-\item Under the premise that $e$ is uniform, and considering that
-  $y_i=(x_{i-1}+x_i)/2$ (something quite reasonable when $x$ can be
-  considered also uniform, the average quantization error is $Z/4$
-  ($Z/2$ is the meximum and $0$ is the minimum), and for this
-  particular case
-  \begin{equation}
-    \text{MSE} = \frac{1}{\Delta}\int_{-\Delta/2}^{\Delta/2}e^2de=\frac{\Delta^2}{12}.
-  \end{equation}
-
-\item Considering that $\Delta=\frac{b-a}{Q}$, $\Delta$ decreases as
-  $\frac{1}{Q}$.
 
 \item El error de cuantificaci\'on promedio en un cuantificador lineal
   depende del paso de cuantificaci\'on y es igual a $Z/4$ ($Z/2$ es el
@@ -177,9 +176,10 @@ cuantificaci\'on.
 \item
   Depending on the number of \(Q\) different possible values (or
   \emph{bins}) for \(s[\cdot]\), we speak of a
-  \(q=\lceil\log_2(Q)\rceil\)-bits quantizer (this means that the output
-  of the quantizer are \(q\) bits for each sample, or that we have
-  \(2^q\) representation levels).
+  \(q=\lceil\log_2(Q)\rceil\)-bits quantizer (this means that the
+  output of the quantizer are \(q\) bits for each sample, or that we
+  have \(2^q\) representation levels). For the simple, $r_i=i$ and the
+  input intervals are of the form $(d_{i-1},d_i]=(i-1/2,i+1/2]$.
 
 \item
   When we quantize digital signals, these are sequences of digital
