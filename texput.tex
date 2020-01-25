@@ -17,8 +17,8 @@
   $n\in{\mathbb{Z}}$ and $T_s$ is sampling period), producing an
   analog
   \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM
-    signal} $s[n]$. Therefore, quantization maps the real (analog)
-  values of samples into a discrete set of real values, also
+    signal} $s[n]$. Therefore, quantization maps the 
+  values of samples into a discrete set of values
   \cite{vetterli1995wavelets}.
 
 \item
@@ -27,7 +27,8 @@
     s[n] = s(nT_s) + e(nT_s),
   \end{equation}
   being \(e(nT_s)\) the quantization error (also called, quantization
-  noise). Therefore, quantization produces a loss of information.
+  noise). Therefore, quantization produces a loss of information
+  because we cannot recover $s(nT_s)$ from $s[n]$.
 
 \item
   Quantizers are defined from their set of \(d_i; i\in {\mathbb{Z}}\)
