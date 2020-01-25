@@ -11,43 +11,39 @@
 \tightlist
 
 \item
-  Let
-  \begin{equation}
-    s_s(t)=s(nT_s),
-  \end{equation}
-  where \(n\in{\mathbb{Z}}\) and \(T_s\) is the sampling frequency in
-  Hertzs.
-
-\item
-  Quantizers discretize the amplitude of a
+  A quantizer discretizes the amplitude of a
   \href{https://en.wikipedia.org/wiki/Pulse-amplitude_modulation}{PAM
-    signal} \(s(nT_s)\), producing a
+    signal} \(s(nT_s)\) (where $s$ is an analog signal,
+  $n\in{\mathbb{Z}}$ and $T_s$ is sampling period), producing an
+  analog
   \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM
-    signal} and a loss of information. In the general case,
-  quantization maps the real (analog) value of samples into a discrete
-  set~\cite{vetterli1995wavelets}.
+    signal} $s[n]$. Therefore, quantization maps the real (analog)
+  values of samples into a discrete set of real values, also
+  \cite{vetterli1995wavelets}.
 
 \item
   The quantization process can be modeled as
   \begin{equation}
     s[n] = s(nT_s) + e(nT_s),
   \end{equation}
-  being \(s[n]\) the the quantized signal and \(e(nT_s)\) the quantization
-  error.
+  being \(e(nT_s)\) the quantization error (also called, quantization
+  noise). Therefore, quantization produces a loss of information.
 
 \item
   Quantizers are defined from their set of \(d_i; i\in {\mathbb{Z}}\)
   (decision levels) and \(r_i; i\in {\mathbb{Z}}\) (representation
-  levels). $\{r_i\}$ must be finite. % The set $\{r_i\}$ is called the
-                                     % codebook and the $r_i$ the
-                                     % codewords.
+  levels). $\{r_i\}$ must be finite.
 
-\item
-  Depending on the number of \(Q\) different possible values (or
-  \emph{bins}) for \(s[]\), we speak of a
-  \(q=\lceil\log_2(Q)\rceil\)-bits quantizer (this means that the output
-  of the quantizer are \(q\) bits for each sample, or that we have
-  \(2^q\) representation levels).
+\item Another design parameter of quantizers is the definition of the
+  decision boundaries $d_{\text min}$ and $d_{\text max}$, ($d_{\text min}<d_{\text max}$) that define the low and high
+  overload regions as
+  \begin{equation}
+    s[n] = \{\begin{array}{ll}
+    r_{\text min} & \text{if $s(nT_s)<d_{\text min}$} \\
+    r_{\text max} & \text{if $s(nT_s)>d_{\text max}$} \\
+    s(nT_s)+e(nT_s) & \text{otherwise}.
+    \end{array}
+  \end{equation}
 
 \end{itemize}
 
@@ -69,11 +65,20 @@
   \end{equation*}
   Thus, the MSE is
   \begin{equation}
-    D = E(|x-y|^2)=\sum_i\int_{x_{i-1}}^{x_i} (x-y_i)^2f_X(x)dx,
+    \text{MSE} = E(|x-y|^2)=\sum_i\int_{x_{i-1}}^{x_i} (x-y_i)^2f_X(x)dx,
   \end{equation}
-  where $d_X(x)$ is the probability density function (pdf) of $x$ and
+  where $d_X(x)$ is the probability density function (PDF) of $x$ and
   $E(\cdot)$ the expectation.
-  
+
+\item The quantization error
+  \begin{equation}
+    e=y-x
+  \end{equation}
+  is modeled as a noise process
+  which: (1) is uncorrelated to the input, (2) is white, and (3)
+  follows a uniform distribution. This is a fair approximation only if
+  $\Delta<<\sigma_x$~\cite{vetterli1995wavelets}.
+
 \end{itemize}
 
 \section{Uniform (lineal) scalar quantization}
@@ -93,6 +98,10 @@
   $e(nTs)_{\text{max}}=\frac{\Delta}{2}$.  This is a
   $q=\lceil\log_2(5)\rceil=3$-bits quantizer $(Q=8)$.
 
+\item Besides $\Delta$, another design parameter of quantizers is the
+  definition of the boundaries $a$ and $b$, ($a<b$) that define the
+  low ($a$) and high ($b$) overload regions. % Ojo, medio duplicado
+  
 \item
   Uniform quantizers are used in most A/D (analogic/digital)
   converters, were it is expected the generation of uniformely
@@ -102,29 +111,102 @@
   For the simple, the input intervals are of the form $(i-1/2,i+1/2]$
     and $r_i=i$.
 
+\item Under the premise that $e$ is uniform, and considering that
+  $y_i=(x_{i-1}+x_i)/2$ (something quite reasonable when $x$ can be
+  considered also uniform, the average quantization error is $Z/4$
+  ($Z/2$ is the meximum and $0$ is the minimum), and for this
+  particular case
+  \begin{equation}
+    \text{MSE} = \frac{1}{\Delta}\int_{-\Delta/2}^{\Delta/2}e^2de=\frac{\Delta^2}{12}.
+  \end{equation}
+
+\item Considering that $\Delta=\frac{b-a}{Q}$, $\Delta$ decreases as
+  $\frac{1}{Q}$.
+
+\item El error de cuantificaci\'on promedio en un cuantificador lineal
+  depende del paso de cuantificaci\'on y es igual a $Z/4$ ($Z/2$ es el
+  m\'aximo y $0$ el m\'inimo). Por tanto,
+  \begin{equation*}
+    \overline{\text{SNR}}=\frac{\displaystyle\sum_{n=1}^N
+    s(nT_s)^2}{\displaystyle\sum_{n=1}^N (Z/4)^2} =
+    \frac{\displaystyle\sum_{n=1}^N
+      s(nT_s)^2}{N\displaystyle\frac{Z^2}{16}}.
+  \end{equation*}
+
+  \item Como se puede apreciar de esta expresi\'on, la relaci\'on
+  se\~nal/ruido promedio es directamente proporcional a la inversa del
+  paso de cuantificaci\'on elevado a cuadrado, es decir,
+\begin{equation*}
+  \overline{\text{SNR}}\sim \frac{1}{Z^2}.
+\end{equation*}
+\item Si usamos PCM (Puse Code Modulation)\footnote{Sistemas de
+  modulaci\'on digital que estudiaremos en posteriormente.} para
+  representar las muestras cuantificadas $s[n]$, se cumple
+\begin{equation*}
+  Z\sim\frac{1}{2^b},
+\end{equation*}
+donde $b$ es el n\'umero de bits utilizados para representar los niveles
+de representaci\'on. Es decir, a mayor n\'umero de bits, menor paso de
+cuantificaci\'on.
+\item Por tanto,
+  \begin{equation*}
+    \overline{\text{SNR}}\sim (2^b)^2 = 2^{2b}.
+  \end{equation*}
+\item Finalmente, ``tomando Decibelios'',
+   \begin{equation*}
+    \overline{\text{SNR}_{\text{dB}}}\sim 10\log_{10} 2^{2b} = 20b\log_{10} 2
+    \approx 6b~\text{dB}.
+  \end{equation*}
+
+\item Este resultado es interesante porque indica que, en un sistema
+  PCM, con cada bit de precisi\'on mejoramos la calidad de la se\~nal
+  digitalizada en un factor de $6$ dB. Si consideramos que para
+  alcanzar una calidad HiFi (High Fidelity) en audio debemos conseguir
+  $96$ dB de relaci\'on se\~nal/ruido, deberemos usar
+  \begin{displaymath}
+    \frac{96}{6} = 16~\text{bits/muestra},
+  \end{displaymath}
+  valor que coincide con la resoluci\'on usada en los CDs de audio!
+  
 \end{itemize}
 
-\subsection{Example (uniform quantization)}
-\href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/uniform_quantization.ipynb}{IPython notebook}
-
-\section{Quantization + Encoding}
+\subsection{Using codewords (encoding)}
 \begin{itemize}
   \tightlist
+  
+\item
+  Depending on the number of \(Q\) different possible values (or
+  \emph{bins}) for \(s[\cdot]\), we speak of a
+  \(q=\lceil\log_2(Q)\rceil\)-bits quantizer (this means that the output
+  of the quantizer are \(q\) bits for each sample, or that we have
+  \(2^q\) representation levels).
+
 \item
   When we quantize digital signals, these are sequences of digital
   samples represented by symbols of a given alphabet, typically, a
   subset of \({\mathbb{Z}}\) or \({\mathbb{N}}\). Therefore, both the
-  input and the output of the quantizer are indexes, not real values of
-  a sampled signal.
-\item
-  Therefore, in this context, \(\Delta\) represents the length of the
-  intervals of indexes what will be ignored.
+  input and the output of the quantizer are indexes, not real values
+  of a sampled signal. The set $\{r_i\}$ is called the codebook and
+  the $r_i$ the codewords.
+
+\item If $R$ is the number of bits of the quantizer, $\Delta$
+  decreases as $\frac{1}{2^R}$, and
+  \begin{equation}
+    \text{MSE} = \frac{(b-a)^2}{12Q^2} = \sigma^22^{-2R}=C2^{-2R}.
+  \end{equation}
+  since $\sigma^2=\frac{(b-a)^2}{12}$ for uniform input PDF. 
+%\item
+%  Therefore, in this context, \(\Delta\) represents the length of the
+%  intervals of indexes what will be ignored.
 \end{itemize}
 
 \subsection{Example}
 Quantize
 \href{https://upload.wikimedia.org/wikipedia/commons/3/3a/Jfk_berlin_address_high.ogg}{Jfk\_berlin\_address\_high.ogg}
 using \(\Delta=2\). Compute the variance of both audio sequences.
+
+\subsection*{Example (uniform quantization)}
+\href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/uniform_quantization.ipynb}{IPython notebook}
 
 \section{Non-uniform quantization}
 \begin{itemize}
