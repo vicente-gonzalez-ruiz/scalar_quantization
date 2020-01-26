@@ -644,16 +644,32 @@ class="content">An uniform quantizer.</span></div><!--tex4ht:label?: x1-30041 --
  id="x1-30052"></a><div style="text-align:center;"> <img width=600 src="graphics/uniform.svg" /> </div> 
 <br /> <div class="caption" 
 ><span class="id">Figure 2: </span><span  
-class="content">Another uniform quantizer (see the <a 
-href="https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/uniform_quantization.ipynb" >notebook</a>).</span></div><!--tex4ht:label?: x1-30052 -->
+class="content">A uniform midrise quantizer (see the <a 
+href="https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/graphics/midrise.ipynb" >notebook</a>).</span></div><!--tex4ht:label?: x1-30052 -->
+     </div><hr class="endfigure" />
+     <hr class="figure" /><div class="figure" 
+><a 
+ id="x1-30063"></a><div style="text-align:center;"> <img width=600 src="graphics/midread.svg" /> </div> 
+<br /> <div class="caption" 
+><span class="id">Figure 3: </span><span  
+class="content">A uniform midread quantizer (see the <a 
+href="https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/graphics/midread.ipynb" >notebook</a>).</span></div><!--tex4ht:label?: x1-30063 -->
+     </div><hr class="endfigure" />
+     <hr class="figure" /><div class="figure" 
+><a 
+ id="x1-30074"></a><div style="text-align:center;"> <img width=600 src="graphics/deadzone.svg" /> </div> 
+<br /> <div class="caption" 
+><span class="id">Figure 4: </span><span  
+class="content">A uniform deadzone quantizer (see the <a 
+href="https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/graphics/deadzone.ipynb" >notebook</a>).</span></div><!--tex4ht:label?: x1-30074 -->
      </div><hr class="endfigure" />
      </li>
-     <li class="itemize">Under the premise that <!--l. 116--><math 
+     <li class="itemize">Under the premise that <!--l. 130--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >e</mi></math>
      is  uniform,  and  considering  that
-     <!--l. 117--><math 
+     <!--l. 131--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -677,31 +693,31 @@ class="MathClass-bin">+</mo> <msub><mrow
 ></mrow><mo 
 class="MathClass-close">)</mo></mrow><mo 
 class="MathClass-bin">∕</mo><mn>2</mn></math> (something quite
-     reasonable when <!--l. 117--><math 
+     reasonable when <!--l. 131--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >x</mi></math>
      can also be considered as uniform) the average quantization error is
-     <!--l. 119--><math 
+     <!--l. 133--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mfrac><mrow 
 ><mi 
 >Z</mi></mrow>
 <mrow 
 ><mn>4</mn></mrow></mfrac> </math>
-     (<!--l. 119--><math 
+     (<!--l. 133--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mfrac><mrow 
 ><mi 
 >Z</mi></mrow>
 <mrow 
 ><mn>2</mn></mrow></mfrac> </math> is the
-     meximum and <!--l. 119--><math 
+     meximum and <!--l. 133--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>0</mn></math>
      is the minimum), and for this particular case <table class="equation"><tr><td> <a 
- id="x1-3006r7"></a>
-     <!--l. 121--><math 
+ id="x1-3008r7"></a>
+     <!--l. 135--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                               <mstyle 
@@ -738,26 +754,26 @@ class="MathClass-rel">=</mo> <mfrac><mrow
 ><mn>1</mn><mn>2</mn></mrow></mfrac> <mo 
 class="MathClass-punc">.</mo>
 </math></td><td class="eq-no">(7)</td></tr></table>
+                                                                  
+
+                                                                  
      </li>
      <li class="itemize">Uniform quantizers are used in most A/D (analogic/digital) converters, were
      it is expected the generation of uniformely distributed sequences of
      samples.
      </li></ul>
-                                                                  
-
-                                                                  
-<!--l. 133--><p class="noindent" >
+<!--l. 147--><p class="noindent" >
 </p>
    <h4 class="subsectionHead"><span class="titlemark">3.1   </span> <a 
  id="x1-40003.1"></a>Using codewords (encoding)</h4>
      <ul class="itemize1">
-     <li class="itemize">Depending on the number of <!--l. 138--><math 
+     <li class="itemize">Depending on the number of <!--l. 152--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >Q</mi></mrow></math>
      diﬀerent possible values (or <span 
-class="ecti-1000">bins</span>) for <!--l. 139--><math 
+class="ecti-1000">bins</span>) for <!--l. 153--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
@@ -765,7 +781,7 @@ display="inline" ><mrow
 class="MathClass-open">[</mo><mrow><mo 
 class="MathClass-bin">⋅</mo></mrow><mo 
 class="MathClass-close">]</mo></mrow></mrow></math>,
-     we speak of a <!--l. 140--><math 
+     we speak of a <!--l. 154--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
@@ -779,12 +795,12 @@ class="MathClass-open">(</mo><mrow><mi
 >Q</mi></mrow><mo 
 class="MathClass-close">)</mo></mrow></mrow><mo 
 class="MathClass-close">⌉</mo></mrow></mrow></math>-bits
-     quantizer (this means that the output of the quantizer are <!--l. 141--><math 
+     quantizer (this means that the output of the quantizer are <!--l. 155--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >q</mi></mrow></math>
-     bits for each sample, or that we have <!--l. 142--><math 
+     bits for each sample, or that we have <!--l. 156--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><msup><mrow 
@@ -792,7 +808,7 @@ display="inline" ><mrow
 ><mi 
 >q</mi></mrow></msup 
 ></mrow></math>
-     representation levels). For the simple, <!--l. 142--><math 
+     representation levels). For the simple, <!--l. 156--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -802,7 +818,7 @@ display="inline" ><msub><mrow
 > <mo 
 class="MathClass-rel">=</mo> <mi 
 >i</mi></math>
-     and the input intervals are of the form <!--l. 143--><math 
+     and the input intervals are of the form <!--l. 157--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow ><mo 
 class="MathClass-open">(</mo><mrow><msub><mrow 
@@ -831,18 +847,18 @@ class="MathClass-bin">∕</mo><mn>2</mn></mrow><mo
 class="MathClass-close">]</mo></mrow></math>.
      </li>
      <li class="itemize">When we quantize digital signals, these are sequences of digital samples
-     represented by symbols of a given alphabet, typically, a subset of <!--l. 148--><math 
+     represented by symbols of a given alphabet, typically, a subset of <!--l. 162--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >ℤ</mi></mrow></math>
-     or <!--l. 148--><math 
+     or <!--l. 162--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >ℕ</mi></mrow></math>.
      Therefore, both the input and the output of the quantizer are indexes, not
-     real values of a sampled signal. The set <!--l. 150--><math 
+     real values of a sampled signal. The set <!--l. 164--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow ><mo 
 class="MathClass-open">{</mo><mrow><msub><mrow 
@@ -852,7 +868,7 @@ class="MathClass-open">{</mo><mrow><msub><mrow
 >i</mi></mrow></msub 
 ></mrow><mo 
 class="MathClass-close">}</mo></mrow></math>
-     is called the codebook and the <!--l. 151--><math 
+     is called the codebook and the <!--l. 165--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -862,13 +878,13 @@ display="inline" ><msub><mrow
 ></math>
      the codewords.
      </li>
-     <li class="itemize">If <!--l. 153--><math 
+     <li class="itemize">If <!--l. 167--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >R</mi></math>
      is the number of bits of the quantizer (for example, in the quantizer of the Fig. <a 
 href="#x1-30041">1<!--tex4ht:ref: fig:cuantif --></a>,
-     <!--l. 155--><math 
+     <!--l. 169--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >R</mi> <mo 
@@ -881,18 +897,18 @@ class="MathClass-open">(</mo><mrow><mn>5</mn></mrow><mo
 class="MathClass-close">)</mo></mrow></mrow><mo 
 class="MathClass-close">⌉</mo></mrow> <mo 
 class="MathClass-rel">=</mo> <mn>3</mn></math>-bits
-     and<!--l. 155--><math 
+     and<!--l. 169--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow ><mo 
 class="MathClass-open">(</mo><mrow><mi 
 >Q</mi> <mo 
 class="MathClass-rel">=</mo> <mn>8</mn></mrow><mo 
 class="MathClass-close">)</mo></mrow></math>),
-     <!--l. 155--><math 
+     <!--l. 169--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >Δ</mi></math> decreases
-     as <!--l. 156--><math 
+     as <!--l. 170--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" > <mfrac><mrow 
 ><mn>1</mn></mrow>
@@ -904,7 +920,10 @@ display="inline" > <mfrac><mrow
 ></mrow></mfrac></math>,
      and <table class="equation"><tr><td> <a 
  id="x1-4001r8"></a>
-     <!--l. 157--><math 
+                                                                  
+
+                                                                  
+     <!--l. 171--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                       <mstyle 
@@ -956,7 +975,7 @@ class="MathClass-bin">−</mo><mn>2</mn><mi
 ><mo 
 class="MathClass-punc">.</mo>
 </math></td><td class="eq-no">(8)</td></tr></table>
-     <!--l. 161--><p class="noindent" >since <!--l. 161--><math 
+     <!--l. 175--><p class="noindent" >since <!--l. 175--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msubsup><mrow 
 ><mi 
@@ -991,11 +1010,11 @@ class="MathClass-close">)</mo></mrow></mrow><mrow
 ><mn>1</mn><mn>2</mn></mrow></mfrac>          </math>
      for uniform input PDF.
      </p></li>
-     <li class="itemize">If we add a bit to <!--l. 165--><math 
+     <li class="itemize">If we add a bit to <!--l. 179--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >R</mi></math>,
-     <!--l. 165--><math 
+     <!--l. 179--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msup><mrow 
 ><mi 
@@ -1006,11 +1025,8 @@ class="MathClass-bin">+</mo><mn>1</mn></mrow></msup
 class="MathClass-rel">=</mo> <mi 
 >R</mi> <mo 
 class="MathClass-bin">+</mo> <mn>1</mn></math>,
-                                                                  
-
-                                                                  
      then <table class="equation-star"><tr><td>
-     <!--l. 166--><math 
+     <!--l. 180--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                                 <msup><mrow 
@@ -1041,8 +1057,8 @@ class="MathClass-bin">−</mo><mn>2</mn></mrow></msup
 ><mo 
 class="MathClass-punc">,</mo>
 </math></td></tr></table>
-     <!--l. 169--><p class="noindent" >and </p><table class="equation-star"><tr><td>
-     <!--l. 170--><math 
+     <!--l. 183--><p class="noindent" >and </p><table class="equation-star"><tr><td>
+     <!--l. 184--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation"><msup><mrow 
 >
@@ -1090,20 +1106,20 @@ class="text"><mtext  >d</mtext></mstyle><mi
 >B</mi><mo 
 class="MathClass-punc">.</mo>
 </math></td></tr></table>
-     <!--l. 174--><p class="noindent" >This result is interesting because in a PCM system, the quality of the signal is incremented
-     <!--l. 175--><math 
+     <!--l. 188--><p class="noindent" >This result is interesting because in a PCM system, the quality of the signal is incremented
+     <!--l. 189--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>6</mn></math>
      dB with each bit. Notice that in <a 
 href="https://en.wikipedia.org/wiki/High_fidelity" >HiFi</a>, the SNR must be at least of
-     <!--l. 177--><math 
+     <!--l. 191--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>9</mn><mn>6</mn></math>
      dB, and </p><table class="equation-star"><tr><td>
                                                                   
 
                                                                   
-     <!--l. 178--><math 
+     <!--l. 192--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                                               <mfrac><mrow 
@@ -1113,52 +1129,52 @@ display="block" class="equation">
 class="MathClass-rel">=</mo> <mn>1</mn><mn>6</mn><mo 
 class="MathClass-punc">,</mo>
 </math></td></tr></table>
-     <!--l. 181--><p class="noindent" >the number of bits per sample used in the <a 
+     <!--l. 195--><p class="noindent" >the number of bits per sample used in the <a 
 href="https://en.wikipedia.org/wiki/Compact_disc" >Audio CDs</a>.
 </p>
      </li></ul>
-<!--l. 189--><p class="noindent" >
+<!--l. 203--><p class="noindent" >
 </p>
    <h4 class="subsectionHead"><span class="titlemark">3.2   </span> <a 
  id="x1-50003.2"></a>Example</h4>
-<!--l. 190--><p class="noindent" >Quantize <a 
+<!--l. 204--><p class="noindent" >Quantize <a 
 href="https://upload.wikimedia.org/wikipedia/commons/3/3a/Jfk_berlin_address_high.ogg" >Jfk_berlin_address_high.ogg</a> using
-<!--l. 192--><math 
+<!--l. 206--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >Δ</mi> <mo 
 class="MathClass-rel">=</mo> <mn>2</mn></mrow></math>.
 Compute the variance of both audio sequences.
-</p><!--l. 194--><p class="noindent" >
+</p><!--l. 208--><p class="noindent" >
 </p>
    <h4 class="likesubsectionHead"><a 
  id="x1-60003.2"></a>Example (uniform quantization)</h4>
-<!--l. 197--><p class="noindent" >
+<!--l. 211--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-70004"></a>Non-uniform quantization</h3>
      <ul class="itemize1">
      <li class="itemize">In order to minimize the maximun, average or the total quantization error,
-     <!--l. 202--><math 
+     <!--l. 216--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >Δ</mi></mrow></math>
-     can be adapted to the characteristics of <!--l. 202--><math 
+     can be adapted to the characteristics of <!--l. 216--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >s</mi></mrow></math>.</li></ul>
-<!--l. 205--><p class="noindent" >
+<!--l. 219--><p class="noindent" >
 </p>
    <h4 class="subsectionHead"><span class="titlemark">4.1   </span> <a 
  id="x1-80004.1"></a>Companded quantization</h4>
-     <ul class="itemize1">
-     <li class="itemize">Non-uniform quantizer.
                                                                   
 
                                                                   
+     <ul class="itemize1">
+     <li class="itemize">Non-uniform quantizer.
      </li>
      <li class="itemize"><a 
 href="https://en.wikipedia.org/wiki/Companding" >Companding</a>: COMpressing + exPANDING. The original signal is mapped
@@ -1167,16 +1183,16 @@ href="https://en.wikipedia.org/wiki/Companding" >Companding</a>: COMpressing + e
      quantization.
      </li>
      <li class="itemize"><a 
-href="https://en.wikipedia.org/wiki/%CE%9C-law_algorithm" ><!--l. 215--><math 
+href="https://en.wikipedia.org/wiki/%CE%9C-law_algorithm" ><!--l. 229--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >μ</mi></mrow></math>-law</a>
      example:</li></ul>
-<!--l. 219--><p class="noindent" ><a 
+<!--l. 233--><p class="noindent" ><a 
 href="https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/companded_quantization.ipynb" >Ipython notebook</a>
-</p><!--l. 221--><p class="indent" >   <div style="text-align:center;"> <img width=600 src="graphics/ulaw-compressor.svg" /> </div>   <div style="text-align:center;"> <img width=600 src="graphics/ulaw-expander.svg" /> </div>   <div style="text-align:center;"> <img width=600 src="graphics/companded.svg" /> </div> 
-</p><!--l. 225--><p class="noindent" >
+</p><!--l. 235--><p class="indent" >   <div style="text-align:center;"> <img width=600 src="graphics/ulaw-compressor.svg" /> </div>   <div style="text-align:center;"> <img width=600 src="graphics/ulaw-expander.svg" /> </div>   <div style="text-align:center;"> <img width=600 src="graphics/companded.svg" /> </div> 
+</p><!--l. 239--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-90005"></a>PDF-optimized quantization</h3>
@@ -1184,26 +1200,26 @@ href="https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blo
      <li class="itemize">Non-uniform quantizer.
      </li>
      <li class="itemize">if we known the probability distribution of the samples, we can select a
-     small <!--l. 231--><math 
+     small <!--l. 245--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >Δ</mi></mrow></math>
      for the most probable samples and viceversa.</li></ul>
-<!--l. 234--><p class="noindent" ><div style="text-align:center;"> <img width=600 src="graphics/cuantif_max-lloyd.svg" /> </div> 
-</p><!--l. 236--><p class="noindent" >
+<!--l. 248--><p class="noindent" ><div style="text-align:center;"> <img width=600 src="graphics/cuantif_max-lloyd.svg" /> </div> 
+</p><!--l. 250--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">6   </span> <a 
  id="x1-100006"></a>Adaptive quantization</h3>
      <ul class="itemize1">
-     <li class="itemize">Useful when the characteristics of <!--l. 239--><math 
+     <li class="itemize">Useful when the characteristics of <!--l. 253--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >s</mi></mrow></math>
      (the variance, for example) vary over time.
      </li>
-     <li class="itemize">Typically, the quantizer varies <!--l. 242--><math 
+     <li class="itemize">Typically, the quantizer varies <!--l. 256--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
@@ -1212,12 +1228,12 @@ display="inline" ><mrow
                                                                   
 
                                                                   
-<!--l. 246--><p class="noindent" >
+<!--l. 260--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">7   </span> <a 
  id="x1-110007"></a>Forward adaptive quantization</h3>
      <ul class="itemize1">
-     <li class="itemize">Used for determining a suitable <!--l. 249--><math 
+     <li class="itemize">Used for determining a suitable <!--l. 263--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
@@ -1228,40 +1244,40 @@ display="inline" ><mrow
  id="encoder"></a>
      <h5 class="subsubsectionHead"><span class="titlemark">7.0.1   </span> <a 
  id="x1-120007.0.1"></a>Encoder:</h5>
-     <!--l. 254--><p class="noindent" >
+     <!--l. 268--><p class="noindent" >
          </p><ol  class="enumerate1" >
          <li 
-  class="enumerate" id="x1-12002x1">While samples in <!--l. 258--><math 
+  class="enumerate" id="x1-12002x1">While samples in <!--l. 272--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >s</mi></mrow></math>:
-         <!--l. 260--><p class="noindent" >
+         <!--l. 274--><p class="noindent" >
              </p><ol  class="enumerate2" >
              <li 
-  class="enumerate" id="x1-12004x1">Read into <!--l. 264--><math 
+  class="enumerate" id="x1-12004x1">Read into <!--l. 278--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >b</mi></mrow></math>
-             the next <!--l. 264--><math 
+             the next <!--l. 278--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >B</mi></mrow></math>
-             samples of <!--l. 264--><math 
+             samples of <!--l. 278--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >s</mi></mrow></math>.
              </li>
              <li 
-  class="enumerate" id="x1-12006x2">Determine <!--l. 266--><math 
+  class="enumerate" id="x1-12006x2">Determine <!--l. 280--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >Δ</mi></mrow></math>,
-             minimizing the quantization error, and output <!--l. 267--><math 
+             minimizing the quantization error, and output <!--l. 281--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
@@ -1269,7 +1285,7 @@ display="inline" ><mrow
              (or the data necessary for its determination).
              </li>
              <li 
-  class="enumerate" id="x1-12008x3">Quantize <!--l. 269--><math 
+  class="enumerate" id="x1-12008x3">Quantize <!--l. 283--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
@@ -1281,14 +1297,14 @@ display="inline" ><mrow
  id="decoder"></a>
      <h5 class="subsubsectionHead"><span class="titlemark">7.0.2   </span> <a 
  id="x1-130007.0.2"></a>Decoder:</h5>
-     <!--l. 276--><p class="noindent" >
+     <!--l. 290--><p class="noindent" >
          </p><ol  class="enumerate1" >
          <li 
   class="enumerate" id="x1-13002x1">While data in input:
-         <!--l. 282--><p class="noindent" >
+         <!--l. 296--><p class="noindent" >
              </p><ol  class="enumerate2" >
              <li 
-  class="enumerate" id="x1-13004x1">Read <!--l. 286--><math 
+  class="enumerate" id="x1-13004x1">Read <!--l. 300--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
@@ -1300,7 +1316,7 @@ display="inline" ><mrow
                                                                   
              </li>
              <li 
-  class="enumerate" id="x1-13006x2">“Dequantize” <!--l. 289--><math 
+  class="enumerate" id="x1-13006x2">“Dequantize” <!--l. 303--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
@@ -1310,7 +1326,7 @@ display="inline" ><mrow
              signal).</li></ol>
          </li></ol>
      </li>
-     <li class="itemize">The selection of <!--l. 295--><math 
+     <li class="itemize">The selection of <!--l. 309--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
@@ -1319,7 +1335,7 @@ display="inline" ><mrow
      sizes and the loss of ﬁdelity due to large block sizes.
      </li>
      <li class="itemize">Forward adaptive quantization generates a
-     <!--l. 300--><math 
+     <!--l. 314--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
@@ -1331,7 +1347,7 @@ class="MathClass-bin">×</mo> <msub><mrow
 ><mi 
 >s</mi></mrow></msub 
 ></mrow></math> delay (buﬀering),
-     where <!--l. 300--><math 
+     where <!--l. 314--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><msub><mrow 
@@ -1340,12 +1356,12 @@ display="inline" ><mrow
 ><mi 
 >s</mi></mrow></msub 
 ></mrow></math> is the
-     sampling rate of <!--l. 301--><math 
+     sampling rate of <!--l. 315--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >s</mi></mrow></math>.</li></ul>
-<!--l. 304--><p class="noindent" >
+<!--l. 318--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">8   </span> <a 
  id="x1-140008"></a>Backward adaptive quantization</h3>
@@ -1353,13 +1369,13 @@ display="inline" ><mrow
      <li class="itemize">Only the previously quantized samples are available to use in adapting the
      quantizer.
      </li>
-     <li class="itemize">Idea: If happens that <!--l. 310--><math 
+     <li class="itemize">Idea: If happens that <!--l. 324--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >Δ</mi></mrow></math>
      is smaller than it should be, the input will fall in the outer levels of the
-     quantizer a high number of times. On the other hand, if <!--l. 312--><math 
+     quantizer a high number of times. On the other hand, if <!--l. 326--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
@@ -1371,10 +1387,10 @@ display="inline" ><mrow
  id="encoder"></a>
      <h5 class="subsubsectionHead"><span class="titlemark">8.0.1   </span> <a 
  id="x1-150008.0.1"></a>Encoder:</h5>
-     <!--l. 318--><p class="noindent" >
+     <!--l. 332--><p class="noindent" >
          </p><ol  class="enumerate1" >
          <li 
-  class="enumerate" id="x1-15002x1"><!--l. 322--><math 
+  class="enumerate" id="x1-15002x1"><!--l. 336--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
@@ -1385,19 +1401,19 @@ class="MathClass-rel">←</mo> <mn>2</mn></mrow></math>.
                                                                   
          </li>
          <li 
-  class="enumerate" id="x1-15004x2">While <!--l. 324--><math 
+  class="enumerate" id="x1-15004x2">While <!--l. 338--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >s</mi></mrow></math>
          is not exhausted:
-         <!--l. 326--><p class="noindent" >
+         <!--l. 340--><p class="noindent" >
              </p><ol  class="enumerate2" >
              <li 
   class="enumerate" id="x1-15006x1">Quantize the next sample.
              </li>
              <li 
-  class="enumerate" id="x1-15008x2">Observe the output and reﬁne <!--l. 332--><math 
+  class="enumerate" id="x1-15008x2">Observe the output and reﬁne <!--l. 346--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
@@ -1408,10 +1424,10 @@ display="inline" ><mrow
  id="decoder"></a>
      <h5 class="subsubsectionHead"><span class="titlemark">8.0.2   </span> <a 
  id="x1-160008.0.2"></a>Decoder:</h5>
-     <!--l. 339--><p class="noindent" >
+     <!--l. 353--><p class="noindent" >
          </p><ol  class="enumerate1" >
          <li 
-  class="enumerate" id="x1-16002x1"><!--l. 343--><math 
+  class="enumerate" id="x1-16002x1"><!--l. 357--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
@@ -1419,13 +1435,13 @@ display="inline" ><mrow
 class="MathClass-rel">←</mo> <mn>2</mn></mrow></math>.
          </li>
          <li 
-  class="enumerate" id="x1-16004x2">While <!--l. 345--><math 
+  class="enumerate" id="x1-16004x2">While <!--l. 359--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >ŝ</mi></mrow></math>
          is not exhausted:
-         <!--l. 347--><p class="noindent" >
+         <!--l. 361--><p class="noindent" >
              </p><ol  class="enumerate2" >
              <li 
   class="enumerate" id="x1-16006x1">“Dequantize” the next sample.
@@ -1434,13 +1450,13 @@ display="inline" ><mrow
   class="enumerate" id="x1-16008x2">Step 2.B of the encoder.</li></ol>
          </li></ol>
      </li></ul>
-<!--l. 358--><p class="noindent" >
+<!--l. 372--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">9   </span> <a 
  id="x1-170009"></a>The Jayant quantizer <span class="cite">[<a 
 href="#Xjayant1974digital">1</a>]</span></h3>
      <ul class="itemize1">
-     <li class="itemize">Adaptive quantization with a one word memory (<!--l. 361--><math 
+     <li class="itemize">Adaptive quantization with a one word memory (<!--l. 375--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><msub><mrow 
@@ -1453,7 +1469,7 @@ class="MathClass-bin">−</mo><mn>1</mn></mrow><mo
 class="MathClass-close">)</mo></mrow></mrow></msub 
 ></mrow></math>).
      </li>
-     <li class="itemize">A Jayant quantider deﬁnes the Step 2.B. as: Deﬁne a multiplier <!--l. 364--><math 
+     <li class="itemize">A Jayant quantider deﬁnes the Step 2.B. as: Deﬁne a multiplier <!--l. 378--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><msub><mrow 
@@ -1462,12 +1478,12 @@ display="inline" ><mrow
 ><mi 
 >l</mi></mrow></msub 
 ></mrow></math>
-     for each quantization level <!--l. 364--><math 
+     for each quantization level <!--l. 378--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >l</mi></mrow></math>,
-     where for the inner levels <!--l. 365--><math 
+     where for the inner levels <!--l. 379--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><msub><mrow 
@@ -1477,7 +1493,7 @@ display="inline" ><mrow
 >l</mi></mrow></msub 
 > <mo 
 class="MathClass-rel">&#x003C;</mo> <mn>1</mn></mrow></math>
-     and for the outer levels <!--l. 365--><math 
+     and for the outer levels <!--l. 379--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><msub><mrow 
@@ -1491,7 +1507,7 @@ class="MathClass-rel">&#x003E;</mo> <mn>1</mn></mrow></math>,
                                                                   
 
                                                                   
-<div class="par-math-display"><!--l. 367--><math 
+<div class="par-math-display"><!--l. 381--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" ><mrow 
 >
@@ -1527,8 +1543,8 @@ class="MathClass-close">]</mo></mrow></mrow></msup
 ><mo 
 class="MathClass-punc">,</mo>
 </mrow></math></div>
-     <!--l. 369--><p class="nopar" >
-     </p><!--l. 371--><p class="noindent" >where <!--l. 371--><math 
+     <!--l. 383--><p class="nopar" >
+     </p><!--l. 385--><p class="noindent" >where <!--l. 385--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><msup><mrow 
@@ -1540,7 +1556,7 @@ class="MathClass-open">[</mo><mrow><mi
 class="MathClass-bin">−</mo><mn>1</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></mrow></msup 
 ></mrow></math>
-     was the previous quantization step and <!--l. 372--><math 
+     was the previous quantization step and <!--l. 386--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><msup><mrow 
@@ -1556,19 +1572,19 @@ class="MathClass-open">[</mo><mrow><mi
 class="MathClass-bin">−</mo><mn>1</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></mrow></msup 
 ></mrow></math>
-     the level multiplier for the <!--l. 372--><math 
+     the level multiplier for the <!--l. 386--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >n</mi> <mo 
 class="MathClass-bin">−</mo> <mn>1</mn></mrow></math>-th
-     (previous) sample. Thus, if the previous (<!--l. 373--><math 
+     (previous) sample. Thus, if the previous (<!--l. 387--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >n</mi> <mo 
 class="MathClass-bin">−</mo> <mn>1</mn></mrow></math>)
-     quantization used a <!--l. 374--><math 
+     quantization used a <!--l. 388--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><msup><mrow 
@@ -1580,7 +1596,7 @@ class="MathClass-open">[</mo><mrow><mi
 class="MathClass-bin">−</mo><mn>1</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></mrow></msup 
 ></mrow></math>
-     too small (using outer quantization levels) then <!--l. 375--><math 
+     too small (using outer quantization levels) then <!--l. 389--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><msup><mrow 
@@ -1593,41 +1609,41 @@ class="MathClass-close">]</mo></mrow></mrow></msup
 ></mrow></math>
      will be larger and viceversa.
      </p></li>
-     <li class="itemize">Depending on the multipliers <!--l. 377--><math 
+     <li class="itemize">Depending on the multipliers <!--l. 391--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >M</mi></mrow></math>,
      the quantizer will converge or oscillate. In the ﬁrst case, the quantizer will
-     be good for small variations of <!--l. 379--><math 
+     be good for small variations of <!--l. 393--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >s</mi></mrow></math>
-     but bad when a fast adaption to large changes in <!--l. 380--><math 
+     but bad when a fast adaption to large changes in <!--l. 394--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >s</mi></mrow></math>
      is required. In the second one, the quantizer will adapt quickly to fast
-     variations of <!--l. 381--><math 
+     variations of <!--l. 395--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >s</mi></mrow></math>
-     but will oscillate when <!--l. 381--><math 
+     but will oscillate when <!--l. 395--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >s</mi></mrow></math>
      changles slowly.
      </li>
-     <li class="itemize">Most Jayant quantizers clip the computation of <!--l. 384--><math 
+     <li class="itemize">Most Jayant quantizers clip the computation of <!--l. 398--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
 >Δ</mi></mrow></math>
-     to avoid generating a zero output quantizer in those contexts where <!--l. 385--><math 
+     to avoid generating a zero output quantizer in those contexts where <!--l. 399--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mi 
@@ -1637,7 +1653,7 @@ display="inline" ><mrow
                                                                   
 
                                                                   
-<div class="par-math-display"><!--l. 390--><math 
+<div class="par-math-display"><!--l. 404--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" ><mrow 
 >
@@ -1705,8 +1721,8 @@ class="text"><mtext  >max</mtext></mstyle></mrow></msub
 ><mo 
 class="MathClass-punc">.</mo> </mtd></mtr><!--ll--></mtable>
 </mrow></math></div>
-     <!--l. 395--><p class="nopar" ></p></li></ul>
-<!--l. 398--><p class="noindent" >
+     <!--l. 409--><p class="nopar" ></p></li></ul>
+<!--l. 412--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">10   </span> <a 
  id="x1-1800010"></a>Adapting with a scale factor</h3>
@@ -1716,7 +1732,7 @@ class="MathClass-punc">.</mo> </mtd></mtr><!--ll--></mtable>
      dividing the input signal by a scale factor deﬁned iteratively as:
      <table class="equation"><tr><td> <a 
  id="x1-18001r9"></a>
-     <!--l. 406--><math 
+     <!--l. 420--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                                       <msup><mrow 
@@ -1753,19 +1769,19 @@ class="MathClass-punc">.</mo>
                                                                   
 
                                                                   
-<!--l. 411--><p class="noindent" >
+<!--l. 425--><p class="noindent" >
 </p>
    <h4 class="subsectionHead"><span class="titlemark">10.1   </span> <a 
  id="x1-1900010.1"></a>Example</h4>
-<!--l. 412--><p class="noindent" >Quantize <a 
+<!--l. 426--><p class="noindent" >Quantize <a 
 href="https://upload.wikimedia.org/wikipedia/commons/3/3a/Jfk_berlin_address_high.ogg" >Jfk_berlin_address_high.ogg</a> using
-<!--l. 414--><math 
+<!--l. 428--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mrow 
 ><mn>4</mn></mrow></math>-bits
 backward adaptive Jayant quantizer. Reproduce the quantized sequence and provide
 a subjective comparison with the original sequence.
-</p><!--l. 418--><p class="noindent" >
+</p><!--l. 432--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">11   </span> <a 
  id="x1-2000011"></a>Vector quantization</h3>
@@ -1793,7 +1809,7 @@ class="ecti-1000">Wavelets and Subband Coding</span></a>.
 </p>
    </div>
 <a 
- id="Q1-1-24"></a>
+ id="Q1-1-26"></a>
     
 </body> 
 </html>
