@@ -36,8 +36,9 @@
   levels). $\{r_i\}$ must be finite.
 
 \item Another design parameter of quantizers is the definition of the
-  decision boundaries $d_{\text min}$ and $d_{\text max}$, ($d_{\text min}<d_{\text max}$) that define the low and high
-  overload regions as
+  decision boundaries $d_{\text min}$ and $d_{\text max}$, ($d_{\text
+    min}<d_{\text max}$) that define the low and high overload regions
+  as
   \begin{equation}
     s[n] = \{\begin{array}{ll}
     r_{\text min} & \text{if $s(nT_s)<d_{\text min}$} \\
@@ -97,32 +98,45 @@
   and
   \begin{equation}
     \Delta=\frac{d_{\text max}-d_{\text min}}{Q}.
+    \label{eq:delta_definition}
   \end{equation}
 
   \begin{figure}
     \svg{cuantif}{800}
-    \caption{An uniform quantizer.}
+    \caption{Uniform scalar quantization.}
     \label{fig:cuantif}
   \end{figure}
 
   \begin{figure}
-    \svg{uniform}{600}
-    \caption{A uniform midrise quantizer (see the
-      \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/graphics/midrise.ipynb}{notebook}).}
+    \svg{midrise}{600}
+    \caption{An uniform midrise quantizer (see the
+      \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/graphics/midrise.ipynb}{notebook}). $\Delta=1$
+      and $Q=13$ (the decision boundaries have been ignored). The
+      decision levels ($x$) are $\{\cdots,-3,-2,-1,0,1,2,3,\cdots\}$
+      and the representation levels ($y$) are
+      $\{\cdots,-2.5,-1.5,-0.5,0.5,1.5,2.5,\cdots\}$.}
     \label{fig:midrise}
   \end{figure}
   
   \begin{figure}
-    \svg{midread}{600}
-    \caption{A uniform midread quantizer (see the
-      \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/graphics/midread.ipynb}{notebook}).}
-    \label{fig:midread}
+    \svg{midtread}{600}
+    \caption{An uniform midtread quantizer (see the
+      \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/graphics/midtread.ipynb}{notebook}). $\Delta=1$
+      and $Q=12$ (the decision boundaries have been ignored). The
+      decision levels ($x$) are $\{\cdots,-2.5,-1.5,-0.5,0.5,1.5,2.5,\cdots\}$
+      and the representation levels ($y$) are
+      $\{\cdots,-2,-1,-0,1,2,\cdots\}$.}
+    \label{fig:midtread}
   \end{figure}
 
   \begin{figure}
     \svg{deadzone}{600}
-    \caption{A uniform deadzone quantizer (see the
-      \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/graphics/deadzone.ipynb}{notebook}).}
+    \caption{An uniform deadzone quantizer (see the
+      \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/graphics/deadzone.ipynb}{notebook}). $\Delta=1$
+      and $Q=12$ (the decision boundaries have been ignored). The
+      decision levels ($x$) are $\{\cdots,-3,-2,-1,1,2,3,\cdots\}$
+      and the representation levels ($y$) are
+      $\{\cdots,-2,-1,-0,1,2,\cdots\}$.}
     \label{fig:deadzone}
   \end{figure}
 
@@ -135,6 +149,7 @@
   \begin{equation}
     \text{MSE} =
     \frac{1}{\Delta}\int_{-\Delta/2}^{\Delta/2}e^2de=\frac{\Delta^2}{12}.
+    \label{eq:MSE_uniform_scalar_quantizer}
   \end{equation}
   
 \item
@@ -167,23 +182,28 @@
 \item If $R$ is the number of bits of the quantizer (for example, in
   the quantizer of the Fig.~\ref{fig:cuantif},
   $R=\lceil\log_2(5)\rceil=3$-bits and$(Q=8)$), $\Delta$ decreases as
-  $\frac{1}{2^R}$, and
+  $\frac{1}{2^R}$. Considering
+  Eq.~\ref{eq:MSE_uniform_scalar_quantizer} and
+  Eq.~\ref{eq:delta_definition}, we get that
   \begin{equation}
-    \text{MSE} = \frac{(d_{\text max}-d_{\text min})^2}{12Q^2} =
-    \sigma^22^{-2R}=C2^{-2R}.
+    \text{MSE} = \frac{\Delta^2}{12} = \frac{(d_{\text max}-d_{\text min})^2}{12Q^2}.
   \end{equation}
-  since $\sigma^2_x=\frac{(d_{\text max}-d_{\text min})^2}{12}$ for
-  uniform input PDF.
+  Considering now that $\sigma^2_x=\frac{(d_{\text max}-d_{\text
+      min})^2}{12}$ for uniform input PDF, we obtain that
+  \begin{equation}
+    \text{MSE} =
+    \sigma_x^22^{-2R}.
+  \end{equation}
 
 \item
-  If we add a bit to $R$, $R^{+1}=R+1$, then
+  Now, if we add a bit to $R$, $R^{+1}=R+1$, then
   \begin{equation*}
-    D^{+1}=C2^{-2(R+1)} = 2^{-2R}2^{-2},
+    \text{MSE}^{+1}=2^{-2(R+1)}\sigma_x^2 = 2^{-2}2^{-2R}\sigma_x^2,
   \end{equation*}
   and
   \begin{equation*}
-    {\text SNR}^{+1} = 10\log_{10}4\frac{\sigma_x^2}{2^{-2R}C} =
-    {\text SNR} + 10\log_{10} 4 \approx {\text SNR} + 6 {\text dB}.
+    \text{SNR}^{+1} = 10\log_{10}\frac{\sigma_x^2}{\text{MSE}^{+1}} = 10\log_{10}4\frac{\sigma_x^2}{\text{MSE}} =
+    10\log_{10} 4 + \text{SNR} \approx  6~\text{dB} + \text{SNR}.
   \end{equation*}
   This result is interesting because in a PCM system, the quality of
   the signal is incremented $6$ dB with each bit. Notice that in
@@ -200,13 +220,10 @@
 %  intervals of indexes what will be ignored.
 \end{itemize}
 
-\subsection{Example}
+\subsection{Exersize}
 Quantize
 \href{https://upload.wikimedia.org/wikipedia/commons/3/3a/Jfk_berlin_address_high.ogg}{Jfk\_berlin\_address\_high.ogg}
 using \(\Delta=2\). Compute the variance of both audio sequences.
-
-\subsection*{Example (uniform quantization)}
-
 
 \section{Non-uniform quantization}
 \begin{itemize}
@@ -216,7 +233,7 @@ using \(\Delta=2\). Compute the variance of both audio sequences.
   error, \(\Delta\) can be adapted to the characteristics of \(s\).
 \end{itemize}
 
-\subsection{Companded quantization}
+\section{Companded quantization~\cite{sayood2017introduction}}
 \begin{itemize}
 \item
   Non-uniform quantizer.
@@ -230,11 +247,15 @@ using \(\Delta=2\). Compute the variance of both audio sequences.
   example:
 \end{itemize}
 
-\href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/companded_quantization.ipynb}{Ipython notebook}
+\href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/graphics/companded_quantization.ipynb}{notebook}
 
-\svg{ulaw-compressor}{600}
-\svg{ulaw-expander}{600}
-\svg{companded}{600}
+\begin{figure}
+  \svg{ulaw-compressor}{600}
+  \svg{ulaw-expander}{600}
+  \svg{companded}{600}
+  \caption{Insights of a companded quantizer.}
+  \label{fig:companded_quantizer}
+\end{figure}
 
 \section{PDF-optimized quantization}
 \begin{itemize}
@@ -263,7 +284,7 @@ using \(\Delta=2\). Compute the variance of both audio sequences.
   Used for determining a suitable \(\Delta\) for blocks of samples.
 \item ~
   \hypertarget{encoder}{%
-  \subsubsection{Encoder:}\label{encoder}}
+  \subsubsection*{Encoder:}\label{encoder}}
 
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -285,7 +306,7 @@ using \(\Delta=2\). Compute the variance of both audio sequences.
   \end{enumerate}
 \item ~
   \hypertarget{decoder}{%
-  \subsubsection{Decoder:}\label{decoder}}
+  \subsubsection*{Decoder:}\label{decoder}}
 
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -327,7 +348,7 @@ using \(\Delta=2\). Compute the variance of both audio sequences.
   the samples will fall in the inner levels a high number of times.
 \item ~
   \hypertarget{encoder}{%
-  \subsubsection{Encoder:}\label{encoder}}
+  \subsubsection*{Encoder:}\label{encoder}}
 
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -348,7 +369,7 @@ using \(\Delta=2\). Compute the variance of both audio sequences.
   \end{enumerate}
 \item ~
   \hypertarget{decoder}{%
-  \subsubsection{Decoder:}\label{decoder}}
+  \subsubsection*{Decoder:}\label{decoder}}
 
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -422,7 +443,7 @@ using \(\Delta=2\). Compute the variance of both audio sequences.
   \end{equation}
 \end{itemize}
 
-\subsection{Example}
+\subsection{Exercise}
 Quantize
 \href{https://upload.wikimedia.org/wikipedia/commons/3/3a/Jfk_berlin_address_high.ogg}{Jfk\_berlin\_address\_high.ogg}
 using \(4\)-bits backward adaptive Jayant quantizer. Reproduce the
@@ -435,4 +456,4 @@ sequence.
 \end{itemize}
   
 
-\bibliography{quantization,DWT}
+\bibliography{quantization,DWT,data-compression}
