@@ -70,16 +70,14 @@
 
 \section{Scalar quantization}
 \begin{itemize}
-\item  In a scalar quantizer, each input sample $x_i$ is
-  individually quantized as $y_i$.
-  
-\item In a scalar quantizer, the quantization error, determined by
+\item In a scalar quantizer, each input sample $x_i$ is individually
+  quantized as $y_i$, and the quantization error, determined by
   \begin{equation*}
     e=y-x,
   \end{equation*}
   can be modeled as a noise process that: (1) is uncorrelated to the
   input $x$, (2) is white, and (3) follows a uniform
-  distribution. However, this only is true when
+  distribution. However, this can only be done when
   $\Delta<<\sigma_x$~\cite{vetterli1995wavelets}.
 
 \end{itemize}
@@ -95,12 +93,13 @@
     \Delta=d_{i+1}-d_i=r_{i+1}-r_i.
   \end{equation}
   Therefore,
+  %\begin{equation}
+  %  Q=\frac{1}{\Delta}
+  %\end{equation}
+  %and
+\item We define the number of decision levels as
   \begin{equation}
-    Q=\frac{1}{\Delta}
-  \end{equation}
-  and
-  \begin{equation}
-    \Delta=\frac{d_{\text max}-d_{\text min}}{Q}.
+    Q=\frac{d_{\text max}-d_{\text min}}{\Delta}.
     \label{eq:delta_definition}
   \end{equation}
 
