@@ -1,6 +1,6 @@
 % Emacs, this is -*-latex-*-
 
-\title{Quantization}
+\title{\href{https://github.com/vicente-gonzalez-ruiz/quantization}{Quantization}}
 
 \author{Vicente González Ruiz}
 
@@ -14,7 +14,7 @@
   A quantizer discretizes the amplitude of a
   \href{https://en.wikipedia.org/wiki/Pulse-amplitude_modulation}{PAM
     signal} \(s(nT_s)\) (where $s$ is an analog signal,
-  $n\in{\mathbb{Z}}$ and $T_s$ is sampling period), producing an
+  $n\in{\mathbb{Z}}$ and $T_s$ is a sampling period), producing an
   analog
   \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM
     signal} $s[n]$. Therefore, quantization maps the 
@@ -27,18 +27,20 @@
     s[n] = s(nT_s) + e(nT_s),
   \end{equation}
   being \(e(nT_s)\) the quantization error (also called, quantization
-  noise). Therefore, quantization produces a loss of information
-  because we cannot recover $s(nT_s)$ from $s[n]$.
+  noise). $e(nT_s)$ is unpredectible. Therefore, quantization produces
+  a loss of information in the signal because we cannot recover
+  $s(nT_s)$ from $s[n]$ without $e(nT_s)$.
 
 \item
   Quantizers are defined from their set of \(d_i; i\in {\mathbb{Z}}\)
-  (decision levels) and \(r_i; i\in {\mathbb{Z}}\) (representation
-  levels). $\{r_i\}$ must be finite.
+  (\emph{decision levels}) and \(r_i; i\in {\mathbb{Z}}\)
+  (\emph{representation levels}). $\{d_i\}$ and $\{r_i\}$ must be
+  finite.
 
 \item Another design parameter of quantizers is the definition of the
-  decision boundaries $d_{\text min}$ and $d_{\text max}$, ($d_{\text
-    min}<d_{\text max}$) that define the low and high overload regions
-  as
+  \emph{decision boundaries} $d_{\text min}$ and $d_{\text max}$,
+  ($d_{\text min}<d_{\text max}$) that define the so called \emph{low
+    and high overload regions} as
   \begin{equation}
     s[n] = \{\begin{array}{ll}
     r_{\text min} & \text{if $s(nT_s)<d_{\text min}$} \\
@@ -47,8 +49,10 @@
     \end{array}
   \end{equation}
   
-\item The performance of the quantizer is measured as the distance
-  between the input $x$ and the output $y$
+\item For the sake of simplicity, lets denote the inputs of the
+  quantizer as $x (=\{s(nT_s)\})$ and the outputs as $y
+  (=\{s[n]\})$. The performance of the quantizer is measured as the
+  distance between the input $x$ and the output $y$
   \begin{equation*}
     d(x,y) = |x-y|^2.
   \end{equation*}
@@ -65,9 +69,7 @@
 
 \section{Scalar quantization}
 \begin{itemize}
-\item For the sake of simplicity, lets denote the inputs of the
-  quantizer as $x (=\{s(nT_s)\})$ and the outputs as $y
-  (=\{s[n]\})$. In a scalar quantizer, each input sample $x_i$ is
+\item  In a scalar quantizer, each input sample $x_i$ is
   individually quantized as $y_i$.
   
 \item In a scalar quantizer, the quantization error, determined by
