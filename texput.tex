@@ -7,6 +7,13 @@
 \maketitle
 
 \section{\href{https://en.wikipedia.org/wiki/Quantization\_(signal\_processing)}{Basics}}
+
+\begin{figure}
+  \svg{cuantif}{500}
+  \caption{The quantization procedure.}
+  \label{fig:cuantif}
+\end{figure}
+
 \begin{itemize}
 \tightlist
 
@@ -17,8 +24,9 @@
   $n\in{\mathbb{Z}}$ and $T_s$ is a sampling period), producing an
   analog
   \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM
-    signal} $s[n]$. Therefore, quantization maps the 
-  values of samples into a discrete set of values
+    signal} $s[n]$ (see Fig.~\ref{fig:cuantif}). Therefore,
+  quantization maps the values of samples (that are defined in a
+  continous space) into a discrete set of values
   \cite{vetterli1995wavelets}.
 
 \item
@@ -26,10 +34,10 @@
   \begin{equation}
     s[n] = s(nT_s) + e(nT_s),
   \end{equation}
-  being \(e(nT_s)\) the quantization error (also called, quantization
-  noise). $e(nT_s)$ is unpredectible. Therefore, quantization produces
-  a loss of information in the signal because we cannot recover
-  $s(nT_s)$ from $s[n]$ without $e(nT_s)$.
+  being \(e(nT_s)\) an unpredectible quantization error (also called,
+  quantization noise). Quantization produces a loss of information in
+  the signal because we cannot recover $s(nT_s)$ from $s[n]$ without
+  $e(nT_s)$.
 
 \item
   Quantizers are defined from their set of \(d_i; i\in {\mathbb{Z}}\)
@@ -37,21 +45,21 @@
   (\emph{representation levels}). $\{d_i\}$ and $\{r_i\}$ must be
   finite.
 
-\item Another design parameter of quantizers is the definition of the
-  \emph{decision boundaries} $d_{\text min}$ and $d_{\text max}$,
-  ($d_{\text min}<d_{\text max}$) that define the so called \emph{low
-    and high overload regions} as
+\item Another design parameter of quantizers is the
+  \emph{decision boundaries} $d_{\text{min}}$ and $d_{\text{max}}$,
+  ($d_{\text{min}}<d_{\text{max}}$) that define the so called \emph{low
+    and high overload regions}, respectively, as
   \begin{equation}
     s[n] = \{\begin{array}{ll}
-    r_{\text min} & \text{if $s(nT_s)<d_{\text min}$} \\
-    r_{\text max} & \text{if $s(nT_s)>d_{\text max}$} \\
-    s(nT_s)+e(nT_s) & \text{otherwise}.
+    r_{\text{min}}, & \text{if $s(nT_s)<d_{\text{min}}$} \\
+    r_{\text{max}}, & \text{if $s(nT_s)>d_{\text{max}}$} \\
+    s(nT_s)+e(nT_s), & \text{otherwise}.
     \end{array}
   \end{equation}
   
 \item For the sake of simplicity, lets denote the inputs of the
   quantizer as $x (=\{s(nT_s)\})$ and the outputs as $y
-  (=\{s[n]\})$. The performance of the quantizer is measured as the
+  (=\{s[n]\})$. The performance of the quantizer can be measured as the
   distance between the input $x$ and the output $y$, and typically the
   squared error is used:
   \begin{equation*}
@@ -73,7 +81,7 @@
 \item In a scalar quantizer, each input sample $x_i$ is individually
   quantized as $y_i$, and the quantization error, determined by
   \begin{equation*}
-    e=y-x,
+    \{e_i\}=\{y_i\}-\{x_i\},
   \end{equation*}
   can be modeled as a noise process that: (1) is uncorrelated to the
   input $x$, (2) is white, and (3) follows a uniform
@@ -102,12 +110,6 @@
     Q=\frac{d_{\text max}-d_{\text min}}{\Delta}.
     \label{eq:delta_definition}
   \end{equation}
-
-  \begin{figure}
-    \svg{cuantif}{800}
-    \caption{Uniform scalar quantization.}
-    \label{fig:cuantif}
-  \end{figure}
 
   \begin{figure}
     \svg{midrise}{600}
