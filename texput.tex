@@ -460,5 +460,12 @@ sequence.
 \item Samples are quantized in groups (vectors).
 \end{itemize}
   
+\section{Perceptual quantization}
+An important consideration is the relative perfectual importante of
+the input samples. This leads to a weighting of the MSE at the
+output. The weighting function can be derived through experiments to
+determine the ``level of just noticeable noise''. For example, in
+subband coding, as expected, high freq. subbands tolerate more noise
+because the HVS becomes less sensitive at them.
 
 \bibliography{quantization,DWT,data-compression}
