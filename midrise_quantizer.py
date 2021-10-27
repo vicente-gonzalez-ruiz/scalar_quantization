@@ -2,10 +2,15 @@
 
 import numpy as np
 
-def quantize(x, quantization_step):
+def quantize(x: np.ndarray, quantization_step: float) -> np.ndarray:
     k = np.floor(x / quantization_step).astype(np.int)
     return k
 
-def dequantize(k, quantization_step):
+def dequantize(k: np.ndarray, quantization_step: float) -> np.ndarray:
     y = quantization_step * (k + 0.5)
     return y
+
+def quan_dequan(x: np.ndarray, quantization_step:float) -> np.ndarray:
+    k = quantize(x, quantization_step)
+    y = dequantize(k, quantization_step)
+    return k, y
