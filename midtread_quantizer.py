@@ -1,4 +1,4 @@
-''' MRVC/mid-tread_quantizer.py '''
+'''Mid-read (round) scalar quantization.'''
 
 import numpy as np
 
