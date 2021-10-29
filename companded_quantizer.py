@@ -13,7 +13,7 @@ def quantize(x: np.ndarray, quantization_step: float) -> np.ndarray:
     '''Companded mu-law deadzone quantizer'''
     mu = 255
     x_compressed = (32768*(muLaw_compress(x/32768, mu)))
-    k = deadzone.quantize(x_compressed, quantization_step)
+    k = deadzone.quantize(x_compressed, quantization_step).astype(np.int16)
     return k
 
 def dequantize(k: np.ndarray, quantization_step: float) -> np.ndarray:

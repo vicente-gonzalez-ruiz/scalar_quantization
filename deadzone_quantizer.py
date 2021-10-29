@@ -6,7 +6,7 @@ name = "dead-zone"
 
 def quantize(x: np.ndarray, quantization_step: float) -> np.ndarray:
     assert quantization_step > 0
-    k = (x / quantization_step).astype(np.int16) # Quantization indexes
+    k = (x / quantization_step).astype(np.int) # Quantization indexes
     #k = (x / quantization_step).astype(np.int32)
     #return k.astype(np.float32)
     return k

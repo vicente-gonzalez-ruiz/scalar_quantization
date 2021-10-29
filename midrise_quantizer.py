@@ -2,8 +2,11 @@
 
 import numpy as np
 
+name = "mid-rise"
+
 def quantize(x: np.ndarray, quantization_step: float) -> np.ndarray:
-    k = np.floor(x / quantization_step).astype(np.int)
+    assert quantization_step > 0
+    k = np.floor(x / quantization_step).astype(np.int16)
     return k
 
 def dequantize(k: np.ndarray, quantization_step: float) -> np.ndarray:
@@ -13,4 +16,4 @@ def dequantize(k: np.ndarray, quantization_step: float) -> np.ndarray:
 def quan_dequan(x: np.ndarray, quantization_step:float) -> np.ndarray:
     k = quantize(x, quantization_step)
     y = dequantize(k, quantization_step)
-    return k, y
+    return y, k
