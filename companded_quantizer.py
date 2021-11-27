@@ -3,6 +3,8 @@
 import numpy as np
 import deadzone_quantizer as deadzone
 
+name = "companded"
+
 def muLaw_compress(x: np.ndarray, mu: float) -> np.ndarray:
     return np.log(1+mu*np.abs(x))/np.log(1+mu)*np.sign(x)
 
@@ -24,6 +26,6 @@ def dequantize(k: np.ndarray, quantization_step: float) -> np.ndarray:
     return y
 
 def quan_dequan(x: np.ndarray, quantization_step:float) -> np.ndarray:
-    k = quantize(x, quantization_step)
+    k = quantize(x, quantization_step)#.astype(np.int8)
     y = dequantize(k, quantization_step)
     return y, k

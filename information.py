@@ -12,10 +12,12 @@ def average_energy(x):
     return energy(x)/np.size(x)
 
 def entropy(sequence_of_symbols):
+    assert sequence_of_symbols.ndim == 1
     value, counts = np.unique(sequence_of_symbols, return_counts = True)
     probs = counts / len(sequence_of_symbols)
     n_classes = np.count_nonzero(probs)
     logging.info("information.entropy: sequence_of_symbols.max() =", sequence_of_symbols.max())
+    #print(f"n_clases={n_classes}")
     logging.info("information.entropy: sequence_of_symbols.min() =", sequence_of_symbols.min())
     logging.info("information.entropy: n_clases = ", n_classes)
     #debug.print("information.entropy: probs =", probs)
@@ -24,6 +26,7 @@ def entropy(sequence_of_symbols):
         return 0
 
     _entropy = 0.
+    #print(f"probs={probs} {np.sum(probs)}")
     for i in probs:
         _entropy -= i * math.log(i, 2)
     logging.debug("information.entropy: _entropy =", _entropy)

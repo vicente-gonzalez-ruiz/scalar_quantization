@@ -16,6 +16,6 @@ def dequantize(k: np.ndarray, quantization_step: float) -> np.ndarray:
     return y
 
 def quan_dequan(x: np.ndarray, quantization_step:float) -> np.ndarray:
-    k = quantize(x, quantization_step)
+    k = quantize(x, quantization_step)#.astype(np.int8)
     y = dequantize(k, quantization_step)
     return y, k
