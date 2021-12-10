@@ -1,4 +1,4 @@
-'''Deadzone scalar quantization.'''
+'''Uniform Scalar Deadzone Quantization.'''
 
 import numpy as np
 
