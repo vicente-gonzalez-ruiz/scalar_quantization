@@ -6,10 +6,14 @@
 
 \maketitle
 
+This discussion is reffered only to the
+\href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{quantization}
+of digital signals. Quantizers can be also applied to analog signals.
+
 \section{\href{https://en.wikipedia.org/wiki/Quantization\_(signal\_processing)}{Basics}}
 
 \begin{figure}
-  \svg{cuantif}{500}
+  \svg{graphics/cuantif}{500}
   \caption{The quantization procedure.}
   \label{fig:cuantif}
 \end{figure}
@@ -117,7 +121,7 @@
   \end{equation}
 
   \begin{figure}
-    \svg{midrise}{600}
+    \svg{graphics/midrise}{600}
     \caption{An uniform midrise quantizer (see the
       \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/graphics/midrise.ipynb}{notebook}). $\Delta=1$
       and $Q=13$ (the decision boundaries have been ignored). The
@@ -128,7 +132,7 @@
   \end{figure}
   
   \begin{figure}
-    \svg{midtread}{600}
+    \svg{graphics/midtread}{600}
     \caption{An uniform midtread quantizer (see the
       \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/graphics/midtread.ipynb}{notebook}). $\Delta=1$
       and $Q=12$ (the decision boundaries have been ignored). The
@@ -139,7 +143,7 @@
   \end{figure}
 
   \begin{figure}
-    \svg{deadzone}{600}
+    \svg{graphics/deadzone}{600}
     \caption{An uniform deadzone quantizer (see the
       \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/graphics/deadzone.ipynb}{notebook}). $\Delta=1$
       and $Q=12$ (the decision boundaries have been ignored). The
@@ -259,9 +263,9 @@ using \(\Delta=2\). Compute the variance of both audio sequences.
 \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/graphics/companded_quantization.ipynb}{notebook}
 
 \begin{figure}
-  \svg{ulaw-compressor}{600}
-  \svg{ulaw-expander}{600}
-  \svg{companded}{600}
+  \svg{graphics/ulaw-compressor}{600}
+  \svg{graphics/ulaw-expander}{600}
+  \svg{graphics/companded}{600}
   \caption{Insights of a companded quantizer.}
   \label{fig:companded_quantizer}
 \end{figure}
@@ -275,7 +279,7 @@ using \(\Delta=2\). Compute the variance of both audio sequences.
   a small \(\Delta\) for the most probable samples and viceversa.
 \end{itemize}
 
-\svg{cuantif_max-lloyd}{600}
+\svg{graphics/cuantif_max-lloyd}{600}
 
 \section{Adaptive quantization}
 \begin{itemize}
