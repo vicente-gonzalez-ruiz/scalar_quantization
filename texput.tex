@@ -27,17 +27,21 @@
     signal} $s[n]$ (see Fig.~\ref{fig:cuantif}). Therefore,
   quantization maps the values of samples (that are defined in a
   continous space) into a discrete set of values
-  \cite{vetterli1995wavelets}.
+  \cite{vetterli1995wavelets}. Therefore, basically speaking,
+  quantization maps a set (not necessarily countable) of input values
+  to a smaller set (necessarily countable) of output values.
 
 \item
-  The quantization process can be modeled as
+  Quantization is a irreversible process and can be modeled as
   \begin{equation}
     s[n] = s(nT_s) + e(nT_s),
   \end{equation}
   being \(e(nT_s)\) an unpredectible quantization error (also called,
   quantization noise). Quantization produces a loss of information in
   the signal because we cannot recover $s(nT_s)$ from $s[n]$ without
-  $e(nT_s)$.
+  $e(nT_s)$ (many input values are mapped to the same output
+  value). Quantization is not
+  \href{https://en.wikipedia.org/wiki/Linear_map}{linear}.
 
 \item
   Quantizers are defined from their set of \(d_i; i\in {\mathbb{Z}}\)
