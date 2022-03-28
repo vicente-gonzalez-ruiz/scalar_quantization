@@ -1,31 +1,29 @@
 '''Companded (using mu-law) scalar quantization.'''
 
 import numpy as np
+from quantizer import Quantizer
 import deadzone_quantizer as deadzone
 
 name = "companded"
 
-def muLaw_compress(x: np.ndarray, mu: float) -> np.ndarray:
-    return np.log(1+mu*np.abs(x))/np.log(1+mu)*np.sign(x)
+class Companded_Quantizer(deadzone.Deadzone_Quantizer):
 
-def muLaw_expand(y: np.ndarray, mu: float) -> np.ndarray:
-    return (1/mu)*(((1+mu)**np.abs(y))-1)*np.sign(y)
+    def muLaw_compress(self, x, mu):
+        return np.log(1+mu*np.abs(x))/np.log(1+mu)*np.sign(x)
 
-def quantize(x: np.ndarray, quantization_step: float) -> np.ndarray:
-    '''Companded mu-law deadzone quantizer'''
-    mu = 255
-    x_compressed = (32768*(muLaw_compress(x/32768, mu)))
-    k = deadzone.quantize(x_compressed, quantization_step).astype(np.int16)
-    return k
+    def muLaw_expand(self, y, mu):
+        return (1/mu)*(((1+mu)**np.abs(y))-1)*np.sign(y)
 
-def dequantize(k: np.ndarray, quantization_step: float) -> np.ndarray:
-    '''Companded mu-law deadzone dequantizer'''
-    mu = 255
-    z_compressed = deadzone.dequantize(k, quantization_step)
-    y = np.round(32768*muLaw_expand(z_compressed/32768, mu)).astype(np.int16)
-    return y
+    def quantize(self, x):
+        '''Companded mu-law deadzone quantizer'''
+        mu = 255
+        x_compressed = (32768*(self.muLaw_compress(x/32768, mu)))
+        k = super().quantize(x_compressed).astype(np.int16) # Ojo, sobra astype
+        return k
 
-def quan_dequan(x: np.ndarray, quantization_step:float) -> np.ndarray:
-    k = quantize(x, quantization_step)#.astype(np.int8)
-    y = dequantize(k, quantization_step)
-    return y, k
+    def dequantize(self, k):
+        '''Companded mu-law deadzone dequantizer'''
+        mu = 255
+        z_compressed = super().dequantize(k)
+        y = np.round(32768*self.muLaw_expand(z_compressed/32768, mu)).astype(np.int16) # Ojo, lo mismo sobra el astype
+        return y
