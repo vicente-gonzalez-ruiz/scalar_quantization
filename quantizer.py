@@ -24,5 +24,7 @@ class Quantizer():
         range_input_values = np.linspace(self.min_val, self.max_val, self.max_val + 1).astype(np.uint8)
         range_input_indexes = self.quantize(range_input_values)
         DPCM = np.diff(range_input_indexes)
-        decision_levels = np.where(DPCM>0)
-        return decision_levels
+        decision_levels = np.where(DPCM != 0)
+        extended_decision_levels = np.append(self.min_val, decision_levels)
+        extended_decision_levels = np.append(extended_decision_levels, self.max_val)
+        return extended_decision_levels

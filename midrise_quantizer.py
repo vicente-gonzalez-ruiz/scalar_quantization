@@ -19,7 +19,7 @@ class Midrise_Quantizer2(Quantizer):
     def __init__(self, Q_step, min_val=0, max_val=255):
         super().__init__(Q_step, min_val, max_val)
         N_clusters = (self.max_val + 1 - self.min_val) // Q_step
-        self.decision_levels = np.linspace(min_val, max_val + 1, N_clusters + 1)
+        #self.decision_levels = np.linspace(min_val, max_val + 1, N_clusters + 1)
         self.centroids = 0.5 * (self.decision_levels[1:] + self.decision_levels[:-1])  # mean
 
     def quantize(self, x):
