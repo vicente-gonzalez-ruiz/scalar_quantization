@@ -1,19 +1,19 @@
 % Emacs, this is -*-latex-*-
 
-\title{\href{https://github.com/vicente-gonzalez-ruiz/quantization}{(Digital) Quantization}}
+\title{\href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization}{Scalar (Digital) Quantization}}
 
 \author{Vicente González Ruiz}
 
 \maketitle
 \tableofcontents
 
-This discussion is reffered only to the
-\href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{quantization}
-of digital signals. To see how quantization is applied to analog
+This discussion is reffered only to the Scalar
+\href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{Quantization}
+(SQ) of digital signals. To see how quantization is applied to analog
 signal, see
 \href{https://vicente-gonzalez-ruiz.github.io/analog_quantization/}{this}.
 
-\section{Basics}
+\section{Basics of quantization}
 %{{{ 
 
 A (digital)
@@ -21,13 +21,18 @@ A (digital)
 usually denoted by $Q$, is an encoding system that inputs a (digital)
 signal $\mathbf{s}$ (a sequence of digital signal samples) and outputs
 a sequence of quantization indexes ${\mathbf k}$. The inverse system,
-called a \emph{dequantizer} (denoted by $\text{Q}^{-1}$), generally
+called a \emph{dequantizer} (denoted by $\text{Q}^{-1}$), can
 only recovers an approximated version of ${\mathbf s}$ that it will be
 denoted by $\tilde{{\mathbf s}}$.
 
+%}}}
+
+\section{Quantization of digital signals}
+% {{{
+
 If we define the \emph{cardinality} operator $|\cdot|$ applied to a
-signal as the number of different values that such signal can take,
-i.e., the size of the signal alphabet, it ususally holds that
+digital signal as the number of different values that such signal can
+take, i.e., the size of the signal alphabet, it ususally holds that
 \begin{equation}
   |{\mathbf s}|\leq|\tilde{\mathbf s}| = |{\mathbf k}|.
 \end{equation}
@@ -37,9 +42,11 @@ the original signal ${\mathbf s}$ can. This is the key concept used in
 the \href{https://en.wikipedia.org/wiki/Lossy_compression}{lossy
   compression} of signals.
 
+We will denote the possible values $D{\mathbf s}$ that ${\mathbf s}$ can take as the domain of ${\mathbf s}$.
+
 %}}}
 
-\section{Scalar Quantization (SQ)}
+\section{Quantization using a SQ}
 %{{{
 
 \begin{figure}
@@ -48,8 +55,37 @@ the \href{https://en.wikipedia.org/wiki/Lossy_compression}{lossy
   \label{fig:Q}
 \end{figure}
 
-A SQ produce a quantization index ${\mathbf k}_i$ for each input sample
-${\mathbf s}_i$ (see Fig.~\ref{fig:Q}). Here, we define the quantization error
+In SQ, each source sample is quantized independently from the other
+samples and therefore, a quantization index ${\mathbf k}_i$ is
+produced for each input sample ${\mathbf s}_i$ (see
+Fig.~\ref{fig:Q}).
+
+A $K$-level (scalar) quantizer $Q$ performs a partition of $D({\mathbf
+  s}$ into $K$ quantization cells $C_k, k = 1, \cdots, K$ and
+associates to any ${\mathbf s}_i\in $D({\mathbf s}$ the quantization
+index $k$ if ${\mathbf s}_i\in $C_k$.
+
+The smallest and the highest value of all $C_k$ are called the
+decision boundaries of $Q$. Therefore,
+\begin{equation}
+  Q({\mathbf s}_i) = k \LeftRightarrow C_{k-1} < {\mathbf s}_i \le C_k
+\end{equation}
+
+The inverse quantizer $Q^{-1}$ estimates ${\mathbf s}_i$ knowing $k$ and possibly the probability density function $p({\mathbf s})$, using a reconstruction level $c_k\in ]C_{k-1}, C_k]$, generating the output
+\begin{equation}
+  \tilde{\mathbf s}_i = c_k.
+\end{equation}
+
+Note that $Q^{−1}$ is only a formal notation and does not correspond
+to the reciprocal function of Q since quantization is
+noninvertible~\cite{duhamel2009joint}.
+
+%}}}
+
+\section{Quantization error}
+%{{{
+
+We define the quantization error
 \begin{equation}
   {\mathbf e}_i = {\mathbf s}_i - \tilde{{\mathbf s}}_i.
 \end{equation}
