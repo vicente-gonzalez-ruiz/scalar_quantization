@@ -1,3 +1,3 @@
-# Acalar Quantization
+# Scalar Quantization
 
 [Click me](https://vicente-gonzalez-ruiz.github.io/quantization/).
