@@ -10,16 +10,17 @@
 \section{Definition}
 %{{{
 
-%\begin{figure}
-%  \centering \myfig{graphics/Q}{3cm}{300}
-%  \caption{Scalar quantization and dequantization of a signal.}
-%  \label{fig:Q}
-%\end{figure}
+\begin{figure}
+  \svgfig{graphics/Q}{3cm}{300pt}
+  \caption{Scalar quantization and dequantization of a signal.}
+  \label{fig:Q}
+\end{figure}
 
-Scalar (Digital) Quantization (SQ) is a technique in which each source
-sample is quantized independently from the other samples and
-therefore, a quantization index ${\mathbf k}_i$ is produced for each
-input sample ${\mathbf s}_i$~\cite{vruiz__quantization}.
+Scalar (Digital) Quantization (SQ) (see Figure~\ref{fig:Q}) is a
+technique in which each source sample is quantized independently from
+the other samples and therefore, a quantization index ${\mathbf k}_i$
+is produced for each input sample ${\mathbf
+  s}_i$~\cite{vruiz__quantization}.
 
 A $K$-levels SQ $Q$ performs a partition of the domain of ${\mathbf
   s}$ into $K$ cells ${\mathbf C}_k, k = 1, \cdots, K$ and associates
@@ -106,7 +107,7 @@ and the inverse mapping by
 \end{equation}
 
 \begin{figure}
-  \svg{graphics/midrise}{600}
+  \svgfig{graphics/midrise}{6cm}{600pt}
   \caption{An uniform mid-rise quantizer (see the
     \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/graphics/midrise.ipynb}{notebook}). $\Delta=1$
     and $Q=13$ (the decision boundaries have been ignored). The
@@ -135,7 +136,7 @@ and the inverse mapping by
 \end{equation}
 
 \begin{figure}
-  \svg{graphics/midtread}{600}
+  \svg{graphics/midtread}{6cm}{600pt}
   \caption{An uniform mid-tread quantizer (see the
     \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/graphics/midtread.ipynb}{notebook}). $\Delta=1$
     and $Q=12$ (the decision boundaries have been ignored). The
@@ -159,7 +160,7 @@ should not be considered uniform, and that all dead-zone quantizers,
 by definition, are mid-tread.}
 
 \begin{figure}
-  \svg{graphics/deadzone}{600}
+  \svg{graphics/deadzone}{6cm}{600pt}
   \caption{An uniform deadzone quantizer (see the
     \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/graphics/deadzone.ipynb}{notebook}). $\Delta=1$
     and $Q=12$ (the decision boundaries have been ignored). The
@@ -427,7 +428,6 @@ at them.
 
 %}}}
 
-\section{}
 
 \section{Resources}
 \bibliography{quantization,DWT,data-compression}

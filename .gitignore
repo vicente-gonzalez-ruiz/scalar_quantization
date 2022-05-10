@@ -3,7 +3,6 @@
 *.xref
 *.xdy
 *.tmp
-*.pdf
 *.out
 *.log
 *.lg
