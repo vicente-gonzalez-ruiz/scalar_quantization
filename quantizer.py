@@ -4,7 +4,7 @@ import numpy as np
 
 class Quantizer():
     
-    def __init__(self, Q_step, min_val, max_val):
+    def __init__(self, Q_step, min_val=-128, max_val=128):
         self.min_val = min_val
         self.max_val = max_val
         self.Q_step = Q_step
