@@ -10,37 +10,37 @@
 \section{Definition}
 %{{{
 
+Scalar (Digital) Quantization (see Figure~\ref{fig:Q}) is a
+technique in which each source sample is quantized independently from
+the other samples and therefore, a quantization index ${\mathbf k}_i$
+is produced for each input sample ${\mathbf
+  s}_i$~\cite{vruiz__signal_quantization}.
+
 \begin{figure}
   \svgfig{graphics/Q}{3cm}{300pt}
   \caption{Scalar quantization and dequantization of a signal.}
   \label{fig:Q}
 \end{figure}
 
-Scalar (Digital) Quantization (SQ) (see Figure~\ref{fig:Q}) is a
-technique in which each source sample is quantized independently from
-the other samples and therefore, a quantization index ${\mathbf k}_i$
-is produced for each input sample ${\mathbf
-  s}_i$~\cite{vruiz__quantization}~\cite{vruiz__signal_quantization}.
-
-A $K$-levels SQ $Q$ performs a partition of the domain of ${\mathbf
-  s}$ into $K$ cells ${\mathbf C}_k, k = 1, \cdots, K$ and associates
-to any ${\mathbf s}_i$ the quantization index $k$ if ${\mathbf s}_i\in
-{\mathbf C}_k$.
-
-The smallest and the highest value of all ${\mathbf C}_k$ are called
-the decision boundaries of $Q$. Therefore,
+A $K$-levels Scalar Quantizer (SQ) $Q$ performs a partition of the
+domain of ${\mathbf s}$ into $K$ cells ${\mathbf C}_k, k = 1, \cdots,
+K$ and associates to any ${\mathbf s}_i$ the quantization index ${\mathbf k}_i$ if
+${\mathbf s}_i\in {\mathbf C}_k$. In other words,
 \begin{equation}
   Q({\mathbf s}_i) = {\mathbf k}_i \Leftrightarrow {\mathbf C}_{k-1} <
   {\mathbf s}_i \le {\mathbf C}_k.
 \end{equation}
 
 The inverse quantizer $Q^{-1}$ estimates ${\mathbf s}_i$ knowing
-${\mathbf k}_i$ and possibly the PDF $p_{\mathbf S}({\mathbf s})$,
-using a reconstruction level ${\mathbf r}_k\in ]{\mathbf C}_{k-1},
-  {\mathbf C}_k]$, generating the output
+${\mathbf k}_i$ and possibly the PDF (Probability Density Function)
+$p_{\mathbf S}({\mathbf s})$, using a reconstruction level ${\mathbf
+  r}_k\in ]{\mathbf C}_{k-1}, {\mathbf C}_k]$, generating the output
 \begin{equation}
   \tilde{\mathbf s}_i = {\mathbf r}_k.
 \end{equation}
+
+The smallest and the highest value of all ${\mathbf C}_k$ are called
+the decision boundaries of $Q$. Therefore,
 
 %}}}
 
@@ -51,10 +51,10 @@ In an USQ, all decission levels are equally spaced by a distance known
 as \emph{the quantization step size} $\Delta$, satisfiying that the
 domain of the input signal is divided into intervals of constant size
 \begin{equation}
-  \Delta=d_{i+1}-d_i=r_{i+1}-r_i,
+  \Delta={\mathbf d}_{i+1}-{\mathbf d}_i={\mathbf r}_{i+1}-{\mathbf r}_i,
 \end{equation}
-where $d_i$ is the $i$-th decission level and $r_i$ is the $i$-th
-representation level.
+where ${\mathbf d}_i$ is the $i$-th decision level and ${\mathbf r}_i$
+is the $i$-th representation level.
   %Therefore,
   %\begin{equation}
   %  Q=\frac{1}{\Delta}
@@ -89,84 +89,81 @@ input ${\mathbf s}$, (2) is
 
 %}}}
 
-\section{Mid-rise USQ}
+\subsection{Mid-rise USQ}
 %{{{
 
 In mid-rise quantizers the reconstructed signal $\tilde{\mathbf s}$
-never is 0, even if ${\mathbf s}_i=0$ for any $i$.
-
-The mapping process in a mid-rise quantizer can be described as
+never is 0, even if ${\mathbf s}_i=0$ for any $i$. The mapping process
+in a mid-rise quantizer can be described as
 \begin{equation}
-  {\mathbf k}_i = \lfloor \frac{{\mathbf s}_i}{\Delta} \rfloor,
+  {\mathbf k}_i = \Big\lfloor \frac{{\mathbf s}_i}{\Delta} \Big\rfloor,
   \label{eq:mid-rise}
 \end{equation}
 and the inverse mapping by
 \begin{equation}
-  \tilde{\mathbf s}_i = \Delta({\mathbf k}_i + \frac{1}{2}).
+  \tilde{\mathbf s}_i = \Delta\Big({\mathbf k}_i + \frac{1}{2}\Big).
   \label{eq:inverse_mid-rise}
 \end{equation}
 
 \begin{figure}
   \svgfig{graphics/midrise}{6cm}{600pt}
   \caption{An uniform mid-rise quantizer (see the
-    \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/graphics/midrise.ipynb}{notebook}). $\Delta=1$
-    and $Q=13$ (the decision boundaries have been ignored). The
-    decision levels ($x$) are $\{\cdots,-3,-2,-1,0,1,2,3,\cdots\}$
-    and the representation levels ($y$) are
+    \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/scalar_quantization/blob/master/graphics/midrise.ipynb}{notebook}). $\Delta=1$
+    and $K=13$ (the decision boundaries have been ignored). The
+    decision levels (${\mathbf d}$) are $\{\cdots,-3,-2,-1,0,1,2,3,\cdots\}$
+    and the representation levels (${\mathbf r}$) are
     $\{\cdots,-2.5,-1.5,-0.5,0.5,1.5,2.5,\cdots\}$.}
   \label{fig:midrise}
 \end{figure}
 %}}}
 
-\section{Mid-tread USQ}
+\subsection{Mid-tread USQ}
 %{{{ 
 
-In mid-tread quantizers the reconstructed signal is 0 when ${\mathbf
-  s}_i=0$.
-
-The mapping process in a mid-tread quantizer can be described as
+In mid-tread quantizers the reconstructed signal is $0$ when ${\mathbf
+  s}_i=0$. The mapping process in a mid-tread quantizer can be described as
 \begin{equation}
-  {\mathbf k}_i = \text{round}( \frac{{\mathbf s}_i}{\Delta} ),
-  \label{eq:mid-rise}
+  {\mathbf k}_i = \mathrm{round}\Big( \frac{{\mathbf s}_i}{\Delta} \Big),
+  \label{eq:midrise}
 \end{equation}
 and the inverse mapping by
 \begin{equation}
   \tilde{\mathbf s}_i = \Delta{\mathbf k}_i.
-  \label{eq:inverse_mid-rise}
+  \label{eq:inverse_midrise}
 \end{equation}
 
 \begin{figure}
-  \svg{graphics/midtread}{6cm}{600pt}
+  \svgfig{graphics/midtread}{6cm}{600pt}
   \caption{An uniform mid-tread quantizer (see the
-    \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/graphics/midtread.ipynb}{notebook}). $\Delta=1$
-    and $Q=12$ (the decision boundaries have been ignored). The
-    decision levels ($x$) are $\{\cdots,-2.5,-1.5,-0.5,0.5,1.5,2.5,\cdots\}$
-    and the representation levels ($y$) are
+    \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/scalar_quantization/blob/master/graphics/midtread.ipynb}{notebook}). $\Delta=1$
+    and $K=12$ (the decision boundaries have been ignored). The
+    decision levels (${\mathbf d}$) are $\{\cdots,-2.5,-1.5,-0.5,0.5,1.5,2.5,\cdots\}$
+    and the representation levels (${\mathbf r}$) are
     $\{\cdots,-2,-1,-0,1,2,\cdots\}$.}
   \label{fig:midtread}
 \end{figure}
 %}}}
 
-\section{Mid-tread USQ with deadzone}
+\subsection{Mid-tread USQ with deadzone}
 %{{{
 
-The quantization step is $2\Delta$ for ${\mathbf s}_i=0$. Deadzone
-quantizers tends to remove the
+In a USQwD (USQ with Deadzone), the quantization step is $2\Delta$ for
+${\mathbf s}_i=0$. Deadzone quantizers tends to remove the
 \href{https://en.wikipedia.org/wiki/Noise_(electronics)}{electronic
   noise} (that usually has a small amplitude compared to the input
 signal ${\mathbf s}$), precisely where the signal-to-noise ratio is
-lowest.\footnote{Notice that, by definition, dead-zone quantizers
+the lowest.\footnote{Notice that, by definition, dead-zone quantizers
 should not be considered uniform, and that all dead-zone quantizers,
 by definition, are mid-tread.}
 
 \begin{figure}
   \svg{graphics/deadzone}{6cm}{600pt}
   \caption{An uniform deadzone quantizer (see the
-    \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/graphics/deadzone.ipynb}{notebook}). $\Delta=1$
-    and $Q=12$ (the decision boundaries have been ignored). The
-    decision levels ($x$) are $\{\cdots,-3,-2,-1,1,2,3,\cdots\}$
-    and the representation levels ($y$) are
-    $\{\cdots,-2,-1,-0,1,2,\cdots\}$.}
+    \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/scalar_quantization/blob/master/graphics/deadzone.ipynb}{notebook}). $\Delta=1$
+    and $K=12$ (the decision boundaries have been ignored). The
+    decision levels (${\mathbf d}$) are
+    $\{\cdots,-3,-2,-1,1,2,3,\cdots\}$ and the representation levels
+    (${\mathbf r}$) are $\{\cdots,-2,-1,-0,1,2,\cdots\}$.}
   \label{fig:deadzone}
 \end{figure}
 %}}}
@@ -174,66 +171,73 @@ by definition, are mid-tread.}
 \section{Non-uniform quantization}
 %{{{
 
-If we known that the input signal ${\mathbf s}$ does not follow an
+If we know that the input signal ${\mathbf s}$ does not follow an
 uniform distribution, it is possible to use a variable $\Delta$ to
-minimize the quantization error ${\mathbf e}$ in the most part of the
-samples.
+minimize the quantization error ${\mathbf e}$ in those
+samples that are more probable.
 
 %}}}
 
-\section{Companded quantization~\cite{sayood2017introduction}}
+\subsection{Companded quantization~\cite{sayood2017introduction}}
 %{{{
 
 \href{https://en.wikipedia.org/wiki/Companding}{Companding}
 (COMpressing + exPANDING) quantization is used when most of the
-samples are concentrated arround 0, or as happens with humans, most of
-the (interesting) audio has a low volume (for this reason, companded
-quantizers are used in telephony). It is, therefore, and non-uniform
-quantizer.
+samples are concentrated arround the $0$ value. For example, most of
+the (interesting) audio for humans has a low volume (for this reason,
+companded quantizers are used in telephony).
 
-The original signal is mapped through a compressor, quantized using an
-uniform quantized, and re-mapped using the corresponding expander. The
-result is a logarithmic quantization.
+In a companded codec, the original signal is mapped through a
+compressor, quantized using an uniform quantized, and re-mapped using
+the corresponding expander, resulting in a logarithmic quantization,
+centered at $0$. A good example is the
 \href{https://en.wikipedia.org/wiki/\%CE\%9C-law_algorithm}{\(\mu\)-law}
-example:
-\href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/quantization/blob/master/graphics/companded_quantization.ipynb}{notebook}
+codec.
 
 \begin{figure}
-  \svg{graphics/ulaw-compressor}{600}
-  \svg{graphics/ulaw-expander}{600}
-  \svg{graphics/companded}{600}
-  \caption{Insights of a companded quantizer.}
+  \centering
+  \svgfig{graphics/ulaw-compressor}{6cm}{600}
+  \svgfig{graphics/ulaw-expander}{6cm}{600}
+  \svgfig{graphics/companded}{6cm}{600}
+  \caption{Insights of a companded quantizer/dequantizer. See this
+    \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/scalar_quantization/blob/master/graphics/companded_quantization.ipynb}{notebook}.}
   \label{fig:companded_quantizer}
 \end{figure}
 
 %}}}
 
-\section{PDF-optimized quantization}
+\subsection{PDF-optimized quantization}
 %{{{
 
 This non-uniform quantizer is a generalization of the companded
-quantizer, where the samples can follow any distribution. Now, with
-the idea of minimizing the distortion (in general, in terms of the
-MSE), we chose $\Delta_i$ smaller where signal samples appear most
+quantizer, where the input samples can follow any distribution. Now,
+with the idea of minimizing the distortion (in general, in terms of
+the \href{https://en.wikipedia.org/wiki/Mean_squared_error}{MSE}), we
+chose ${\mathbf\Delta}_i$ smaller where signal samples appear most
 offen.
 
-The most used PDF (Probability Density Function) quantizer is the
-Max-LLoyd quantizer, who developed an iterative algorithm for
-determining the decision and representation levels.
+The most used PDF quantizer is the Max-Lloyd quantizer, whose authors
+developed an iterative algorithm for determining the decision and
+representation levels.
 
-\svg{graphics/cuantif_max-lloyd}{600}
+\begin{figure}
+  \centering
+  \svgfig{graphics/cuantif_max-lloyd}{6cm}{600}
+  \caption{A Max-Lloyd quantizer.}
+  \label{fig:Max-Lloyd}
+\end{figure}
 
 %}}}
 
 \section{Adaptive quantization}
 %{{{
 
-Implies to modify $\Delta$ dynamically, depending on the local
+Adaptive quantizers modify $\Delta$ dynamically, depending on the local
 characteristics of ${\mathbf s}$.
 
 %}}}
 
-\section{Forward adaptive quantization}
+\subsection{Forward adaptive quantization}
 %{{{
 
 \begin{itemize}
@@ -241,7 +245,7 @@ characteristics of ${\mathbf s}$.
   Used for determining a suitable \(\Delta\) for blocks of samples.
 \item ~
   \hypertarget{encoder}{%
-  \subsubsection*{Encoder:}\label{encoder}}
+  \subsubsection*{Encoder:}\label{forward_encoder}}
 
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -263,7 +267,7 @@ characteristics of ${\mathbf s}$.
   \end{enumerate}
 \item ~
   \hypertarget{decoder}{%
-  \subsubsection*{Decoder:}\label{decoder}}
+  \subsubsection*{Decoder:}\label{forward_decoder}}
 
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -310,7 +314,7 @@ characteristics of ${\mathbf s}$.
   times.
 \item ~
   \hypertarget{encoder}{%
-  \subsubsection*{Encoder:}\label{encoder}}
+  \subsubsection*{Encoder:}\label{backward_encoder}}
 
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -331,7 +335,7 @@ characteristics of ${\mathbf s}$.
   \end{enumerate}
 \item ~
   \hypertarget{decoder}{%
-  \subsubsection*{Decoder:}\label{decoder}}
+  \subsubsection*{Decoder:}\label{backward_decoder}}
 
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -354,7 +358,7 @@ characteristics of ${\mathbf s}$.
 
 %}}}
 
-\section{The Jayant quantizer~\cite{jayant1974digital}}
+\subsection{The Jayant quantizer~\cite{jayant1974digital}}
 %{{{
 
 \begin{itemize}
@@ -398,7 +402,7 @@ characteristics of ${\mathbf s}$.
 
 %}}}
 
-\section{Adapting with a scale factor}
+\subsection{Adapting with a scale factor}
 %{{{
 
 \begin{itemize}
