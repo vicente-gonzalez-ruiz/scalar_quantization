@@ -2,7 +2,7 @@
 
 import numpy as np
 from quantizer import Quantizer
-import deadzone_quantizer as deadzone
+import deadzone_quantization as deadzone
 
 name = "companded"
 
