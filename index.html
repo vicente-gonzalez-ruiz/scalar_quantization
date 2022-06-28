@@ -29,7 +29,7 @@
 <br />     <span class='subsectionToc'>2.2 <a href='#midtread-usq' id='QQ2-1-7'>Mid-tread USQ</a></span>
 <br />     <span class='subsectionToc'>2.3 <a href='#midtread-usq-with-deadzone' id='QQ2-1-9'>Mid-tread USQ with deadzone</a></span>
 <br />    <span class='sectionToc'>3 <a href='#nonuniform-quantization' id='QQ2-1-11'>Non-uniform quantization</a></span>
-<br />     <span class='subsectionToc'>3.1 <a href='#companded-quantization-sayoodintroduction' id='QQ2-1-12'>Companded quantization [4]</a></span>
+<br />     <span class='subsectionToc'>3.1 <a href='#companded-quantization-sayoodintroduction' id='QQ2-1-12'>Companded quantization [5]</a></span>
 <br />     <span class='subsectionToc'>3.2 <a href='#pdfoptimized-quantization' id='QQ2-1-14'>PDF-optimized quantization</a></span>
 <br />    <span class='sectionToc'>4 <a href='#adaptive-quantization' id='QQ2-1-16'>Adaptive quantization</a></span>
 <br />     <span class='subsectionToc'>4.1 <a href='#forward-adaptive-quantization' id='QQ2-1-17'>Forward adaptive quantization</a></span>
@@ -163,7 +163,7 @@ possible to use a variable \(\Delta \) to minimize the quantization error \(\mat
 are more probable.
 </p><!-- l. 181 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='companded-quantization-sayoodintroduction'><span class='titlemark'>3.1   </span> <a id='x1-80003.1'></a>Companded quantization <span class='cite'>[<a href='#Xsayood2017introduction'>4</a>]</span></h4>
+   <h4 class='subsectionHead' id='companded-quantization-sayoodintroduction'><span class='titlemark'>3.1   </span> <a id='x1-80003.1'></a>Companded quantization <span class='cite'>[<a href='#Xsayood2017introduction'>5</a>]</span></h4>
 <!-- l. 184 --><p class='noindent'><a href='https://en.wikipedia.org/wiki/Companding'>Companding</a> (COMpressing + exPANDING) quantization is used when most of the
 samples are concentrated arround the \(0\) value. For example, most of the (interesting)
 audio for humans has a low volume (for this reason, companded quantizers are used
@@ -194,7 +194,7 @@ expander, resulting in a logarithmic quantization, centered at \(0\). A good exa
 the input samples can follow any distribution. Now, with the idea of minimizing the
 distortion (in general, in terms of the <a href='https://en.wikipedia.org/wiki/Mean_squared_error'>MSE</a>), we chose \({\mathbf \Delta }_i\) smaller where signal samples
 appear most offen.
-</p><!-- l. 219 --><p class='indent'>   The most used PDF quantizer is the Max-Lloyd quantizer, whose authors
+</p><!-- l. 219 --><p class='indent'>   The most used PDF quantizer is the Max-Lloyd quantizer <span class='cite'>[<a href='#Xlloyd1982least'>4</a>]</span>, whose authors
 developed an iterative algorithm for determining the decision and representation
 levels.
 </p>
@@ -392,7 +392,11 @@ them.
    DPCM, and DM quantizers</a>. <span class='ecti-1000'>Proceedings of the IEEE</span>, 62(5):611–632, 1974.
    </p>
    <p class='bibitem'><span class='biblabel'>
- [4]<span class='bibsp'>   </span></span><a id='Xsayood2017introduction'></a>K. Sayood.   <a href='http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf'><span class='ecti-1000'>Introduction to Data Compression</span></a>.   Morgan  Kaufmann,
+ [4]<span class='bibsp'>   </span></span><a id='Xlloyd1982least'></a>Stuart Lloyd.  <a href='http://mlsp.cs.cmu.edu/courses/fall2010/class14/lloyd.pdf'>Least squares quantization in PCM</a>.  <span class='ecti-1000'>IEEE transactions
+   </span><span class='ecti-1000'>on information theory</span>, 28(2):129–137, 1982.
+   </p>
+   <p class='bibitem'><span class='biblabel'>
+ [5]<span class='bibsp'>   </span></span><a id='Xsayood2017introduction'></a>K. Sayood.   <a href='http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf'><span class='ecti-1000'>Introduction to Data Compression</span></a>.   Morgan  Kaufmann,
    2017.
 </p>
    </div>
