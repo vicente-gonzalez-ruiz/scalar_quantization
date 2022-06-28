@@ -227,6 +227,13 @@ representation levels.
   \label{fig:Max-Lloyd}
 \end{figure}
 
+Notice that the Max-Lloyd quantizer is equivalent to use
+K-means~\cite{hartigan1979algorithm} if we known the $K$ parameter
+(the number of representation levels). In this case, the centroids
+computed by K-means are in the middle of each region. If we don't know
+$K$, we must use the Lloyd Algorithm~\cite{hartigan1979algorithm},
+which also estimates $K$.
+
 %}}}
 
 \section{Adaptive quantization}
@@ -434,4 +441,4 @@ at them.
 
 
 \section{Resources}
-\bibliography{quantization,DWT,data-compression}
+\bibliography{quantization,DWT,data-compression,pattern_recognition}
