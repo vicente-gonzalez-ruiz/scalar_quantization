@@ -1,7 +1,7 @@
 '''Mid-read (round) scalar quantization.'''
 
 import numpy as np
-from quantizer import Quantizer
+from quantization import Quantizer
 
 name = "mid-tread"
 

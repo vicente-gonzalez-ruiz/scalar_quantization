@@ -1,7 +1,7 @@
 '''Uniform Scalar Deadzone Quantization.'''
 
 import numpy as np
-from quantizer import Quantizer
+from quantization import Quantizer
 
 name = "dead-zone"
 
