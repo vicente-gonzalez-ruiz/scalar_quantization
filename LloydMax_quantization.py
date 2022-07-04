@@ -2,7 +2,7 @@
 
 import numpy as np
 from sklearn import cluster
-from quantizer import Quantizer
+from quantization import Quantizer
 
 name = "Lloyd-Max"
 
