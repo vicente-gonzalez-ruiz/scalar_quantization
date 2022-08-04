@@ -48,9 +48,10 @@ the decision boundaries of $Q$. Therefore,
 \section{Uniform SQ (USQ)}
 %{{{
 
-In an USQ, all decission levels are equally spaced by a distance known
-as \emph{the quantization step size} $\Delta$, satisfiying that the
-domain of the input signal is divided into intervals of constant size
+In an USQ, all decision levels are equally spaced by a distance known
+as \emph{the Quantization Step Size} (QSS) $\Delta$, satisfiying that
+the domain of the input signal is divided into intervals of constant
+size
 \begin{equation}
   \Delta={\mathbf d}_{i+1}-{\mathbf d}_i={\mathbf r}_{i+1}-{\mathbf r}_i,
 \end{equation}
@@ -470,6 +471,11 @@ at them.
 
 %}}}
 
+\section{Quantization error}
+The quantization error can be modeled as a random signal $\mathbf{e}$
+that is added to the original one $\mathbf{s}$, and the energy of this
+error signal $\leftangle \mathbf{e},\mathbf{e}\rightangle$ depends on
+the QSS and the values of $\mathbf{s}$.
 
 \section{Resources}
 \bibliography{quantization,DWT,data-compression,pattern_recognition}
