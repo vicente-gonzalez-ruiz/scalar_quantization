@@ -2,13 +2,13 @@
 
 import numpy as np
 
-class Quantizer():
+class Quantizer(object):
 
     def __init__(self, Q_step=1, min_val=-128, max_val=128):
+        assert Q_step > 0
         self.min_val = min_val
         self.max_val = max_val
         self.Q_step = Q_step
-        assert Q_step > 0
         
     def quan_dequan(self, x):
         k = self.quantize(x)
