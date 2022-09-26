@@ -26,13 +26,8 @@ class Quantizer(object):
         y = self.dequantize(k)
         return y, k
 
-    def get_representation_levels(self):
-        quantization_indexes = np.linspace(start=self.min_val//self.Q_step, stop=(self.max_val + 1)//self.Q_step - 1, num=(self.max_val - self.min_val + 1)//self.Q_step)#.astype(np.uint8)
-        representation_levels = self.dequantize(quantization_indexes)
-        return representation_levels
-
     def get_decision_levels(self):
-        range_input_values = np.linspace(start=self.min_val, stop=self.max_val, num=self.max_val - self.min_val + 1)#.astype(np.uint8)
+        range_input_values = np.linspace(start=self.min_val + 1, stop=self.max_val - 1, num=self.max_val - self.min_val - 1)#.astype(np.uint8)
         #print("range_input_values =", range_input_values)
         range_input_indexes = self.quantize(range_input_values)
         #print("range_input_indexes =", range_input_indexes)
@@ -44,4 +39,11 @@ class Quantizer(object):
         #print("decision_levels =", decision_levels)
         extended_decision_levels = np.append(self.min_val, decision_levels)
         extended_decision_levels = np.append(extended_decision_levels, self.max_val)
-        return extended_decision_levels
+        return extended_decision_levels[1:-1]
+
+    def get_representation_levels(self):
+        #quantization_indexes = np.linspace(start=self.min_val//self.Q_step, stop=(self.max_val + 1)//self.Q_step - 1, num=(self.max_val - self.min_val + 1)//self.Q_step)#.astype(np.uint8)
+        quantization_indexes = self.quantize(self.get_decision_levels())
+        representation_levels = self.dequantize(quantization_indexes)
+        return representation_levels
+
