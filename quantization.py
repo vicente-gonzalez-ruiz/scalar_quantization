@@ -39,7 +39,7 @@ class Quantizer(object):
         #print("decision_levels =", decision_levels)
         extended_decision_levels = np.append(self.min_val, decision_levels)
         extended_decision_levels = np.append(extended_decision_levels, self.max_val)
-        return extended_decision_levels[1:-1]
+        return extended_decision_levels
 
     def get_representation_levels(self):
         #quantization_indexes = np.linspace(start=self.min_val//self.Q_step, stop=(self.max_val + 1)//self.Q_step - 1, num=(self.max_val - self.min_val + 1)//self.Q_step)#.astype(np.uint8)
