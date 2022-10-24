@@ -55,9 +55,37 @@ class LloydMax_Quantizer(Quantizer):
             self.train(x)
         else:
             self.algorithm = "KMedoids"
-            self.classifier = KMedoids(n_clusters=self.N_clusters, random_state=0)
-            self.train(shuffle(x.flatten(), random_state=0, n_samples=N_samples))
-
+            #self.classifier = KMedoids(n_clusters=self.N_clusters, random_state=0, init="random")
+            #self.classifier = KMedoids(n_clusters=self.N_clusters, init="random")
+            #self.classifier = KMedoids(n_clusters=self.N_clusters, init="heuristic")
+            #self.classifier = KMedoids(n_clusters=self.N_clusters, init="k-medoids++")
+            #self.classifier = KMedoids(n_clusters=self.N_clusters, init="build")
+            #self.classifier = KMedoids(n_clusters=self.N_clusters, method="pam")
+            self.classifier = KMedoids(init="k-medoids++", n_clusters=self.N_clusters)
+            sampled_x = shuffle(x.flatten(), random_state=0, n_samples=N_samples).reshape((-1, 1))
+            self.classifier.fit(sampled_x)
+            #self.train(shuffle(x.flatten(), random_state=0, n_samples=N_samples))
+            #for i in range(x.shape[0]):
+                #self.train(x[i])
+                #self.classifier.fit(x[i].reshape((-1, 1)))
+            self._get_sorted_labels()
+                
+    def _get_sorted_labels(self):
+        self.centers = self.classifier.cluster_centers_.squeeze()
+        idx = np.argsort(self.classifier.cluster_centers_.sum(axis=1))
+        self.lut = np.zeros_like(idx)
+        self.lut[idx] = np.arange(self.N_clusters)
+        logger.info(f"lut={self.lut}")
+        logger.info(f"centroids={self.centers}")
+        argsort_lut = np.argsort(self.lut)
+        sorted_centroids = self.centers[argsort_lut]
+        logger.info(f"sorted_centroids={sorted_centroids}")
+        logger.info(f"labels={self.classifier.labels_} len={len(self.classifier.labels_)}")
+        sorted_labels = self.lut[self.classifier.labels_]
+        logger.info(f"sorted_labels={sorted_labels} len={len(sorted_labels)}")
+        self.centers[:] = sorted_centroids
+        self.classifier.labels_ = sorted_labels
+        
     def train(self, x):
         flatten_x = shuffle(x.reshape((-1, 1)), random_state=0, n_samples=x.size)
         self.classifier.fit(flatten_x)
