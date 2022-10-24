@@ -1,4 +1,6 @@
-'''Lloyd-Max scalar quantization.'''
+'''Lloyd-Max scalar quantization. Use K-Means or K-Medoids (depending
+on a parameter) to compute the centers (an average in the case of
+K-Means and the best input (a medoid) in the case of K-Medoids).'''
 
 import logging
 import logging_config
@@ -22,7 +24,7 @@ name = "Lloyd-Max"
 
 class LloydMax_Quantizer(Quantizer):
 
-    def __init__(self, x, Q_step, min_val=0, max_val=255, speedme=False, select_an_input=False):
+    def __init__(self, x, Q_step, min_val=0, max_val=255, speedme=False, use_medoid=False, N_samples=1_000):
         '''Creates the classifier using the samples in <X>. <Q_step>
         is the quantization step size, <min_val> is the minimum
         expected value faced by the classifier, and <max_val> the
@@ -30,15 +32,17 @@ class LloydMax_Quantizer(Quantizer):
         an initial value for the centroids (the distance between the
         representation levels is not going to be <Q_step> in
         general). <speedme> decreases significantly the processing
-        time at the cost of a lower performence. If <select_a_input>
-        is False, the representation levels are computed as K-means's
-        centroids. Otherwise, one of the elements of the cluster is
-        selected as the representation level.
+        time at the cost of a lower performence. If <use_medoid> is
+        False, the representation levels are computed as K-means's
+        centroids (a mean). Otherwise, one of the elements of the
+        cluster is selected as the representation level (a
+        medoid). <n_samples> is used to run K-medoids (in the case of
+        K-means it is ignored).
 
         '''
         super().__init__(Q_step, min_val, max_val)
         self.N_clusters = (max_val + 1 - min_val) // Q_step
-        if select_an_input == False:
+        if use_medoid == False:
             self.algorithm = "Kmeans"
             if speedme:
                 initial_decision_levels = np.linspace(min_val, max_val + 1, self.N_clusters + 1).reshape(-1, 1)
@@ -48,11 +52,11 @@ class LloydMax_Quantizer(Quantizer):
                 self.classifier = KMeans(n_clusters=self.N_clusters, init=initial_centroids, n_init=1)
             else:
                 self.classifier = KMeans(n_clusters=self.N_clusters)
+            self.train(x)
         else:
             self.algorithm = "KMedoids"
             self.classifier = KMedoids(n_clusters=self.N_clusters, random_state=0)
-
-        self.train(x)
+            self.train(shuffle(x.flatten(), random_state=0, n_samples=N_samples))
 
     def train(self, x):
         flatten_x = shuffle(x.reshape((-1, 1)), random_state=0, n_samples=x.size)
