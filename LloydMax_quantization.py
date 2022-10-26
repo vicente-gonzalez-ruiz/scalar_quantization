@@ -24,8 +24,8 @@ name = "Lloyd-Max"
 
 class LloydMax_Quantizer(Quantizer):
 
-    def __init__(self, x, Q_step, min_val=0, max_val=255, speedme=False, use_medoid=False, N_samples=1_000):
-        '''Creates the classifier using the samples in <X>. <Q_step>
+    def __init__(self, x, Q_step, min_val=0, max_val=255, speedme=False, use_medoid=False, N_samples=1_000, metric='euclidean'):
+        '''Creates the classifier using the samples in <x>. <Q_step>
         is the quantization step size, <min_val> is the minimum
         expected value faced by the classifier, and <max_val> the
         maximum value. Notice that <Q_step> is used only for providing
@@ -37,7 +37,11 @@ class LloydMax_Quantizer(Quantizer):
         centroids (a mean). Otherwise, one of the elements of the
         cluster is selected as the representation level (a
         medoid). <n_samples> is used to run K-medoids (in the case of
-        K-means it is ignored).
+        K-means it is ignored) <metric> is a string, or
+        callable. Accepted metrics are listed by
+        sklearn.metrics.pairwise_distances_argmin(). The callable
+        function must input two points and output a scalar (with the
+        value of the distance between them).
 
         '''
         super().__init__(Q_step, min_val, max_val)
@@ -68,9 +72,9 @@ class LloydMax_Quantizer(Quantizer):
             #for i in range(x.shape[0]):
                 #self.train(x[i])
                 #self.classifier.fit(x[i].reshape((-1, 1)))
-            self._get_sorted_labels()
+            self._sort_labels()
                 
-    def _get_sorted_labels(self):
+    def _sort_labels(self):
         self.centers = self.classifier.cluster_centers_.squeeze()
         idx = np.argsort(self.classifier.cluster_centers_.sum(axis=1))
         self.lut = np.zeros_like(idx)
