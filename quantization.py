@@ -21,15 +21,15 @@ class Quantizer(object):
         self.Q_step = Q_step
         logger.info(f"min={min_val} max={max_val} Q_step={Q_step}")
         
-    def quan_dequan(self, x):
-        k = self.quantize(x)
-        y = self.dequantize(k)
+    def encode_and_decode(self, x):
+        k = self.encode(x)
+        y = self.decode(k)
         return y, k
 
     def get_decision_levels(self):
         range_input_values = np.linspace(start=self.min_val + 1, stop=self.max_val - 1, num=self.max_val - self.min_val - 1)#.astype(np.uint8)
         #print("range_input_values =", range_input_values)
-        range_input_indexes = self.quantize(range_input_values)
+        range_input_indexes = self.encode(range_input_values)
         #print("range_input_indexes =", range_input_indexes)
         DPCM = np.diff(range_input_indexes)
         #print("DPCM =", DPCM)
@@ -43,7 +43,7 @@ class Quantizer(object):
 
     def get_representation_levels(self):
         #quantization_indexes = np.linspace(start=self.min_val//self.Q_step, stop=(self.max_val + 1)//self.Q_step - 1, num=(self.max_val - self.min_val + 1)//self.Q_step)#.astype(np.uint8)
-        quantization_indexes = self.quantize(self.get_decision_levels())
-        representation_levels = self.dequantize(quantization_indexes)
+        quantization_indexes = self.encode(self.get_decision_levels())
+        representation_levels = self.decode(quantization_indexes)
         return representation_levels
 

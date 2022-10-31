@@ -114,7 +114,7 @@ class LloydMax_Quantizer(Quantizer):
             self.classifier = KMeans(n_clusters=self.N_clusters, init=self.classifier.cluster_centers_, n_init=1)
         self.train(x)
 
-    def quantize(self, x):
+    def encode(self, x):
         '''Use the created classifier to find the quantization indexes
         (labels) for each point of <x>.
 
@@ -123,7 +123,7 @@ class LloydMax_Quantizer(Quantizer):
         k.shape = x.shape
         return k
 
-    def dequantize(self, k):
+    def decode(self, k):
         '''Return the centroids corresponding to the quantization indexes
         <k>.
 
