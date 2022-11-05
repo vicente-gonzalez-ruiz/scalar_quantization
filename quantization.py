@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 ##logger.setLevel(logging.ERROR)
 logger.setLevel(logging.WARNING)
 #logger.setLevel(logging.INFO)
-#logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.DEBUG)
 
 import numpy as np
 
@@ -22,8 +22,11 @@ class Quantizer(object):
         logger.info(f"min={min_val} max={max_val} Q_step={Q_step}")
         
     def encode_and_decode(self, x):
+        logger.debug(f"x.shape={x.shape}")
         k = self.encode(x)
+        logger.debug(f"k.shape={k.shape}")
         y = self.decode(k)
+        logger.debug(f"y.shape={y.shape}")
         return y, k
 
     def get_decision_levels(self):

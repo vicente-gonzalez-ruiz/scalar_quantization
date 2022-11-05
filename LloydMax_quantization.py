@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 ##logger.setLevel(logging.ERROR)
 logger.setLevel(logging.WARNING)
 #logger.setLevel(logging.INFO)
-#logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.DEBUG)
 
 import numpy as np
 from scipy.ndimage import uniform_filter1d
@@ -45,6 +45,7 @@ class LloydMax_Quantizer(Quantizer):
 
         '''
         super().__init__(Q_step, min_val, max_val)
+        assert np.all(counts) > 0
         self.N_bins = (max_val + 1 - min_val) // Q_step
         initial_boundaries = np.linspace(min_val, max_val + 1, self.N_bins + 1)
         initial_centroids = 0.5 * (initial_boundaries[1:] + initial_boundaries[:-1])
@@ -94,7 +95,10 @@ class LloydMax_Quantizer(Quantizer):
         '''Find the quantization indexes for the signal <x>.
 
         '''
+        logger.debug(f"x.shape={x.shape}")
         k = np.searchsorted(self.boundaries, x)
+        logger.debug(f"k.shape={k.shape}")
+        logger.debug(f"max(k)={np.max(k)}")
         return k
 
     def decode(self, k):
@@ -102,7 +106,11 @@ class LloydMax_Quantizer(Quantizer):
         <k>.
 
         '''
+        logger.debug(f"k.shape={k.shape}")
+        logger.debug(f"max(k)={np.max(k)}")
+        logger.debug(f"centroids.shape={self.centroids.shape}")
         y = self.centroids[k]
+        logger.debug(f"y.shape={y.shape}")
         return y
 
     def get_representation_levels(self):
