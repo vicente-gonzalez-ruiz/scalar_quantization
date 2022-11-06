@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 ##logger.setLevel(logging.ERROR)
 logger.setLevel(logging.WARNING)
 #logger.setLevel(logging.INFO)
-logger.setLevel(logging.DEBUG)
+#logger.setLevel(logging.DEBUG)
 
 import numpy as np
 

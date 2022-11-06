@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 ##logger.setLevel(logging.ERROR)
 logger.setLevel(logging.WARNING)
 #logger.setLevel(logging.INFO)
-logger.setLevel(logging.DEBUG)
+#logger.setLevel(logging.DEBUG)
 
 import numpy as np
 from scipy.ndimage import uniform_filter1d
@@ -96,7 +96,7 @@ class LloydMax_Quantizer(Quantizer):
 
         '''
         logger.debug(f"x.shape={x.shape}")
-        k = np.searchsorted(self.boundaries, x)
+        k = np.searchsorted(self.boundaries, x, side="right") - 1
         logger.debug(f"k.shape={k.shape}")
         logger.debug(f"max(k)={np.max(k)}")
         return k
