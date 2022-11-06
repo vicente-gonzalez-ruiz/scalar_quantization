@@ -21,7 +21,7 @@ name = "Lloyd-Max"
 
 class LloydMax_Quantizer(Quantizer):
 
-    def __init__(self, Q_step, counts, min_val=0, max_val=255, max_iters=100, epsilon=1E5):
+    def __init__(self, Q_step, counts, min_val=0, max_val=255, max_iters=10):
         '''Defines the working parameters of the quantizer:
 
         Q_step: quantization step size.
@@ -45,22 +45,34 @@ class LloydMax_Quantizer(Quantizer):
 
         '''
         super().__init__(Q_step, min_val, max_val)
-        assert np.all(counts) > 0
+        #assert np.all(counts) > 0
         self.N_bins = (max_val + 1 - min_val) // Q_step
-        initial_boundaries = np.linspace(min_val, max_val + 1, self.N_bins + 1)
+        #initial_boundaries = np.linspace(min_val, max_val + 1, self.N_bins + 1)
+        initial_boundaries = [0.]
+        acc = 0
+        counter = 0
+        for p in P:
+            acc += p
+            counter += 1
+            if acc > bin_count:
+                initial_boundaries.append(float(counter))
+                acc = 0
+        initial_boundaries.append(256.)
+        initial_boundaries = np.array(initial_boundaries)
+        self.boundaries = initial_boundaries
+        logger.info(f"initial_boundaries={self.boundaries}")
         initial_centroids = 0.5 * (initial_boundaries[1:] + initial_boundaries[:-1])
         self.centroids = initial_centroids
         logger.info(f"initial_centroids={self.centroids}")
-        self.boundaries = initial_boundaries
-        logger.info(f"initial_boundaries={self.boundaries}")
         prev_b = np.zeros(self.boundaries.size)
         for j in range(max_iters):
             prev_b[:] = self.boundaries
             self._compute_boundaries()
             max_abs_error = np.max(np.abs(prev_b - self.boundaries))
-            if (j>0) and (max_abs_error <= epsilon):
+            prev_c = self.centroids
+            ended = self.compute_centroids(counts)
+            if ended:
                 break
-            self._compute_centroids(counts)
         logger.info(f"centroids={self.centroids}")
 
     def _compute_boundaries(self):
