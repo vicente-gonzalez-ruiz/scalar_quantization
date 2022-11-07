@@ -27,16 +27,7 @@ class LloydMax_Quantizer(Quantizer):
         Q_step: quantization step size.
 
         counts: number of ocurrences of each possible input
-        sample. None of such ocurrences should be 0 (although this
-        issue is solved in this constructor). This will generate that
-        the enumeration of the quantization indexes are not
-        consecutive, and usually, will not start at 0 (see the
-        notebook), but this should not be a problem for those entropy
-        codecs that do not expect to find an input in the range [0,
-        ...]. Notice, anyway, that the used centroids (the number of
-        different quantization indexes used by the encoder in the
-        quantization of the signal, that can be smaller than the
-        number of bins) must be sent to the decoder.
+        sample. 
         
         [min_val, max_val]: expected dynamic range of the input
         signal.
