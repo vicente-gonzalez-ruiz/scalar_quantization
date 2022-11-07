@@ -48,10 +48,12 @@ class LloydMax_Quantizer(Quantizer):
         #assert np.all(counts) > 0
         self.N_bins = (max_val + 1 - min_val) // Q_step
         #initial_boundaries = np.linspace(min_val, max_val + 1, self.N_bins + 1)
+        total_count = np.sum(counts)
+        bin_count = total_count/self.N_bins
         initial_boundaries = [0.]
         acc = 0
         counter = 0
-        for p in P:
+        for p in counts:
             acc += p
             counter += 1
             if acc > bin_count:
@@ -70,8 +72,9 @@ class LloydMax_Quantizer(Quantizer):
             self._compute_boundaries()
             max_abs_error = np.max(np.abs(prev_b - self.boundaries))
             prev_c = self.centroids
-            ended = self.compute_centroids(counts)
-            if ended:
+            end = self._compute_centroids(counts)
+            if end:
+                self.centroids = prev_c
                 break
         logger.info(f"centroids={self.centroids}")
 
@@ -87,6 +90,7 @@ class LloydMax_Quantizer(Quantizer):
 
     def _compute_centroids(self, counts):
         '''Compute the centroid of each bin.'''
+        end = False
         centroids = []
         bin_size = self.Q_step
         logger.info(f"bin_size={bin_size}")
@@ -94,6 +98,9 @@ class LloydMax_Quantizer(Quantizer):
             b_i = i*bin_size
             b_i_1 = (i+1)*bin_size
             logger.debug(f"b_i={b_i} b_i_1={b_i_1}")
+            if b_i == b_i_1:
+                end = True
+                break
             # See from scipy.ndimage import center_of_mass
             mass = np.sum([j*counts[j] for j in range(b_i, b_i_1)])
             total_counts_in_bin = np.sum([counts[j] for j in range(b_i, b_i_1)])
@@ -102,6 +109,7 @@ class LloydMax_Quantizer(Quantizer):
             centroids.append(centroid)
         self.centroids = np.array(centroids)
         logger.info(f"centroids={self.centroids}")
+        return end
 
     def encode(self, x):
         '''Find the quantization indexes for the signal <x>.
@@ -119,7 +127,7 @@ class LloydMax_Quantizer(Quantizer):
 
         '''
         logger.debug(f"k.shape={k.shape}")
-        logger.debug(f"max(k)={np.max(k)}")
+        logger.debug(f"min(k)={np.min(k)}, max(k)={np.max(k)}")
         logger.debug(f"centroids.shape={self.centroids.shape}")
         y = self.centroids[k]
         logger.debug(f"y.shape={y.shape}")
