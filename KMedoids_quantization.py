@@ -14,58 +14,39 @@ logger.setLevel(logging.WARNING)
 
 import numpy as np
 #from sklearn import cluster
-from sklearn.cluster import KMeans
 from sklearn.utils import shuffle
 from sklearn_extra.cluster import KMedoids
 from quantization import Quantizer
 import warnings
 
-name = "Lloyd-Max"
+name = "KMedoids"
 
-class LloydMax_Quantizer(Quantizer):
+class KMedoids_Quantizer(Quantizer):
 
-    def __init__(self, x, Q_step, min_val=0, max_val=255, speedme=False, use_medoid=False, N_samples=1_000, metric='euclidean'):
-        '''Creates the classifier using the samples in <x>. <Q_step>
-        is the quantization step size, <min_val> is the minimum
-        expected value faced by the classifier, and <max_val> the
-        maximum value. Notice that <Q_step> is used only for providing
-        an initial value for the centroids (the distance between the
-        representation levels is not going to be <Q_step> in
-        general). <speedme> decreases significantly the processing
-        time at the cost of a lower performence. If <use_medoid> is
-        False, the representation levels are computed as K-means's
-        centroids (a mean). Otherwise, one of the elements of the
-        cluster is selected as the representation level (a
-        medoid). <n_samples> is used to run K-medoids (in the case of
-        K-means it is ignored) <metric> is a string, or
-        callable. Accepted metrics are listed by
-        sklearn.metrics.pairwise_distances_argmin(). The callable
-        function must input two points and output a scalar (with the
-        value of the distance between them).
+    def __init__(self, Q_step, counts, min_val=0, max_val=255, metric='euclidean'):
+        '''Creates a KMeans clusterer using the histogram
+        <counts>.
+
+        Q_step: quantization step size.
+
+        counts: number of ocurrences of each possible input
+        sample.
+
+        [min_val, max_val]: expected dynamic range of the input
+        signal.
+
+        metric: the distance metric used for comparing the
+        points. Accepted metrics are listed by
+        sklearn.metrics.pairwise_distances_argmin(). It can be also a
+        callable function that inputs two points and outputs a scalar
+        (with the value of the distance between them).
 
         '''
         super().__init__(Q_step, min_val, max_val)
         self.N_clusters = (max_val + 1 - min_val) // Q_step
-        if use_medoid == False:
-            self.algorithm = "Kmeans"
-            if speedme:
-                initial_decision_levels = np.linspace(min_val, max_val + 1, self.N_clusters + 1).reshape(-1, 1)
-                initial_centroids = 0.5 * (initial_decision_levels[1:] + initial_decision_levels[:-1])
-                logger.info(f"initial_centroids={initial_centroids.squeeze()}")
+        self.clusterer = KMedoids(init="k-medoids++", n_clusters=self.N_clusters)
 
-                self.classifier = KMeans(n_clusters=self.N_clusters, init=initial_centroids, n_init=1)
-            else:
-                self.classifier = KMeans(n_clusters=self.N_clusters)
-            self.train(x)
-        else:
-            self.algorithm = "KMedoids"
-            #self.classifier = KMedoids(n_clusters=self.N_clusters, random_state=0, init="random")
-            #self.classifier = KMedoids(n_clusters=self.N_clusters, init="random")
-            #self.classifier = KMedoids(n_clusters=self.N_clusters, init="heuristic")
-            #self.classifier = KMedoids(n_clusters=self.N_clusters, init="k-medoids++")
-            #self.classifier = KMedoids(n_clusters=self.N_clusters, init="build")
-            #self.classifier = KMedoids(n_clusters=self.N_clusters, method="pam")
-            self.classifier = KMedoids(init="k-medoids++", n_clusters=self.N_clusters)
+        '''
             sampled_x = shuffle(x.flatten(), random_state=0, n_samples=N_samples).reshape((-1, 1))
             self.classifier.fit(sampled_x)
             #self.train(shuffle(x.flatten(), random_state=0, n_samples=N_samples))
@@ -73,8 +54,25 @@ class LloydMax_Quantizer(Quantizer):
                 #self.train(x[i])
                 #self.classifier.fit(x[i].reshape((-1, 1)))
             self._sort_labels()
-                
+        '''
+
+    def fit(self, x):
+        self.clusterer.fit(x)
+        self._sort_labels()
+        self.medoids = self.clusterer.cluster_centers_
+
     def _sort_labels(self):
+        medoids = self.clusterer.cluster_centers_.squeeze()
+        idx = np.argsort(self.clusterer.cluster_centers_.sum(axis=1))
+        lut = np.zeros_like(idx)
+        lut[idx] = np.arange(len(medoids))
+        argsort_lut = np.argsort(lut)
+        sorted_medoids = medoids[argsort_lut]
+        sorted_labels = lut[self.clusterer.labels_]
+        medoids[:] = sorted_medoids
+        self.clusterer.labels_ = sorted_labels
+
+    def __sort_labels(self):
         self.centers = self.classifier.cluster_centers_.squeeze()
         idx = np.argsort(self.classifier.cluster_centers_.sum(axis=1))
         self.lut = np.zeros_like(idx)

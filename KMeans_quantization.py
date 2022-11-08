@@ -13,8 +13,6 @@ logger.setLevel(logging.WARNING)
 import numpy as np
 #from sklearn import cluster
 from sklearn.cluster import KMeans
-from sklearn.utils import shuffle
-from sklearn_extra.cluster import KMedoids
 from quantization import Quantizer
 import warnings
 
@@ -23,7 +21,7 @@ name = "KMeans"
 class KMeans_Quantizer(Quantizer):
 
     def __init__(self, Q_step, counts, min_val=0, max_val=255):
-        '''Creates the KMeans clusterer using the histogram
+        '''Creates a KMeans clusterer using the histogram
         <counts>.
 
         Q_step: quantization step size.
