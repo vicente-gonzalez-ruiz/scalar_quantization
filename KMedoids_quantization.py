@@ -88,7 +88,7 @@ class KMedoids_Quantizer(Quantizer):
         self.centers[:] = sorted_centroids
         self.classifier.labels_ = sorted_labels
         
-    def train(self, x):
+    def __train(self, x):
         flatten_x = shuffle(x.reshape((-1, 1)), random_state=0, n_samples=x.size)
         self.classifier.fit(flatten_x)
         self.centers = self.classifier.cluster_centers_.squeeze()
@@ -106,7 +106,7 @@ class KMedoids_Quantizer(Quantizer):
         self.centers[:] = sorted_centroids
         self.classifier.labels_ = sorted_labels
 
-    def retrain(self, x):
+    def __retrain(self, x):
         '''Retrain the classifier using previous centers.'''
         if self.algorithm == "KMeans":
             self.classifier = KMeans(n_clusters=self.N_clusters, init=self.classifier.cluster_centers_, n_init=1)
@@ -117,7 +117,7 @@ class KMedoids_Quantizer(Quantizer):
         (labels) for each point of <x>.
 
         '''
-        k = self.classifier.predict(x.reshape((-1, 1)))
+        k = self.clusterer.predict(x.reshape((-1, 1)))
         k.shape = x.shape
         return k
 
@@ -126,7 +126,7 @@ class KMedoids_Quantizer(Quantizer):
         <k>.
 
         '''
-        y = self.centers[k]
+        y = self.medoids[k]
         return y
 
     def get_representation_levels(self):
@@ -134,4 +134,4 @@ class KMedoids_Quantizer(Quantizer):
         centroids computed by the classifier (K-Means).
 
         '''
-        return self.centers
+        return self.medoids
