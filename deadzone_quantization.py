@@ -7,11 +7,11 @@ name = "dead-zone"
 
 class Deadzone_Quantizer(Quantizer):
     
-    def quantize(self, x):
+    def encode(self, x):
         k = (x / self.Q_step).astype(np.int)
         return k
 
-    def dequantize(self, k):
+    def decode(self, k):
         y = np.where(k < 0, self.Q_step * (k - 0.5), k)
         y = np.where(k > 0, self.Q_step * (k + 0.5), y)
         #y = self.Q_step * k

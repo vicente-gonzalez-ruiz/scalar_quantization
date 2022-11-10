@@ -7,11 +7,11 @@ name = "mid-rise"
 
 class Midrise_Quantizer(Quantizer):
         
-    def quantize(self, x):
+    def encode(self, x):
         k = np.floor(x / self.Q_step).astype(np.int)
         return k
 
-    def dequantize(self, k):
+    def decode(self, k):
         y = self.Q_step * (k + 0.5)
         return y
 
