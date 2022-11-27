@@ -14,7 +14,7 @@ logger.setLevel(logging.WARNING)
 
 import numpy as np
 from scipy.ndimage import uniform_filter1d
-from quantization import Quantizer
+from .quantization import Quantizer
 import warnings
 
 name = "Lloyd-Max"

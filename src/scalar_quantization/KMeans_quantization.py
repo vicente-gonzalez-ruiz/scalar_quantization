@@ -13,7 +13,7 @@ logger.setLevel(logging.WARNING)
 import numpy as np
 #from sklearn import cluster
 from sklearn.cluster import KMeans
-from quantization import Quantizer
+from .quantization import Quantizer
 import warnings
 
 name = "KMeans"

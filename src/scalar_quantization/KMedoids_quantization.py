@@ -16,7 +16,7 @@ import numpy as np
 #from sklearn import cluster
 from sklearn.utils import shuffle
 from sklearn_extra.cluster import KMedoids
-from quantization import Quantizer
+from .quantization import Quantizer
 import warnings
 
 name = "KMedoids"

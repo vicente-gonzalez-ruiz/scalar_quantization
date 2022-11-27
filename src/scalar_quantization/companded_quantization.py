@@ -1,7 +1,7 @@
 '''Companded (using mu-law) scalar quantization.'''
 
 import numpy as np
-from quantization import Quantizer
+from .quantization import Quantizer
 import deadzone_quantization as deadzone
 
 name = "companded"

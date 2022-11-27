@@ -1,7 +1,7 @@
 '''Mid-rise scalar quantization.'''
 
 import numpy as np
-from quantization import Quantizer
+from .quantization import Quantizer
 
 name = "mid-rise"
 
