@@ -130,3 +130,8 @@ class LloydMax_Quantizer(Quantizer):
 
         '''
         return self.centroids
+    
+    def set_representation_levels(self, centroids):
+        '''Set the centroids to provide decoding.'''
+        self.centroids = centroids
+
