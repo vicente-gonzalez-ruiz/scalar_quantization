@@ -1,6 +1,4 @@
-'''Lloyd-Max scalar quantization. Use K-Means or K-Medoids (depending
-on a parameter) to compute the centers (an average in the case of
-K-Means and the best input (a medoid) in the case of K-Medoids).'''
+'''Lloyd-Max (scalar) quantization.'''
 
 import logging
 import logging_config
@@ -15,7 +13,7 @@ logger.setLevel(logging.WARNING)
 import numpy as np
 from scipy.ndimage import uniform_filter1d
 from .quantization import Quantizer
-import warnings
+#import warnings
 
 name = "Lloyd-Max"
 
@@ -57,11 +55,13 @@ class LloydMax_Quantizer(Quantizer):
         initial_centroids = 0.5 * (initial_boundaries[1:] + initial_boundaries[:-1])
         self.centroids = initial_centroids
         logger.info(f"initial_centroids={self.centroids}")
-        prev_b = np.zeros(self.boundaries.size)
+        #prev_b = np.zeros(self.boundaries.size)
         for j in range(max_iters):
-            prev_b[:] = self.boundaries
+            #prev_b[:] = self.boundaries
             self._compute_boundaries()
-            max_abs_error = np.max(np.abs(prev_b - self.boundaries))
+            #logger.debug(f"len(prev_b)={len(prev_b)} len(boundaries)={len(self.boundaries)}")
+            #logger.debug(f"prev_b={prev_b} boundaries={self.boundaries}")
+            #max_abs_error = np.max(np.abs(prev_b - self.boundaries))
             prev_c = self.centroids
             end = self._compute_centroids(counts)
             if end:
@@ -77,7 +77,8 @@ class LloydMax_Quantizer(Quantizer):
         logger.debug(f"centroids={self.centroids}")
         self.boundaries = uniform_filter1d(self.centroids, size=2, origin=-1)[:-1]
         self.boundaries = np.concatenate(([0], self.boundaries, [256]))
-        logger.info(f"boundaries={self.boundaries}")
+        logger.debug(f"boundaries={self.boundaries}")
+        logger.debug(f"len(centroids)={len(self.centroids)} len(bondaries)={len(self.boundaries)}")
 
     def _compute_centroids(self, counts):
         '''Compute the centroid of each bin.'''
