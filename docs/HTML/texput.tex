@@ -153,10 +153,11 @@ In a USQwD (USQ with Deadzone), the quantization step is $2\Delta$ for
 ${\mathbf s}_i=0$. Deadzone quantizers tends to remove the
 \href{https://en.wikipedia.org/wiki/Noise_(electronics)}{electronic
   noise} (that usually has a small amplitude compared to the input
-signal ${\mathbf s}$), precisely where the signal-to-noise ratio is
-the lowest.\footnote{Notice that, by definition, dead-zone quantizers
-should not be considered uniform, and that all dead-zone quantizers,
-by definition, are mid-tread.}
+signal ${\mathbf s}$), precisely where the
+\href{https://en.wikipedia.org/wiki/Signal-to-noise_ratio}{SNR
+  (Signal-to-Noise Ratio)} is the lowest.\footnote{Notice that, by
+  definition, dead-zone quantizers should not be considered uniform,
+  and that all dead-zone quantizers, by definition, are mid-tread.}
 
 \begin{figure}
   \svgfig{graphics/deadzone}{6cm}{600pt}
@@ -172,6 +173,19 @@ by definition, are mid-tread.}
 
 \section{Non-uniform quantization}
 %{{{
+
+Uniform quantizers are efficient (minimize the distortion) only if the
+input samples (gray-scale values of the pixels) are uniformly
+distributed among the quantization
+\href{https://en.wikipedia.org/wiki/Data_binning}{bins}~\cite{vruiz__scalar_quantization}. However,
+when the probability of the samples is not ``flat'' (or the number of
+bins is small compared to the number of possible input values), we can
+use better quantizers. For example, if we know that most of the
+samples are small integer values (positive and negative\footnote{Such
+  as it happens with audio CD data.}), a quantizer such as
+\href{https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/gray_SQ/gray_SQ_companded.ipynb}{gray\_SQ\_companded.ipynb}
+can be more suitable than an uniform one\footnote{At least, from a
+  pure-distortion point of view.}.
 
 If we know that the input signal ${\mathbf s}$ does not follow an
 uniform distribution, it is possible to use a variable $\Delta$ to
@@ -228,6 +242,19 @@ algorithm for determining the decision and representation levels.
   \caption{A Max-Lloyd quantizer.}
   \label{fig:Max-Lloyd}
 \end{figure}
+
+Uniform quantizers are efficient (minimize the distortion) only if the
+input samples (gray-scale values of the pixels) are uniformly
+distributed among the quantization
+\href{https://en.wikipedia.org/wiki/Data_binning}{bins}~\cite{vruiz__scalar_quantization}. However,
+when the probability of the samples is not ``flat'' (or the number of
+bins is small compared to the number of possible input values), we can
+use better quantizers. For example, if we know that most of the
+samples are small integer values (positive and negative\footnote{Such
+as it happens with audio CD data.}), a quantizer such as
+\href{https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/gray_SQ/gray_SQ_companded.ipynb}{gray\_SQ\_companded.ipynb}
+can be more suitable than an uniform one\footnote{At least, from a
+  pure-distortion point of view.}.
 
 Notice that the Max-Lloyd quantizer is equivalent to use
 K-means~\cite{hartigan1979algorithm} if we known the $K$ parameter
@@ -461,6 +488,8 @@ performance because it is adaptive.
 \section{Perceptual quantization}
 %{{{
 
+\subsection{In audio}
+
 An important consideration is the relative perfectual importance of
 the input samples. This leads to a weighting of the MSE at the
 output. The weighting function can be derived through experiments to
@@ -469,6 +498,12 @@ subband coding, as expected, high frequecy subbands tolerate more
 noise because the HAS (Human Auditory System) becomes less sensitive
 at them.
 
+\subsection{In images}
+
+Normally, \href{https://en.wikipedia.org/wiki/Visual_system}{humans}
+hardly distinguish more than 64 different
+\href{https://en.wikipedia.org/wiki/Color}{colors}.
+
 %}}}
 
 \section{Quantization error}
@@ -476,6 +511,22 @@ The quantization error can be modeled as a random signal $\mathbf{e}$
 that is added to the original one $\mathbf{s}$, and the energy of this
 error signal $\langle \mathbf{e},\mathbf{e}\rangle$ depends on
 the QSS and the values of $\mathbf{s}$.
+
+\section{RD optimized quantizer design}
+So far, we have designed the image compressor in two steps: (1)
+quantize the pixels ... trying to minimize the distortion, and (2) entropy
+encode (compress) the quantization indexes. However, if we assume that
+the entropy encoding performance is proportional to some
+rate-prediction metric, such as the entropy, it is possible to design
+the quantizer minizing the two RD variables (rate and distortion) at
+the same time~\cite{sayood2017introduction}.
+
+However, there is not (yet) any known reason to think that this
+approach will be generate better RD curves that the one in which only
+the distortion is both parameters (R and D) are minimized
+independently. Besides, the joint optimization of R and D makes the
+quantizer dependent of the entropy codec, that reduces the flexility
+of the encoding system.
 
 \section{Resources}
 \bibliography{quantization,DWT,data-compression,pattern_recognition}
