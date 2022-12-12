@@ -1,0 +1,494 @@
+<!DOCTYPE html> 
+<html lang='en-US' xml:lang='en-US'> 
+<head> <title>Scalar (Digital) Quantization</title> 
+<meta charset='utf-8' /> 
+<meta content='TeX4ht (https://tug.org/tex4ht/)' name='generator' /> 
+<meta content='width=device-width,initial-scale=1' name='viewport' /> 
+<link href='index.css' rel='stylesheet' type='text/css' /> 
+<meta content='index.tex' name='src' /> 
+<script>window.MathJax = { tex: { tags: "ams", }, }; </script> 
+ <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js' type='text/javascript'></script>  
+</head><body>
+   <div class='maketitle'>
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+
+<h2 class='titleHead'><a href='https://github.com/vicente-gonzalez-ruiz/scalar_quantization'>Scalar (Digital) Quantization</a></h2>
+ <div class='author'><span class='ecrm-1200'>Vicente González Ruiz</span></div><br />
+<div class='date'><span class='ecrm-1200'>December 12, 2022</span></div>
+   </div>
+   <h3 class='likesectionHead' id='contents'><a id='x1-1000'></a>Contents</h3>
+   <div class='tableofcontents'>
+    <span class='sectionToc'>1 <a href='#definition' id='QQ2-1-2'>Definition</a></span>
+<br />    <span class='sectionToc'>2 <a href='#uniform-sq-usq' id='QQ2-1-4'>Uniform SQ (USQ)</a></span>
+<br />     <span class='subsectionToc'>2.1 <a href='#midrise-usq' id='QQ2-1-5'>Mid-rise USQ</a></span>
+<br />     <span class='subsectionToc'>2.2 <a href='#midtread-usq' id='QQ2-1-7'>Mid-tread USQ</a></span>
+<br />     <span class='subsectionToc'>2.3 <a href='#midtread-usq-with-deadzone' id='QQ2-1-9'>Mid-tread USQ with deadzone</a></span>
+<br />    <span class='sectionToc'>3 <a href='#nonuniform-quantization' id='QQ2-1-11'>Non-uniform quantization</a></span>
+<br />     <span class='subsectionToc'>3.1 <a href='#companded-quantization-sayoodintroduction' id='QQ2-1-12'>Companded quantization [6]</a></span>
+<br />     <span class='subsectionToc'>3.2 <a href='#pdfoptimized-quantization' id='QQ2-1-14'>PDF-optimized quantization</a></span>
+<br />    <span class='sectionToc'>4 <a href='#adaptive-quantization' id='QQ2-1-16'>Adaptive quantization</a></span>
+<br />     <span class='subsectionToc'>4.1 <a href='#forward-adaptive-quantization' id='QQ2-1-17'>Forward adaptive quantization</a></span>
+<br />    <span class='sectionToc'>5 <a href='#backward-adaptive-quantization' id='QQ2-1-20'>Backward adaptive quantization</a></span>
+<br />     <span class='subsectionToc'>5.1 <a href='#the-jayant-quantizer-jayantdigital' id='QQ2-1-23'>The Jayant quantizer [4]</a></span>
+<br />     <span class='subsectionToc'>5.2 <a href='#adapting-with-a-scale-factor' id='QQ2-1-24'>Adapting with a scale factor</a></span>
+<br />    <span class='sectionToc'>6 <a href='#rd-performance' id='QQ2-1-25'>RD performance</a></span>
+<br />    <span class='sectionToc'>7 <a href='#perceptual-quantization' id='QQ2-1-26'>Perceptual quantization</a></span>
+<br />     <span class='subsectionToc'>7.1 <a href='#in-audio' id='QQ2-1-27'>In audio</a></span>
+<br />     <span class='subsectionToc'>7.2 <a href='#in-images' id='QQ2-1-28'>In images</a></span>
+<br />    <span class='sectionToc'>8 <a href='#quantization-error' id='QQ2-1-29'>Quantization error</a></span>
+<br />    <span class='sectionToc'>9 <a href='#rd-optimized-quantizer-design' id='QQ2-1-30'>RD optimized quantizer design</a></span>
+<br />    <span class='sectionToc'>10 <a href='#resources' id='QQ2-1-31'>Resources</a></span>
+<br />    <span class='sectionToc'><a href='#references'>References</a></span>
+   </div>
+                                                                  
+
+                                                                  
+<!-- l. 10 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead' id='definition'><span class='titlemark'>1   </span> <a id='x1-20001'></a>Definition</h3>
+<!-- l. 13 --><p class='noindent'>Scalar (Digital) <a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)'>Quantization</a> <span class='cite'>[<a href='#Xsayood2017introduction'>6</a>, <span class='ecbx-1000'>?</span>]</span> (see Figure <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:Q  --></a>) is a technique in which each
+source sample is quantized independently from the other samples and therefore, a
+quantization index \({\mathbf k}_i\) is produced for each input sample \({\mathbf s}_i\) <span class='cite'>[<a href='#Xvruiz__signal_quantization'>2</a>]</span>.
+</p>
+   <figure class='figure'> 
+
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+<!-- l. 21 --><p class='noindent' id='-scalar-quantization-and-dequantization-of-a-signal-'><div style='text-align:center;'> <img src='graphics/Q.svg' /> </div>  <a id='x1-2001r1'></a>
+<a id='x1-2002'></a>
+</p>
+<figcaption class='caption'><span class='id'>Figure 1: </span><span class='content'>Scalar quantization and dequantization of a signal.
+</span></figcaption><!-- tex4ht:label?: x1-2001r1  -->
+                                                                  
+
+                                                                  
+   </figure>
+<!-- l. 26 --><p class='indent'>   A \(K\)-levels Scalar Quantizer (SQ) \(Q\) performs a partition of the domain of \(\mathbf s\) into \(K\)
+cells \({\mathbf C}_k, k = 1, \cdots , K\) and associates to any \({\mathbf s}_i\) the quantization index \({\mathbf k}_i\) if \({\mathbf s}_i\in {\mathbf C}_k\). In other words, \begin {equation}  Q({\mathbf s}_i) = {\mathbf k}_i \Leftrightarrow {\mathbf C}_{k-1} &lt; {\mathbf s}_i \le {\mathbf C}_k.  \end {equation}
+</p><!-- l. 35 --><p class='indent'>   The inverse quantizer \(Q^{-1}\) estimates \({\mathbf s}_i\) knowing \({\mathbf k}_i\) and possibly the PDF (Probability
+Density Function) \(p_{\mathbf S}({\mathbf s})\), using a reconstruction level \({\mathbf r}_k\in ]{\mathbf C}_{k-1}, {\mathbf C}_k]\), generating the output \begin {equation}  \tilde {\mathbf s}_i = {\mathbf r}_k.  \end {equation}
+</p><!-- l. 43 --><p class='indent'>   The smallest and the highest value of all \({\mathbf C}_k\) are called the decision boundaries of \(Q\).
+Therefore,
+</p>
+   <h3 class='sectionHead' id='uniform-sq-usq'><span class='titlemark'>2   </span> <a id='x1-30002'></a>Uniform SQ (USQ)</h3>
+<!-- l. 51 --><p class='noindent'>In an USQ, all decision levels are equally spaced by a distance known as <span class='ecti-1000'>the
+</span><span class='ecti-1000'>Quantization Step Size </span>(QSS) \(\Delta \), satisfiying that the domain of the input signal is
+divided into intervals of constant size \begin {equation}  \Delta ={\mathbf d}_{i+1}-{\mathbf d}_i={\mathbf r}_{i+1}-{\mathbf r}_i,  \end {equation}
+where \({\mathbf d}_i\) is the \(i\)-th decision level and \({\mathbf r}_i\) is the \(i\)-th representation level.
+</p><!-- l. 71 --><p class='indent'>   In USQs, the quantization error \(\mathbf e\) depends on \(\Delta \) and can be modeled as a noise
+signal that: (1) is uncorrelated to the input \(\mathbf s\), (2) is <a href='https://en.wikipedia.org/wiki/White_noise'>white</a> and therefore, (3) it follows
+a uniform distribution.
+</p><!-- l. 94 --><p class='noindent'>
+</p>
+   <h4 class='subsectionHead' id='midrise-usq'><span class='titlemark'>2.1   </span> <a id='x1-40002.1'></a>Mid-rise USQ</h4>
+<!-- l. 97 --><p class='noindent'>In mid-rise quantizers the reconstructed signal \(\tilde {\mathbf s}\) never is 0, even if \({\mathbf s}_i=0\) for any \(i\). The
+mapping process in a mid-rise quantizer can be described as \begin {equation}  {\mathbf k}_i = \Big \lfloor \frac {{\mathbf s}_i}{\Delta } \Big \rfloor , \label {eq:mid-rise}  \end {equation}
+and the inverse mapping by \begin {equation}  \tilde {\mathbf s}_i = \Delta \Big ({\mathbf k}_i + \frac {1}{2}\Big ). \label {eq:inverse_mid-rise}  \end {equation}
+</p>
+   <figure class='figure'> 
+
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+<!-- l. 111 --><p class='noindent' id='-an-uniform-midrise-quantizer-see-the-httpsnbviewerjupyterorggithubvicentegonzalezruizscalarquantizationblobmastergraphicsmidriseipynbnotebook-and-k-the-decision-boundaries-have-been-ignored-the-decision-levels-d-are-and-the-representation-levels-r-are-'><div style='text-align:center;'> <img src='graphics/midrise.svg' /> </div>  <a id='x1-4001r2'></a>
+<a id='x1-4002'></a>
+</p>
+<figcaption class='caption'><span class='id'>Figure 2: </span><span class='content'>An uniform mid-rise quantizer (see the <a href='https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/scalar_quantization/blob/master/graphics/midrise.ipynb'>notebook</a>). \(\Delta =1\) and \(K=13\) (the decision
+boundaries have been ignored). The decision levels (\(\mathbf d\)) are \(\{\cdots ,-3,-2,-1,0,1,2,3,\cdots \}\) and the representation
+levels (\(\mathbf r\)) are \(\{\cdots ,-2.5,-1.5,-0.5,0.5,1.5,2.5,\cdots \}\).
+</span></figcaption><!-- tex4ht:label?: x1-4001r2  -->
+                                                                  
+
+                                                                  
+   </figure>
+   <h4 class='subsectionHead' id='midtread-usq'><span class='titlemark'>2.2   </span> <a id='x1-50002.2'></a>Mid-tread USQ</h4>
+<!-- l. 125 --><p class='noindent'>In mid-tread quantizers the reconstructed signal is \(0\) when \({\mathbf s}_i=0\). The mapping process in a
+mid-tread quantizer can be described as \begin {equation}  {\mathbf k}_i = \mathrm {round}\Big ( \frac {{\mathbf s}_i}{\Delta } \Big ), \label {eq:midrise}  \end {equation}
+and the inverse mapping by \begin {equation}  \tilde {\mathbf s}_i = \Delta {\mathbf k}_i. \label {eq:inverse_midrise}  \end {equation}
+</p>
+   <figure class='figure'> 
+
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+<!-- l. 138 --><p class='noindent' id='-an-uniform-midtread-quantizer-see-the-httpsnbviewerjupyterorggithubvicentegonzalezruizscalarquantizationblobmastergraphicsmidtreadipynbnotebook-and-k-the-decision-boundaries-have-been-ignored-the-decision-levels-d-are-and-the-representation-levels-r-are-'><div style='text-align:center;'> <img src='graphics/midtread.svg' /> </div>  <a id='x1-5001r3'></a>
+<a id='x1-5002'></a>
+</p>
+<figcaption class='caption'><span class='id'>Figure 3: </span><span class='content'>An uniform mid-tread quantizer (see the <a href='https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/scalar_quantization/blob/master/graphics/midtread.ipynb'>notebook</a>). \(\Delta =1\) and \(K=12\) (the decision
+boundaries have been ignored). The decision levels (\(\mathbf d\)) are \(\{\cdots ,-2.5,-1.5,-0.5,0.5,1.5,2.5,\cdots \}\) and the representation
+levels (\(\mathbf r\)) are \(\{\cdots ,-2,-1,-0,1,2,\cdots \}\).
+</span></figcaption><!-- tex4ht:label?: x1-5001r2  -->
+                                                                  
+
+                                                                  
+   </figure>
+   <h4 class='subsectionHead' id='midtread-usq-with-deadzone'><span class='titlemark'>2.3   </span> <a id='x1-60002.3'></a>Mid-tread USQ with deadzone</h4>
+<!-- l. 152 --><p class='noindent'>In a USQwD (USQ with Deadzone), the quantization step is \(2\Delta \) for \({\mathbf s}_i=0\). Deadzone quantizers
+tends to remove the <a href='https://en.wikipedia.org/wiki/Noise_(electronics)'>electronic noise</a> (that usually has a small amplitude compared to
+the input signal \(\mathbf s\)), precisely where the <a href='https://en.wikipedia.org/wiki/Signal-to-noise_ratio'>SNR (Signal-to-Noise Ratio)</a> is the
+lowest.<span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-6001f1'></a>
+</p>
+   <figure class='figure'> 
+
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+<!-- l. 163 --><p class='noindent' id='-an-uniform-deadzone-quantizer-see-the-httpsnbviewerjupyterorggithubvicentegonzalezruizscalarquantizationblobmastergraphicsdeadzoneipynbnotebook-and-k-the-decision-boundaries-have-been-ignored-the-decision-levels-d-are-and-the-representation-levels-r-are-'><div style='text-align:center;'> <img src='graphics/deadzone.svg' /> </div>  <a id='x1-6002r4'></a>
+<a id='x1-6003'></a>
+</p>
+<figcaption class='caption'><span class='id'>Figure 4: </span><span class='content'>An uniform deadzone quantizer (see the <a href='https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/scalar_quantization/blob/master/graphics/deadzone.ipynb'>notebook</a>). \(\Delta =1\) and \(K=12\) (the decision
+boundaries have been ignored). The decision levels (\(\mathbf d\)) are \(\{\cdots ,-3,-2,-1,1,2,3,\cdots \}\) and the representation
+levels (\(\mathbf r\)) are \(\{\cdots ,-2,-1,-0,1,2,\cdots \}\).
+</span></figcaption><!-- tex4ht:label?: x1-6002r2  -->
+                                                                  
+
+                                                                  
+   </figure>
+   <h3 class='sectionHead' id='nonuniform-quantization'><span class='titlemark'>3   </span> <a id='x1-70003'></a>Non-uniform quantization</h3>
+<!-- l. 177 --><p class='noindent'>Uniform quantizers are efficient (minimize the distortion) only if the input
+samples (gray-scale values of the pixels) are uniformly distributed among
+the quantization <a href='https://en.wikipedia.org/wiki/Data_binning'>bins</a> <span class='cite'>[<a href='#Xvruiz__scalar_quantization'>1</a>]</span>. However, when the probability of the samples
+is not “flat” (or the number of bins is small compared to the number
+of possible input values), we can use better quantizers. For example, if we
+know that most of the samples are small integer values (positive and
+negative<span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-7001f2'></a>),
+a quantizer such as <a href='https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/gray_SQ/gray_SQ_companded.ipynb'>gray_SQ_companded.ipynb</a> can be more suitable than an uniform
+one<span class='footnote-mark'><a href='#fn3x0' id='fn3x0-bk'><sup class='textsuperscript'>3</sup></a></span><a id='x1-7002f3'></a>.
+</p><!-- l. 190 --><p class='indent'>   If we know that the input signal \(\mathbf s\) does not follow an uniform distribution, it is
+possible to use a variable \(\Delta \) to minimize the quantization error \(\mathbf e\) in those samples that
+are more probable.
+</p><!-- l. 197 --><p class='noindent'>
+</p>
+   <h4 class='subsectionHead' id='companded-quantization-sayoodintroduction'><span class='titlemark'>3.1   </span> <a id='x1-80003.1'></a>Companded quantization <span class='cite'>[<a href='#Xsayood2017introduction'>6</a>]</span></h4>
+<!-- l. 200 --><p class='noindent'><a href='https://en.wikipedia.org/wiki/Companding'>Companding</a> (COMpressing + exPANDING) quantization is used when most of the
+samples are concentrated arround the \(0\) value. For example, most of the (interesting)
+audio for humans has a low volume (for this reason, companded quantizers are used
+in telephony).
+</p><!-- l. 206 --><p class='indent'>   In a companded codec, the original signal is mapped through a compressor,
+quantized using an uniform quantized, and re-mapped using the corresponding
+expander, resulting in a logarithmic quantization, centered at \(0\). A good example is the
+<a href='https://en.wikipedia.org/wiki/%CE%9C-law_algorithm'>\(\mu \)-law</a> codec.
+</p>
+   <figure class='figure'> 
+
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+<!-- l. 215 --><p class='noindent' id='-insights-of-a-companded-quantizerdequantizer-see-this-httpsnbviewerjupyterorggithubvicentegonzalezruizscalarquantizationblobmastergraphicscompandedquantizationipynbnotebook-'><div style='text-align:center;'> <img src='graphics/ulaw-compressor.svg' /> </div>  <div style='text-align:center;'> <img src='graphics/ulaw-expander.svg' /> </div>   <div style='text-align:center;'> <img src='graphics/companded.svg' /> </div>   <a id='x1-8001r5'></a>
+<a id='x1-8002'></a>
+</p>
+<figcaption class='caption'><span class='id'>Figure 5: </span><span class='content'>Insights of a companded quantizer/dequantizer. See this <a href='https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/scalar_quantization/blob/master/graphics/companded_quantization.ipynb'>notebook</a>.  </span></figcaption><!-- tex4ht:label?: x1-8001r3  -->
+                                                                  
+
+                                                                  
+   </figure>
+   <h4 class='subsectionHead' id='pdfoptimized-quantization'><span class='titlemark'>3.2   </span> <a id='x1-90003.2'></a>PDF-optimized quantization</h4>
+<!-- l. 228 --><p class='noindent'>This non-uniform quantizer is a generalization of the companded quantizer, where
+the input samples can follow any distribution. Now, with the idea of minimizing the
+distortion (in general, in terms of the <a href='https://en.wikipedia.org/wiki/Mean_squared_error'>MSE</a>), we chose \({\mathbf \Delta }_i\) smaller where signal samples
+appear most offen.
+</p><!-- l. 235 --><p class='indent'>   The most used PDF quantizer is the Max-Lloyd quantizer <span class='cite'>[<a href='#Xlloyd1982least'>5</a>]</span>, whose authors
+developed an iterative algorithm for determining the decision and representation
+levels.
+</p>
+   <figure class='figure'> 
+
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+<!-- l. 241 --><p class='noindent' id='-a-maxlloyd-quantizer-'><div style='text-align:center;'> <img src='graphics/cuantif_max-lloyd.svg' /> </div>  <a id='x1-9001r6'></a>
+<a id='x1-9002'></a>
+</p>
+<figcaption class='caption'><span class='id'>Figure 6: </span><span class='content'>A Max-Lloyd quantizer.                                     </span></figcaption><!-- tex4ht:label?: x1-9001r3  -->
+                                                                  
+
+                                                                  
+   </figure>
+<!-- l. 246 --><p class='indent'>   Uniform quantizers are efficient (minimize the distortion) only if the input
+samples (gray-scale values of the pixels) are uniformly distributed among
+the quantization <a href='https://en.wikipedia.org/wiki/Data_binning'>bins</a> <span class='cite'>[<a href='#Xvruiz__scalar_quantization'>1</a>]</span>. However, when the probability of the samples
+is not “flat” (or the number of bins is small compared to the number
+of possible input values), we can use better quantizers. For example, if we
+know that most of the samples are small integer values (positive and
+negative<span class='footnote-mark'><a href='#fn4x0' id='fn4x0-bk'><sup class='textsuperscript'>4</sup></a></span><a id='x1-9003f4'></a>),
+a quantizer such as <a href='https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/gray_SQ/gray_SQ_companded.ipynb'>gray_SQ_companded.ipynb</a> can be more suitable than an uniform
+one<span class='footnote-mark'><a href='#fn5x0' id='fn5x0-bk'><sup class='textsuperscript'>5</sup></a></span><a id='x1-9004f5'></a>.
+</p><!-- l. 259 --><p class='indent'>   Notice that the Max-Lloyd quantizer is equivalent to use K-means <span class='cite'>[<a href='#Xhartigan1979algorithm'>3</a>]</span> if we
+known the \(K\) parameter (the number of representation levels). In this case,
+the centroids computed by K-means are in the middle of each region. If we
+don’t know \(K\), we must use the Lloyd Algorithm <span class='cite'>[<a href='#Xhartigan1979algorithm'>3</a>]</span>, which also estimates
+\(K\).
+</p>
+   <h3 class='sectionHead' id='adaptive-quantization'><span class='titlemark'>4   </span> <a id='x1-100004'></a>Adaptive quantization</h3>
+<!-- l. 271 --><p class='noindent'>Adaptive quantizers modify \(\Delta \) dynamically, depending on the local characteristics of
+\(\mathbf s\).
+</p><!-- l. 276 --><p class='noindent'>
+</p>
+   <h4 class='subsectionHead' id='forward-adaptive-quantization'><span class='titlemark'>4.1   </span> <a id='x1-110004.1'></a>Forward adaptive quantization</h4>
+     <ul class='itemize1'>
+     <li class='itemize'>Used for determining a suitable \(\Delta \) for blocks of samples.
+     </li>
+     <li class='itemize'>
+     <!-- l. 282 --><p class='noindent'>  <a id='encoder'></a>
+</p>
+     <h5 class='likesubsubsectionHead'><a id='x1-120004.1'></a>Encoder:</h5>
+     <!-- l. 286 --><p class='noindent'>
+         </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-12002x1'>
+                                                                  
+
+                                                                  
+         <!-- l. 290 --><p class='noindent'>While samples in \(s\):
+         </p><!-- l. 292 --><p class='noindent'>
+             </p><ol class='enumerate2'>
+<li class='enumerate' id='x1-12004x1'>Read into \(b\) the next \(B\) samples of \(s\).
+             </li>
+<li class='enumerate' id='x1-12006x2'>Determine \(\Delta \), minimizing the quantization error, and output \(\Delta \) (or
+             the data necessary for its determination).
+             </li>
+<li class='enumerate' id='x1-12008x3'>Quantize \(b\) and output it.</li></ol>
+         </li></ol>
+     </li>
+     <li class='itemize'>
+     <!-- l. 304 --><p class='noindent'>  <a id='decoder'></a>
+</p>
+     <h5 class='likesubsubsectionHead'><a id='x1-130004.1'></a>Decoder:</h5>
+     <!-- l. 308 --><p class='noindent'>
+         </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-13002x1'>
+         <!-- l. 312 --><p class='noindent'>While data in input:
+         </p><!-- l. 314 --><p class='noindent'>
+             </p><ol class='enumerate2'>
+<li class='enumerate' id='x1-13004x1'>Read \(\Delta \) (or the data necessary for determining it, and in this case,
+             use the same algorithm that the used by the encoder).
+             </li>
+<li class='enumerate' id='x1-13006x2'>“Dequantize” \(b\) and output it (note that the dequantization is only
+             a way of calling the process of reverting the original range of the
+             quantized signal).</li></ol>
+         </li></ol>
+                                                                  
+
+                                                                  
+     </li>
+     <li class='itemize'>The selection of \(B\) is a trade-off between the increase in side information
+     needed by small block sizes and the loss of fidelity due to large block
+     sizes.
+     </li>
+     <li class='itemize'>Forward adaptive quantization generates a \(B\text {-samples}\times f_s\) delay (buffering), where \(f_s\) is the
+     sampling rate of \(s\).</li></ul>
+<!-- l. 338 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead' id='backward-adaptive-quantization'><span class='titlemark'>5   </span> <a id='x1-140005'></a>Backward adaptive quantization</h3>
+     <ul class='itemize1'>
+     <li class='itemize'>Only the previously quantized samples are available to use in adapting the
+     quantizer.
+     </li>
+     <li class='itemize'>Idea: If happens that \(\Delta \) is smaller than it should be, the input will fall in the
+     outer levels of the quantizer a high number of times. On the other hand,
+     if \(\Delta \) is larger than it should be, the samples will fall in the inner levels a
+     high number of times.
+     </li>
+     <li class='itemize'>
+     <!-- l. 351 --><p class='noindent'>  <a id='encoder'></a>
+</p>
+     <h5 class='likesubsubsectionHead' id='encoder1'><a id='x1-150005'></a>Encoder:</h5>
+     <!-- l. 355 --><p class='noindent'>
+         </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-15002x1'>\(\Delta \leftarrow 2\).
+                                                                  
+
+                                                                  
+         </li>
+<li class='enumerate' id='x1-15004x2'>
+         <!-- l. 361 --><p class='noindent'>While \(s\) is not exhausted:
+         </p><!-- l. 363 --><p class='noindent'>
+             </p><ol class='enumerate2'>
+<li class='enumerate' id='x1-15006x1'>Quantize the next sample.
+             </li>
+<li class='enumerate' id='x1-15008x2'>Observe the output and refine \(\Delta \).</li></ol>
+         </li></ol>
+     </li>
+     <li class='itemize'>
+     <!-- l. 372 --><p class='noindent'>  <a id='decoder'></a>
+</p>
+     <h5 class='likesubsubsectionHead' id='decoder1'><a id='x1-160005'></a>Decoder:</h5>
+     <!-- l. 376 --><p class='noindent'>
+         </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-16002x1'>\(\Delta \leftarrow 2\).
+         </li>
+<li class='enumerate' id='x1-16004x2'>
+         <!-- l. 382 --><p class='noindent'>While \(\hat {s}\) is not exhausted:
+         </p><!-- l. 384 --><p class='noindent'>
+             </p><ol class='enumerate2'>
+<li class='enumerate' id='x1-16006x1'>“Dequantize” the next sample.
+             </li>
+<li class='enumerate' id='x1-16008x2'>Step 2.B of the encoder.</li></ol>
+         </li></ol>
+     </li></ul>
+                                                                  
+
+                                                                  
+<!-- l. 397 --><p class='noindent'>
+</p>
+   <h4 class='subsectionHead' id='the-jayant-quantizer-jayantdigital'><span class='titlemark'>5.1   </span> <a id='x1-170005.1'></a>The Jayant quantizer <span class='cite'>[<a href='#Xjayant1974digital'>4</a>]</span></h4>
+     <ul class='itemize1'>
+     <li class='itemize'>Adaptive quantization with a one word memory (\(\Delta _{(t-1)}\)).
+     </li>
+     <li class='itemize'>
+     <!-- l. 404 --><p class='noindent'>A Jayant quantider defines the Step 2.B. as: Define a multiplier \(M_l\) for each
+     quantization level \(l\), where for the inner levels \(M_l&lt;1\) and for the outer levels \(M_l&gt;1\),
+     and compute:
+     </p><!-- l. 410 --><p class='noindent'>\[ \Delta ^{[n]} = \Delta ^{[n-1]}{M_l}^{[n-1]}, \]
+     </p><!-- l. 412 --><p class='noindent'>where \(\Delta ^{[n-1]}\) was the previous quantization step and \({M_l}^{[n-1]}\) the level multiplier for the
+     \(n-1\)-th (previous) sample. Thus, if the previous (\(n-1\)) quantization used a \(\Delta ^{[n-1]}\) too
+     small (using outer quantization levels) then \(\Delta ^{[n]}\) will be larger and viceversa.
+     </p></li>
+     <li class='itemize'>Depending on the multipliers \(M\), the quantizer will converge or oscillate. In
+     the first case, the quantizer will be good for small variations of \(s\) but bad
+     when a fast adaption to large changes in \(s\) is required. In the second one,
+     the quantizer will adapt quickly to fast variations of \(s\) but will oscillate
+     when \(s\) changles slowly.
+     </li>
+     <li class='itemize'>
+     <!-- l. 425 --><p class='noindent'>Most Jayant quantizers clip the computation of \(\Delta \) to avoid generating a zero
+     output quantizer in those contexts where \(s\) is zero or very close to zero, and
+     to improve the adaptation to smaller samples after a sequence of bigger
+     ones (avoiding to grow without limit):
+     </p><!-- l. 436 --><p class='noindent'>\[ \begin {array}{ll} \text {if}~\Delta ^{[n]}&lt;\Delta _{\text {min}}~\text {then}~\Delta ^{[n]} = \Delta _{\text {min}},\\ \text {if}~\Delta ^{[n]}&gt;\Delta _{\text {max}}~\text {then}~\Delta ^{[n]} = \Delta _{\text {max}}. \end {array} \]</p></li></ul>
+<!-- l. 441 --><p class='noindent'>
+</p>
+   <h4 class='subsectionHead' id='adapting-with-a-scale-factor'><span class='titlemark'>5.2   </span> <a id='x1-180005.2'></a>Adapting with a scale factor</h4>
+     <ul class='itemize1'>
+     <li class='itemize'>
+                                                                  
+
+                                                                  
+     <!-- l. 446 --><p class='noindent'>A Jayant quantized adapts the quantization step to the dynamic range
+     of the signa using a set of multipiers. A similar effect can be provided by
+     dividing the input signal by a scale factor defined iteratively as:
+     </p><!-- l. 453 --><p class='noindent'>\begin {equation}  \alpha ^{[n]} = \alpha ^{[n-1]}M_l^{[n-1]}.  \end {equation}
+     </p></li></ul>
+<!-- l. 458 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead' id='rd-performance'><span class='titlemark'>6   </span> <a id='x1-190006'></a>RD performance</h3>
+<!-- l. 460 --><p class='noindent'>Normaly, RD curves are convex <span class='cite'>[<span class='ecbx-1000'>?</span>]</span> (this can be seen in the notebooks <a href='https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/scalar_quantization/midtread.ipynb'>Midtread
+Quantization</a>, <a href='https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/scalar_quantization/midrise.ipynb'>Midrise Quantization</a>, <a href='https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/scalar_quantization/deadzone.ipynb'>Deadzone Quantization</a>, <a href='https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/scalar_quantization/companded.ipynb'>Companded
+Quantization</a>, and <a href='https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/scalar_quantization/LloydMax.ipynb'>LloydMax Quantization</a>). This means that:
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-19002x1'>At low bit-rates the distortion decreases faster than at high bit-rates.
+     </li>
+<li class='enumerate' id='x1-19004x2'>If we have a <span class='ecti-1000'>scalable </span>code-stream (we can decide how the code-stream will
+     be decompressed), we should be aware that some parts of the code-stream
+     can minimize faster the RD curve than others.</li></ol>
+<!-- l. 477 --><p class='indent'>   As it can be also seen in the notebook <a href='https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/scalar_quantization/compare_quantizers.ipynb'>quantizers_comparison</a>, that the
+performance of the quantizers is not the same: usually midrise and midtread,
+performs better than deadzone at intermediate bit-rates, but deadzone is the best a
+low bit-rates (excluding Lloyd-Max). Deadzone has also another advantage
+over midread and midtread: when \(\Delta \) is a power of 2 (which corresponds to a
+bit-plane encoding), the obtained RD point is near optimal in the RD space.
+Finally, the Lloyd-Max Quantizer reaches the highest performance because it is
+adaptive.
+</p><!-- l. 488 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead' id='perceptual-quantization'><span class='titlemark'>7   </span> <a id='x1-200007'></a>Perceptual quantization</h3>
+                                                                  
+
+                                                                  
+<!-- l. 491 --><p class='noindent'>
+</p>
+   <h4 class='subsectionHead' id='in-audio'><span class='titlemark'>7.1   </span> <a id='x1-210007.1'></a>In audio</h4>
+<!-- l. 493 --><p class='noindent'>An important consideration is the relative perfectual importance of the input
+samples. This leads to a weighting of the MSE at the output. The weighting function
+can be derived through experiments to determine the “level of just noticeable noise”.
+For example, in subband coding, as expected, high frequecy subbands tolerate more
+noise because the HAS (Human Auditory System) becomes less sensitive at
+them.
+</p><!-- l. 501 --><p class='noindent'>
+</p>
+   <h4 class='subsectionHead' id='in-images'><span class='titlemark'>7.2   </span> <a id='x1-220007.2'></a>In images</h4>
+<!-- l. 503 --><p class='noindent'>Normally, <a href='https://en.wikipedia.org/wiki/Visual_system'>humans</a> hardly distinguish more than 64 different <a href='https://en.wikipedia.org/wiki/Color'>colors</a>.
+</p><!-- l. 509 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead' id='quantization-error'><span class='titlemark'>8   </span> <a id='x1-230008'></a>Quantization error</h3>
+<!-- l. 510 --><p class='noindent'>The quantization error can be modeled as a random signal \(\mathbf {e}\) that is added to the
+original one \(\mathbf {s}\), and the energy of this error signal \(\langle \mathbf {e},\mathbf {e}\rangle \) depends on the QSS and the values
+of \(\mathbf {s}\).
+</p><!-- l. 515 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead' id='rd-optimized-quantizer-design'><span class='titlemark'>9   </span> <a id='x1-240009'></a>RD optimized quantizer design</h3>
+<!-- l. 516 --><p class='noindent'>So far, we have designed the image compressor in two steps: (1) quantize the pixels ...
+trying to minimize the distortion, and (2) entropy encode (compress) the
+quantization indexes. However, if we assume that the entropy encoding performance
+is proportional to some rate-prediction metric, such as the entropy, it is possible to
+design the quantizer minizing the two RD variables (rate and distortion) at the same
+time <span class='cite'>[<a href='#Xsayood2017introduction'>6</a>]</span>.
+</p><!-- l. 524 --><p class='indent'>   However, there is not (yet) any known reason to think that this approach will be
+generate better RD curves that the one in which only the distortion is both
+parameters (R and D) are minimized independently. Besides, the joint optimization
+of R and D makes the quantizer dependent of the entropy codec, that reduces the
+flexility of the encoding system.
+</p><!-- l. 531 --><p class='noindent'>
+</p>
+                                                                  
+
+                                                                  
+   <h3 class='sectionHead' id='resources'><span class='titlemark'>10   </span> <a id='x1-2500010'></a>Resources</h3>
+   <div class='thebibliography'>
+   <p class='bibitem'><span class='biblabel'>
+ [1]<span class='bibsp'>   </span></span><a id='Xvruiz__scalar_quantization'></a>V. González-Ruiz. <a href='https://vicente-gonzalez-ruiz.github.io/scalar_quantization/'>Scalar Quantization</a>.
+   </p>
+   <p class='bibitem'><span class='biblabel'>
+ [2]<span class='bibsp'>   </span></span><a id='Xvruiz__signal_quantization'></a>V. González-Ruiz. <a href='https://vicente-gonzalez-ruiz.github.io/signal_quantization/'>Signal Quantization</a>.
+   </p>
+   <p class='bibitem'><span class='biblabel'>
+ [3]<span class='bibsp'>   </span></span><a id='Xhartigan1979algorithm'></a>John A Hartigan and Manchek A Wong. <a href='https://www.jstor.org/stable/pdf/2346830.pdf?casa_token=OpmDCC-xvB8AAAAA:XsNY6uI435vqjFaoRw_NG8huJq90gTYJ8fqsfwUPZrWiG3Br-eJ-WxftbmDy8ZD7GcFx5STPmU58HnjqbVG8Y-XSK1didSwaovvumCLzYg4Y9CltmX1G'>Algorithm AS 136: A k-means
+   clustering algorithm</a>. <span class='ecti-1000'>Journal of the royal statistical society. series c (applied
+   </span><span class='ecti-1000'>statistics)</span>, 28(1):100–108, 1979.
+   </p>
+   <p class='bibitem'><span class='biblabel'>
+ [4]<span class='bibsp'>   </span></span><a id='Xjayant1974digital'></a>Nuggehally S.  Jayant.    <a href='https://scholar.google.es/scholar?hl=es&amp;as_sdt=0%2C5&amp;q=%22Digital+coding+of+speech+waveforms%3A+PCM%2C+DPCM%2C+and+DM+quantizers%22&amp;btnG='>Digital  coding  of  speech  waveforms:  PCM,
+   DPCM, and DM quantizers</a>. <span class='ecti-1000'>Proceedings of the IEEE</span>, 62(5):611–632, 1974.
+   </p>
+   <p class='bibitem'><span class='biblabel'>
+ [5]<span class='bibsp'>   </span></span><a id='Xlloyd1982least'></a>Stuart Lloyd.  <a href='http://mlsp.cs.cmu.edu/courses/fall2010/class14/lloyd.pdf'>Least squares quantization in PCM</a>.  <span class='ecti-1000'>IEEE transactions
+   </span><span class='ecti-1000'>on information theory</span>, 28(2):129–137, 1982.
+   </p>
+   <p class='bibitem'><span class='biblabel'>
+ [6]<span class='bibsp'>   </span></span><a id='Xsayood2017introduction'></a>K. Sayood.    <a href='http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf'><span class='ecti-1000'>Introduction  to  Data  Compression</span></a>  <a href='https://people.cs.nctu.edu.tw/~cmliu/Courses/Compression/'><span class='ecti-1000'>(Slides)</span></a>.    Morgan
+   Kaufmann, 2017.
+</p>
+   </div>
+<p id='references'><a id='Q1-1-32'></a>
+   </p><div class='footnotes'><!-- l. 160 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>Notice that, by definition, dead-zone quantizers should not be considered uniform, and that
+</span><span class='ecrm-0800'>all dead-zone quantizers, by definition, are mid-tread.</span></p>
+<!-- l. 185 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>Such as it happens with audio CD data.</span></p>
+<!-- l. 188 --><p class='indent'>     <span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ecrm-0800'>At least, from a pure-distortion point of view.</span></p>
+<!-- l. 254 --><p class='indent'>     <span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>Such as it happens with audio CD data.</span></p>
+<!-- l. 257 --><p class='indent'>     <span class='footnote-mark'><a href='#fn5x0-bk' id='fn5x0'><sup class='textsuperscript'>5</sup></a></span><span class='ecrm-0800'>At least, from a pure-distortion point of view.</span></p>                                                   </div>
+ 
+</body> 
+</html>
