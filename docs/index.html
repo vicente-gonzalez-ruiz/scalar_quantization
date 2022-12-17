@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'><a href='https://github.com/vicente-gonzalez-ruiz/scalar_quantization'>Scalar (Digital) Quantization</a></h2>
  <div class='author'><span class='ecrm-1200'>Vicente González Ruiz</span></div><br />
-<div class='date'><span class='ecrm-1200'>December 12, 2022</span></div>
+<div class='date'><span class='ecrm-1200'>December 17, 2022</span></div>
    </div>
    <h3 class='likesectionHead' id='contents'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -51,8 +51,8 @@
 <!-- l. 10 --><p class='noindent'>
 </p>
    <h3 class='sectionHead' id='definition'><span class='titlemark'>1   </span> <a id='x1-20001'></a>Definition</h3>
-<!-- l. 13 --><p class='noindent'>Scalar (Digital) <a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)'>Quantization</a> <span class='cite'>[<a href='#Xsayood2017introduction'>6</a>, <span class='ecbx-1000'>?</span>]</span> (see Figure <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:Q  --></a>) is a technique in which each
-source sample is quantized independently from the other samples and therefore, a
+<!-- l. 13 --><p class='noindent'>Scalar (Digital) <a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)'>Quantization</a> <span class='cite'>[<a href='#Xsayood2017introduction'>6</a>, <a href='#Xvetterli2014foundations'>7</a>]</span> (see Fig. <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:Q  --></a>) is a technique in which each source
+sample is quantized independently from the other samples and therefore, a
 quantization index \({\mathbf k}_i\) is produced for each input sample \({\mathbf s}_i\) <span class='cite'>[<a href='#Xvruiz__signal_quantization'>2</a>]</span>.
 </p>
    <figure class='figure'> 
@@ -102,10 +102,10 @@ and the inverse mapping by \begin {equation}  \tilde {\mathbf s}_i = \Delta \Big
                                                                   
 
                                                                   
-<!-- l. 111 --><p class='noindent' id='-an-uniform-midrise-quantizer-see-the-httpsnbviewerjupyterorggithubvicentegonzalezruizscalarquantizationblobmastergraphicsmidriseipynbnotebook-and-k-the-decision-boundaries-have-been-ignored-the-decision-levels-d-are-and-the-representation-levels-r-are-'><div style='text-align:center;'> <img src='graphics/midrise.svg' /> </div>  <a id='x1-4001r2'></a>
+<!-- l. 111 --><p class='noindent' id='-an-uniform-midrise-quantizer-see-the-httpsgithubcomvicentegonzalezruizscalarquantizationblobmasterdocsgraphicsmidriseipynbnotebook-and-k-the-decision-boundaries-have-been-ignored-the-decision-levels-d-are-and-the-representation-levels-r-are-'><div style='text-align:center;'> <img src='graphics/midrise.svg' /> </div>  <a id='x1-4001r2'></a>
 <a id='x1-4002'></a>
 </p>
-<figcaption class='caption'><span class='id'>Figure 2: </span><span class='content'>An uniform mid-rise quantizer (see the <a href='https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/scalar_quantization/blob/master/graphics/midrise.ipynb'>notebook</a>). \(\Delta =1\) and \(K=13\) (the decision
+<figcaption class='caption'><span class='id'>Figure 2: </span><span class='content'>An uniform mid-rise quantizer (see the <a href='https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/midrise.ipynb'>notebook</a>). \(\Delta =1\) and \(K=13\) (the decision
 boundaries have been ignored). The decision levels (\(\mathbf d\)) are \(\{\cdots ,-3,-2,-1,0,1,2,3,\cdots \}\) and the representation
 levels (\(\mathbf r\)) are \(\{\cdots ,-2.5,-1.5,-0.5,0.5,1.5,2.5,\cdots \}\).
 </span></figcaption><!-- tex4ht:label?: x1-4001r2  -->
@@ -126,10 +126,10 @@ and the inverse mapping by \begin {equation}  \tilde {\mathbf s}_i = \Delta {\ma
                                                                   
 
                                                                   
-<!-- l. 138 --><p class='noindent' id='-an-uniform-midtread-quantizer-see-the-httpsnbviewerjupyterorggithubvicentegonzalezruizscalarquantizationblobmastergraphicsmidtreadipynbnotebook-and-k-the-decision-boundaries-have-been-ignored-the-decision-levels-d-are-and-the-representation-levels-r-are-'><div style='text-align:center;'> <img src='graphics/midtread.svg' /> </div>  <a id='x1-5001r3'></a>
+<!-- l. 138 --><p class='noindent' id='-an-uniform-midtread-quantizer-see-the-httpsgithubcomvicentegonzalezruizscalarquantizationblobmasterdocsgraphicsmidtreadipynbnotebook-and-k-the-decision-boundaries-have-been-ignored-the-decision-levels-d-are-and-the-representation-levels-r-are-'><div style='text-align:center;'> <img src='graphics/midtread.svg' /> </div>  <a id='x1-5001r3'></a>
 <a id='x1-5002'></a>
 </p>
-<figcaption class='caption'><span class='id'>Figure 3: </span><span class='content'>An uniform mid-tread quantizer (see the <a href='https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/scalar_quantization/blob/master/graphics/midtread.ipynb'>notebook</a>). \(\Delta =1\) and \(K=12\) (the decision
+<figcaption class='caption'><span class='id'>Figure 3: </span><span class='content'>An uniform mid-tread quantizer (see the <a href='https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/midtread.ipynb'>notebook</a>). \(\Delta =1\) and \(K=12\) (the decision
 boundaries have been ignored). The decision levels (\(\mathbf d\)) are \(\{\cdots ,-2.5,-1.5,-0.5,0.5,1.5,2.5,\cdots \}\) and the representation
 levels (\(\mathbf r\)) are \(\{\cdots ,-2,-1,-0,1,2,\cdots \}\).
 </span></figcaption><!-- tex4ht:label?: x1-5001r2  -->
@@ -151,10 +151,10 @@ lowest.<span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='te
                                                                   
 
                                                                   
-<!-- l. 163 --><p class='noindent' id='-an-uniform-deadzone-quantizer-see-the-httpsnbviewerjupyterorggithubvicentegonzalezruizscalarquantizationblobmastergraphicsdeadzoneipynbnotebook-and-k-the-decision-boundaries-have-been-ignored-the-decision-levels-d-are-and-the-representation-levels-r-are-'><div style='text-align:center;'> <img src='graphics/deadzone.svg' /> </div>  <a id='x1-6002r4'></a>
+<!-- l. 163 --><p class='noindent' id='-an-uniform-deadzone-quantizer-see-the-httpsgithubcomvicentegonzalezruizscalarquantizationblobmasterdocsgraphicsdeadzoneipynbnotebook-and-k-the-decision-boundaries-have-been-ignored-the-decision-levels-d-are-and-the-representation-levels-r-are-'><div style='text-align:center;'> <img src='graphics/deadzone.svg' /> </div>  <a id='x1-6002r4'></a>
 <a id='x1-6003'></a>
 </p>
-<figcaption class='caption'><span class='id'>Figure 4: </span><span class='content'>An uniform deadzone quantizer (see the <a href='https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/scalar_quantization/blob/master/graphics/deadzone.ipynb'>notebook</a>). \(\Delta =1\) and \(K=12\) (the decision
+<figcaption class='caption'><span class='id'>Figure 4: </span><span class='content'>An uniform deadzone quantizer (see the <a href='https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/deadzone.ipynb'>notebook</a>). \(\Delta =1\) and \(K=12\) (the decision
 boundaries have been ignored). The decision levels (\(\mathbf d\)) are \(\{\cdots ,-3,-2,-1,1,2,3,\cdots \}\) and the representation
 levels (\(\mathbf r\)) are \(\{\cdots ,-2,-1,-0,1,2,\cdots \}\).
 </span></figcaption><!-- tex4ht:label?: x1-6002r2  -->
@@ -170,7 +170,7 @@ is not “flat” (or the number of bins is small compared to the number
 of possible input values), we can use better quantizers. For example, if we
 know that most of the samples are small integer values (positive and
 negative<span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-7001f2'></a>),
-a quantizer such as <a href='https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/gray_SQ/gray_SQ_companded.ipynb'>gray_SQ_companded.ipynb</a> can be more suitable than an uniform
+a quantizer such as <a href='https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/gray_SQ_companded.ipynb'>gray_SQ_companded.ipynb</a> can be more suitable than an uniform
 one<span class='footnote-mark'><a href='#fn3x0' id='fn3x0-bk'><sup class='textsuperscript'>3</sup></a></span><a id='x1-7002f3'></a>.
 </p><!-- l. 190 --><p class='indent'>   If we know that the input signal \(\mathbf s\) does not follow an uniform distribution, it is
 possible to use a variable \(\Delta \) to minimize the quantization error \(\mathbf e\) in those samples that
@@ -195,10 +195,10 @@ expander, resulting in a logarithmic quantization, centered at \(0\). A good exa
                                                                   
 
                                                                   
-<!-- l. 215 --><p class='noindent' id='-insights-of-a-companded-quantizerdequantizer-see-this-httpsnbviewerjupyterorggithubvicentegonzalezruizscalarquantizationblobmastergraphicscompandedquantizationipynbnotebook-'><div style='text-align:center;'> <img src='graphics/ulaw-compressor.svg' /> </div>  <div style='text-align:center;'> <img src='graphics/ulaw-expander.svg' /> </div>   <div style='text-align:center;'> <img src='graphics/companded.svg' /> </div>   <a id='x1-8001r5'></a>
+<!-- l. 215 --><p class='noindent' id='-insights-of-a-companded-quantizerdequantizer-see-this-httpsgithubcomvicentegonzalezruizscalarquantizationblobmasterdocsgraphicscompandedquantizationipynbnotebook-'><div style='text-align:center;'> <img src='graphics/ulaw-compressor.svg' /> </div>  <div style='text-align:center;'> <img src='graphics/ulaw-expander.svg' /> </div>   <div style='text-align:center;'> <img src='graphics/companded.svg' /> </div>   <a id='x1-8001r5'></a>
 <a id='x1-8002'></a>
 </p>
-<figcaption class='caption'><span class='id'>Figure 5: </span><span class='content'>Insights of a companded quantizer/dequantizer. See this <a href='https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/scalar_quantization/blob/master/graphics/companded_quantization.ipynb'>notebook</a>.  </span></figcaption><!-- tex4ht:label?: x1-8001r3  -->
+<figcaption class='caption'><span class='id'>Figure 5: </span><span class='content'>Insights of a companded quantizer/dequantizer. See this <a href='https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/companded_quantization.ipynb'>notebook</a>.  </span></figcaption><!-- tex4ht:label?: x1-8001r3  -->
                                                                   
 
                                                                   
@@ -235,7 +235,7 @@ is not “flat” (or the number of bins is small compared to the number
 of possible input values), we can use better quantizers. For example, if we
 know that most of the samples are small integer values (positive and
 negative<span class='footnote-mark'><a href='#fn4x0' id='fn4x0-bk'><sup class='textsuperscript'>4</sup></a></span><a id='x1-9003f4'></a>),
-a quantizer such as <a href='https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/gray_SQ/gray_SQ_companded.ipynb'>gray_SQ_companded.ipynb</a> can be more suitable than an uniform
+a quantizer such as <a href='https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/gray_SQ_companded.ipynb'>gray_SQ_companded.ipynb</a> can be more suitable than an uniform
 one<span class='footnote-mark'><a href='#fn5x0' id='fn5x0-bk'><sup class='textsuperscript'>5</sup></a></span><a id='x1-9004f5'></a>.
 </p><!-- l. 259 --><p class='indent'>   Notice that the Max-Lloyd quantizer is equivalent to use K-means <span class='cite'>[<a href='#Xhartigan1979algorithm'>3</a>]</span> if we
 known the \(K\) parameter (the number of representation levels). In this case,
@@ -395,16 +395,16 @@ don’t know \(K\), we must use the Lloyd Algorithm <span class='cite'>[<a href
 <!-- l. 458 --><p class='noindent'>
 </p>
    <h3 class='sectionHead' id='rd-performance'><span class='titlemark'>6   </span> <a id='x1-190006'></a>RD performance</h3>
-<!-- l. 460 --><p class='noindent'>Normaly, RD curves are convex <span class='cite'>[<span class='ecbx-1000'>?</span>]</span> (this can be seen in the notebooks <a href='https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/scalar_quantization/midtread.ipynb'>Midtread
-Quantization</a>, <a href='https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/scalar_quantization/midrise.ipynb'>Midrise Quantization</a>, <a href='https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/scalar_quantization/deadzone.ipynb'>Deadzone Quantization</a>, <a href='https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/scalar_quantization/companded.ipynb'>Companded
-Quantization</a>, and <a href='https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/scalar_quantization/LloydMax.ipynb'>LloydMax Quantization</a>). This means that:
+<!-- l. 460 --><p class='noindent'>Normaly, RD curves are convex <span class='cite'>[<span class='ecbx-1000'>?</span>]</span> (this can be seen in the notebooks <a href='https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/midtread.ipynb'>Midtread
+Quantization</a>, <a href='https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/midrise.ipynb'>Midrise Quantization</a>, <a href='https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/deadzone.ipynb'>Deadzone Quantization</a>, <a href='https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/companded_quantization.ipynb'>Companded
+Quantization</a>, and <a href='https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/LloydMax_quantization.ipynb'>LloydMax Quantization</a>). This means that:
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-19002x1'>At low bit-rates the distortion decreases faster than at high bit-rates.
      </li>
 <li class='enumerate' id='x1-19004x2'>If we have a <span class='ecti-1000'>scalable </span>code-stream (we can decide how the code-stream will
      be decompressed), we should be aware that some parts of the code-stream
      can minimize faster the RD curve than others.</li></ol>
-<!-- l. 477 --><p class='indent'>   As it can be also seen in the notebook <a href='https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/scalar_quantization/compare_quantizers.ipynb'>quantizers_comparison</a>, that the
+<!-- l. 477 --><p class='indent'>   As it can be also seen in the notebook <a href='https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/compare_quantizers.ipynb'>quantizers_comparison</a>, that the
 performance of the quantizers is not the same: usually midrise and midtread,
 performs better than deadzone at intermediate bit-rates, but deadzone is the best a
 low bit-rates (excluding Lloyd-Max). Deadzone has also another advantage
@@ -459,10 +459,10 @@ flexility of the encoding system.
    <h3 class='sectionHead' id='resources'><span class='titlemark'>10   </span> <a id='x1-2500010'></a>Resources</h3>
    <div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
- [1]<span class='bibsp'>   </span></span><a id='Xvruiz__scalar_quantization'></a>V. González-Ruiz. <a href='https://vicente-gonzalez-ruiz.github.io/scalar_quantization/'>Scalar Quantization</a>.
+ [1]<span class='bibsp'>   </span></span><a id='Xvruiz__scalar_quantization'></a>V. González-Ruiz. <a href='https://github.com/vicente-gonzalez-ruiz/scalar_quantization'>Scalar Quantization</a>.
    </p>
    <p class='bibitem'><span class='biblabel'>
- [2]<span class='bibsp'>   </span></span><a id='Xvruiz__signal_quantization'></a>V. González-Ruiz. <a href='https://vicente-gonzalez-ruiz.github.io/signal_quantization/'>Signal Quantization</a>.
+ [2]<span class='bibsp'>   </span></span><a id='Xvruiz__signal_quantization'></a>V. González-Ruiz. <a href='https://github.com/vicente-gonzalez-ruiz/signal_quantization'>Signal Quantization</a>.
    </p>
    <p class='bibitem'><span class='biblabel'>
  [3]<span class='bibsp'>   </span></span><a id='Xhartigan1979algorithm'></a>John A Hartigan and Manchek A Wong. <a href='https://www.jstor.org/stable/pdf/2346830.pdf?casa_token=OpmDCC-xvB8AAAAA:XsNY6uI435vqjFaoRw_NG8huJq90gTYJ8fqsfwUPZrWiG3Br-eJ-WxftbmDy8ZD7GcFx5STPmU58HnjqbVG8Y-XSK1didSwaovvumCLzYg4Y9CltmX1G'>Algorithm AS 136: A k-means
@@ -480,6 +480,10 @@ flexility of the encoding system.
    <p class='bibitem'><span class='biblabel'>
  [6]<span class='bibsp'>   </span></span><a id='Xsayood2017introduction'></a>K. Sayood.    <a href='http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf'><span class='ecti-1000'>Introduction  to  Data  Compression</span></a>  <a href='https://people.cs.nctu.edu.tw/~cmliu/Courses/Compression/'><span class='ecti-1000'>(Slides)</span></a>.    Morgan
    Kaufmann, 2017.
+   </p>
+   <p class='bibitem'><span class='biblabel'>
+ [7]<span class='bibsp'>   </span></span><a id='Xvetterli2014foundations'></a>M. Vetterli, J. Kovačević, and V.K. Goyal.  <a href='http://www.fourierandwavelets.org/FSP_v1.1_2014.pdf'><span class='ecti-1000'>Foundations of Signal
+   </span><span class='ecti-1000'>Processing</span></a>. Cambridge University Press, 2014.
 </p>
    </div>
 <p id='references'><a id='Q1-1-32'></a>

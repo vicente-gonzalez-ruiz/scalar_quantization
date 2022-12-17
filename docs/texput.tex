@@ -12,7 +12,7 @@
 
 Scalar (Digital)
 \href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{Quantization}~\cite{sayood2017introduction,vetterli2014foundations}
-(see Figure~\ref{fig:Q}) is a technique in which each source sample is
+(see Fig.~\ref{fig:Q}) is a technique in which each source sample is
 quantized independently from the other samples and therefore, a
 quantization index ${\mathbf k}_i$ is produced for each input sample
 ${\mathbf s}_i$~\cite{vruiz__signal_quantization}.
@@ -110,7 +110,7 @@ and the inverse mapping by
 \begin{figure}
   \svgfig{graphics/midrise}{6cm}{600pt}
   \caption{An uniform mid-rise quantizer (see the
-    \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/scalar_quantization/blob/master/graphics/midrise.ipynb}{notebook}). $\Delta=1$
+    \href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/midrise.ipynb}{notebook}). $\Delta=1$
     and $K=13$ (the decision boundaries have been ignored). The
     decision levels (${\mathbf d}$) are $\{\cdots,-3,-2,-1,0,1,2,3,\cdots\}$
     and the representation levels (${\mathbf r}$) are
@@ -137,7 +137,7 @@ and the inverse mapping by
 \begin{figure}
   \svgfig{graphics/midtread}{6cm}{600pt}
   \caption{An uniform mid-tread quantizer (see the
-    \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/scalar_quantization/blob/master/graphics/midtread.ipynb}{notebook}). $\Delta=1$
+    \href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/midtread.ipynb}{notebook}). $\Delta=1$
     and $K=12$ (the decision boundaries have been ignored). The
     decision levels (${\mathbf d}$) are $\{\cdots,-2.5,-1.5,-0.5,0.5,1.5,2.5,\cdots\}$
     and the representation levels (${\mathbf r}$) are
@@ -162,7 +162,7 @@ signal ${\mathbf s}$), precisely where the
 \begin{figure}
   \svgfig{graphics/deadzone}{6cm}{600pt}
   \caption{An uniform deadzone quantizer (see the
-    \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/scalar_quantization/blob/master/graphics/deadzone.ipynb}{notebook}). $\Delta=1$
+    \href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/deadzone.ipynb}{notebook}). $\Delta=1$
     and $K=12$ (the decision boundaries have been ignored). The
     decision levels (${\mathbf d}$) are
     $\{\cdots,-3,-2,-1,1,2,3,\cdots\}$ and the representation levels
@@ -183,7 +183,7 @@ bins is small compared to the number of possible input values), we can
 use better quantizers. For example, if we know that most of the
 samples are small integer values (positive and negative\footnote{Such
   as it happens with audio CD data.}), a quantizer such as
-\href{https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/gray_SQ/gray_SQ_companded.ipynb}{gray\_SQ\_companded.ipynb}
+\href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/gray_SQ_companded.ipynb}{gray\_SQ\_companded.ipynb}
 can be more suitable than an uniform one\footnote{At least, from a
   pure-distortion point of view.}.
 
@@ -216,7 +216,7 @@ codec.
   \svgfig{graphics/ulaw-expander}{6cm}{600}
   \svgfig{graphics/companded}{6cm}{600}
   \caption{Insights of a companded quantizer/dequantizer. See this
-    \href{https://nbviewer.jupyter.org/github/vicente-gonzalez-ruiz/scalar_quantization/blob/master/graphics/companded_quantization.ipynb}{notebook}.}
+    \href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/companded_quantization.ipynb}{notebook}.}
   \label{fig:companded_quantizer}
 \end{figure}
 
@@ -252,7 +252,7 @@ bins is small compared to the number of possible input values), we can
 use better quantizers. For example, if we know that most of the
 samples are small integer values (positive and negative\footnote{Such
 as it happens with audio CD data.}), a quantizer such as
-\href{https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/gray_SQ/gray_SQ_companded.ipynb}{gray\_SQ\_companded.ipynb}
+\href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/gray_SQ_companded.ipynb}{gray\_SQ\_companded.ipynb}
 can be more suitable than an uniform one\footnote{At least, from a
   pure-distortion point of view.}.
 
@@ -459,12 +459,12 @@ characteristics of ${\mathbf s}$.
 
 Normaly, RD curves are convex~\cite{vruiz__information_theory} (this
 can be seen in the notebooks
-\href{https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/scalar_quantization/midtread.ipynb}{Midtread Quantization},
-\href{https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/scalar_quantization/midrise.ipynb}{Midrise Quantization},
-\href{https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/scalar_quantization/deadzone.ipynb}{Deadzone Quantization},
-\href{https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/scalar_quantization/companded.ipynb}{Companded Quantization},
+\href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/midtread.ipynb}{Midtread Quantization},
+\href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/midrise.ipynb}{Midrise Quantization},
+\href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/deadzone.ipynb}{Deadzone Quantization},
+\href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/companded_quantization.ipynb}{Companded Quantization},
 and
-\href{https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/scalar_quantization/LloydMax.ipynb}{LloydMax Quantization}). This means that:
+\href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/LloydMax_quantization.ipynb}{LloydMax Quantization}). This means that:
 \begin{enumerate}
 \item At low bit-rates the distortion decreases faster than at high
   bit-rates.
@@ -475,7 +475,7 @@ and
 \end{enumerate}
 
 As it can be also seen in the notebook
-\href{https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/contents/scalar_quantization/compare_quantizers.ipynb}{quantizers\_comparison},
+\href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/compare_quantizers.ipynb}{quantizers\_comparison},
 that the performance of the quantizers is not the same: usually
 midrise and midtread, performs better than deadzone at intermediate
 bit-rates, but deadzone is the best a low bit-rates (excluding
@@ -529,4 +529,4 @@ quantizer dependent of the entropy codec, that reduces the flexility
 of the encoding system.
 
 \section{Resources}
-\bibliography{quantization,DWT,data_compression,pattern_recognition}
+\bibliography{quantization,DWT,data_compression,pattern_recognition,signal_processing}
