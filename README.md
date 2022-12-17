@@ -1,3 +1,1 @@
-# Scalar Quantization
-
-[Click me](https://vicente-gonzalez-ruiz.github.io/scalar_quantization/docs/HTML/).
+# [Scalar Quantization](https://vicente-gonzalez-ruiz.github.io/scalar_quantization/docs/).
