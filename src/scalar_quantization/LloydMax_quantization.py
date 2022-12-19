@@ -136,3 +136,5 @@ class LloydMax_Quantizer(Quantizer):
         '''Set the centroids to provide decoding.'''
         self.centroids = centroids
 
+    def fit(self, x):
+        pass
