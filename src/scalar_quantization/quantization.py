@@ -1,7 +1,7 @@
 '''Scalar Uniform Quantization.'''
 
 import logging
-import logging_config
+#import logging_config
 logger = logging.getLogger(__name__)
 #logging.basicConfig(format="[%(filename)s:%(lineno)s %(levelname)s probando %(funcName)s()] %(message)s")
 ##logger.setLevel(logging.CRITICAL)
@@ -49,4 +49,3 @@ class Quantizer(object):
         quantization_indexes = self.encode(self.get_decision_levels())
         representation_levels = self.decode(quantization_indexes)
         return representation_levels
-
