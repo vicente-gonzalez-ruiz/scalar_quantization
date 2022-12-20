@@ -7,8 +7,8 @@ logger = logging.getLogger(__name__)
 ##logger.setLevel(logging.CRITICAL)
 ##logger.setLevel(logging.ERROR)
 #logger.setLevel(logging.WARNING)
-#logger.setLevel(logging.INFO)
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
+#logger.setLevel(logging.DEBUG)
 
 import numpy as np
 #from sklearn import cluster
@@ -133,7 +133,7 @@ class KMeans_Quantizer(Quantizer):
         logger.debug(f"centroids.shape={self.centroids.shape}")
         logger.debug(f"centroids={self.centroids}")
         logger.debug(f"y.shape={y.shape}")
-        return y.resize(k.shape)
+        return y[...,0]
 
     def get_representation_levels(self):
         '''In a Lloyd-Max quantizer the representation levels are the
