@@ -58,6 +58,7 @@ class KMeans_Quantizer(Quantizer):
         self.clusterer.fit(x)
         self._sort_labels()
         self.centroids = self.clusterer.cluster_centers_
+        logger.debug(f"centroids.shape={self.centroids.shape}")
 
     def _sort_labels(self):
         centroids = self.clusterer.cluster_centers_.squeeze()
@@ -69,6 +70,7 @@ class KMeans_Quantizer(Quantizer):
         sorted_labels = lut[self.clusterer.labels_]
         centroids[:] = sorted_centroids
         self.clusterer.labels_ = sorted_labels
+        logger.debug(f"labels.shape={self.classifier.labels_}")
 
     def __sort_labels(self):
         self.centers = self.classifier.cluster_centers_.squeeze()
@@ -135,4 +137,5 @@ class KMeans_Quantizer(Quantizer):
         centroids computed by the clusterer.
 
         '''
+        logger.debug(f"centroids.shape={self.centroids.shape}")
         return self.centroids
