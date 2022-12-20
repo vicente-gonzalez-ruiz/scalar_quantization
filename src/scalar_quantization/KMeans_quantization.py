@@ -116,7 +116,8 @@ class KMeans_Quantizer(Quantizer):
 
         '''
         k = self.clusterer.predict(x.reshape(-1, 1))
-        k.shape = x.shape
+        #k.shape = x.shape
+        k = k.reshape(x.shape)
         return k
 
     def decode(self, k):
