@@ -133,7 +133,7 @@ class KMeans_Quantizer(Quantizer):
         logger.debug(f"centroids.shape={self.centroids.shape}")
         logger.debug(f"centroids={self.centroids}")
         logger.debug(f"y.shape={y.shape}")
-        return y
+        return y.resize(k.shape)
 
     def get_representation_levels(self):
         '''In a Lloyd-Max quantizer the representation levels are the
