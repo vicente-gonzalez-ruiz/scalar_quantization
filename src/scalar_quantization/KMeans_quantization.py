@@ -129,6 +129,7 @@ class KMeans_Quantizer(Quantizer):
 
         '''
         y = self.centroids[k]
+        logger.debug(f"k.shape={k.shape}")
         logger.debug(f"centroids.shape={self.centroids.shape}")
         logger.debug(f"y.shape={y.shape}")
         return y
