@@ -70,7 +70,7 @@ class KMeans_Quantizer(Quantizer):
         sorted_labels = lut[self.clusterer.labels_]
         centroids[:] = sorted_centroids
         self.clusterer.labels_ = sorted_labels
-        logger.debug(f"labels.shape={self.classifier.labels_}")
+        logger.debug(f"labels.shape={self.clusterer.labels_}")
 
     def __sort_labels(self):
         self.centers = self.classifier.cluster_centers_.squeeze()
