@@ -6,9 +6,9 @@ logger = logging.getLogger(__name__)
 #logging.basicConfig(format="[%(filename)s:%(lineno)s %(levelname)s probando %(funcName)s()] %(message)s")
 ##logger.setLevel(logging.CRITICAL)
 ##logger.setLevel(logging.ERROR)
-logger.setLevel(logging.WARNING)
+#logger.setLevel(logging.WARNING)
 #logger.setLevel(logging.INFO)
-#logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.DEBUG)
 
 import numpy as np
 #from sklearn import cluster
@@ -118,7 +118,7 @@ class KMeans_Quantizer(Quantizer):
         k = self.clusterer.predict(x.reshape(-1, 1))
         #k.shape = x.shape
         k = k.reshape(x.shape)
-        logger.warning(f"k.shape={k.shape}")
+        logger.debug(f"k.shape={k.shape}")
         return k
 
     def decode(self, k):
@@ -127,6 +127,7 @@ class KMeans_Quantizer(Quantizer):
 
         '''
         y = self.centroids[k]
+        logger.debug(f"y.shape={y.shape}")
         return y
 
     def get_representation_levels(self):
