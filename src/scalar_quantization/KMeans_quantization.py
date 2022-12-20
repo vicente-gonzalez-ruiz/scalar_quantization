@@ -27,7 +27,7 @@ class KMeans_Quantizer(Quantizer):
         Q_step: quantization step size.
 
         counts: number of ocurrences of each possible input
-        sample.
+        sample. Used only for an initial generation of the centroids.
 
         [min_val, max_val]: expected dynamic range of the input
         signal.
