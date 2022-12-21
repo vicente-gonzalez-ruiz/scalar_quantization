@@ -109,11 +109,12 @@ and the inverse mapping by
 
 \begin{figure}
   \svgfig{graphics/midrise}{6cm}{600pt}
-  \caption{An uniform mid-rise quantizer (see the
-    \href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/midrise.ipynb}{notebook}). $\Delta=1$
-    and $K=13$ (the decision boundaries have been ignored). The
-    decision levels (${\mathbf d}$) are $\{\cdots,-3,-2,-1,0,1,2,3,\cdots\}$
-    and the representation levels (${\mathbf r}$) are
+  \caption{An uniform mid-rise quantizer (see the notebook
+    \href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/midrise.ipynb}{Uniform
+      Midrise Scalar Quantization}). $\Delta=1$ and $K=13$ (the
+    decision boundaries have been ignored). The decision levels
+    (${\mathbf d}$) are $\{\cdots,-3,-2,-1,0,1,2,3,\cdots\}$ and the
+    representation levels (${\mathbf r}$) are
     $\{\cdots,-2.5,-1.5,-0.5,0.5,1.5,2.5,\cdots\}$.}
   \label{fig:midrise}
 \end{figure}
@@ -136,10 +137,11 @@ and the inverse mapping by
 
 \begin{figure}
   \svgfig{graphics/midtread}{6cm}{600pt}
-  \caption{An uniform mid-tread quantizer (see the
-    \href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/midtread.ipynb}{notebook}). $\Delta=1$
-    and $K=12$ (the decision boundaries have been ignored). The
-    decision levels (${\mathbf d}$) are $\{\cdots,-2.5,-1.5,-0.5,0.5,1.5,2.5,\cdots\}$
+  \caption{An uniform mid-tread quantizer (see the notebook
+    \href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/midtread.ipynb}{Uniform
+      Midrise Scalar Quantization}). $\Delta=1$ and $K=12$ (the
+    decision boundaries have been ignored). The decision levels
+    (${\mathbf d}$) are $\{\cdots,-2.5,-1.5,-0.5,0.5,1.5,2.5,\cdots\}$
     and the representation levels (${\mathbf r}$) are
     $\{\cdots,-2,-1,-0,1,2,\cdots\}$.}
   \label{fig:midtread}
@@ -161,12 +163,13 @@ signal ${\mathbf s}$), precisely where the
 
 \begin{figure}
   \svgfig{graphics/deadzone}{6cm}{600pt}
-  \caption{An uniform deadzone quantizer (see the
-    \href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/deadzone.ipynb}{notebook}). $\Delta=1$
-    and $K=12$ (the decision boundaries have been ignored). The
-    decision levels (${\mathbf d}$) are
-    $\{\cdots,-3,-2,-1,1,2,3,\cdots\}$ and the representation levels
-    (${\mathbf r}$) are $\{\cdots,-2,-1,-0,1,2,\cdots\}$.}
+  \caption{An uniform deadzone quantizer (see the notebook
+    \href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/deadzone.ipynb}{Uniform
+      Midrise Scalar Quantization}). $\Delta=1$ and $K=12$ (the
+    decision boundaries have been ignored). The decision levels
+    (${\mathbf d}$) are $\{\cdots,-3,-2,-1,1,2,3,\cdots\}$ and the
+    representation levels (${\mathbf r}$) are
+    $\{\cdots,-2,-1,-0,1,2,\cdots\}$.}
   \label{fig:deadzone}
 \end{figure}
 %}}}
@@ -215,8 +218,10 @@ codec.
   \svgfig{graphics/ulaw-compressor}{6cm}{600}
   \svgfig{graphics/ulaw-expander}{6cm}{600}
   \svgfig{graphics/companded}{6cm}{600}
-  \caption{Insights of a companded quantizer/dequantizer. See this
-    \href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/companded_quantization.ipynb}{notebook}.}
+  \caption{Insights of a companded quantizer/dequantizer. See the
+    notebook
+    \href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/companded_quantization.ipynb}{Companded
+      Quantization}.}
   \label{fig:companded_quantizer}
 \end{figure}
 
@@ -458,13 +463,9 @@ characteristics of ${\mathbf s}$.
 \section{RD performance}
 
 Normaly, RD curves are convex~\cite{vruiz__information_theory} (this
-can be seen in the notebooks
-\href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/midtread.ipynb}{Midtread Quantization},
-\href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/midrise.ipynb}{Midrise Quantization},
-\href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/deadzone.ipynb}{Deadzone Quantization},
-\href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/graphics/companded_quantization.ipynb}{Companded Quantization},
-and
-\href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/LloydMax_quantization.ipynb}{LloydMax Quantization}). This means that:
+can be seen in the notebook
+\href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/SQ_comparison.ipynb}{A
+  Comparison of Scalar Quantizers}). This means that:
 \begin{enumerate}
 \item At low bit-rates the distortion decreases faster than at high
   bit-rates.
@@ -474,16 +475,14 @@ and
   others.
 \end{enumerate}
 
-As it can be also seen in the notebook
-\href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization/blob/master/docs/compare_quantizers.ipynb}{quantizers\_comparison},
-that the performance of the quantizers is not the same: usually
-midrise and midtread, performs better than deadzone at intermediate
-bit-rates, but deadzone is the best a low bit-rates (excluding
-Lloyd-Max). Deadzone has also another advantage over midread and
-midtread: when $\Delta$ is a power of 2 (which corresponds to a
-bit-plane encoding), the obtained RD point is near optimal in the RD
-space. Finally, the Lloyd-Max Quantizer reaches the highest
-performance because it is adaptive.
+As it can be also seen in the previous notebook that the performance
+of the quantizers is not the same: usually midrise and midtread,
+performs better than deadzone at intermediate bit-rates, but deadzone
+is the best a low bit-rates (excluding Lloyd-Max). Deadzone has also
+another advantage over midread and midtread: when $\Delta$ is a power
+of 2 (which corresponds to a bit-plane encoding), the obtained RD
+point is near optimal in the RD space. Finally, the Lloyd-Max
+Quantizer reaches the highest performance because it is adaptive.
 
 \section{Perceptual quantization}
 %{{{
