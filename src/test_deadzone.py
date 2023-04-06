@@ -3,6 +3,7 @@ from scalar_quantization.deadzone_quantization import Deadzone_Quantizer as Quan
 
 if __name__ == "__main__":
     Q = Quantizer()
-    x = np.linspace(0, 255, 10)
+    x = np.linspace(-5, 5, 50)
     y, k = Q.encode_and_decode(x)
-    print(y)
+    for i in range(50):
+        print(x[i], y[i])
