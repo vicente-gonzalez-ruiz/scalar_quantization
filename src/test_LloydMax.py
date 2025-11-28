@@ -20,18 +20,18 @@ if __name__ == "__main__":
     '''
 
     # Generate a sample histogram (for example, using a Gaussian distribution)
-    number_of_bins = 2
-    low = 0
+    number_of_bins = 8
+    low = -256
     high = 255
     Q_step = (high - low + 1) // number_of_bins
     print("Q_step =", Q_step)
     x = np.random.randint(low, high, size=100)
 
-    histogram, _ = np.histogram(x, bins=(high-low+1), range=(0, 255))
+    histogram, _ = np.histogram(x, bins=(high-low+1), range=(-256, 255))
 
     # Create the Lloyd-Max quantizer with a quantization step and histogram
     q_step = 64
-    quantizer = Quantizer(Q_step=q_step, counts=histogram)
+    quantizer = Quantizer(Q_step=q_step, counts=histogram, min_val=-256, max_val=255)
     # Print the representation levels (centroids)
     print("Representation levels (centroids):")
     print(quantizer.get_representation_levels())

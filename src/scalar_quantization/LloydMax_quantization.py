@@ -35,11 +35,12 @@ class LloydMax_Quantizer(Quantizer):
         '''
         super().__init__(Q_step, min_val, max_val)
         #assert np.all(counts) > 0
-        self.N_bins = (max_val + 1 - min_val) // Q_step
+        #self.N_bins = (max_val + 1 - min_val) // Q_step
+        self.N_bins = int(np.ceil((max_val + 1 - min_val) / Q_step))
         #initial_boundaries = np.linspace(min_val, max_val + 1, self.N_bins + 1)
         total_count = np.sum(counts)
         bin_count = total_count/self.N_bins
-        initial_boundaries = [0.]
+        initial_boundaries = [float(min_val)] #initial_boundaries = [0.]
         acc = 0
         counter = 0
         for p in counts:
@@ -48,7 +49,7 @@ class LloydMax_Quantizer(Quantizer):
             if acc > bin_count:
                 initial_boundaries.append(float(counter))
                 acc = 0
-        initial_boundaries.append(256.)
+        initial_boundaries.append(float(max_val + 1)) #initial_boundaries.append(256.)
         initial_boundaries = np.array(initial_boundaries)
         self.boundaries = initial_boundaries
         logger.info(f"initial_boundaries={self.boundaries}")
@@ -76,7 +77,11 @@ class LloydMax_Quantizer(Quantizer):
         '''
         logger.debug(f"centroids={self.centroids}")
         self.boundaries = uniform_filter1d(self.centroids, size=2, origin=-1)[:-1]
-        self.boundaries = np.concatenate(([0], self.boundaries, [256]))
+        #self.boundaries = np.concatenate(([0], self.boundaries, [256]))
+        self.boundaries = np.concatenate(
+            ([self.min_val], self.boundaries, [self.max_val + 1])
+        )
+
         logger.debug(f"boundaries={self.boundaries}")
         logger.debug(f"len(centroids)={len(self.centroids)} len(bondaries)={len(self.boundaries)}")
 
@@ -87,15 +92,20 @@ class LloydMax_Quantizer(Quantizer):
         bin_size = self.Q_step
         logger.info(f"bin_size={bin_size}")
         for i in range(self.N_bins):
-            b_i = i*bin_size
-            b_i_1 = (i+1)*bin_size
+            #b_i = i*bin_size
+            #b_i_1 = (i+1)*bin_size
+            b_i   = self.min_val + i * bin_size
+            b_i_1 = self.min_val + (i+1) * bin_size
             logger.debug(f"b_i={b_i} b_i_1={b_i_1}")
             if b_i == b_i_1:
                 end = True
                 break
             # See from scipy.ndimage import center_of_mass
-            mass = np.sum([j*counts[j] for j in range(b_i, b_i_1)])
-            total_counts_in_bin = np.sum([counts[j] for j in range(b_i, b_i_1)])
+            #mass = np.sum([j*counts[j] for j in range(b_i, b_i_1)])
+            mass = np.sum([(j) * counts[j - self.min_val] for j in range(b_i, b_i_1)])
+            #total_counts_in_bin = np.sum([counts[j] for j in range(b_i, b_i_1)])
+            total_counts_in_bin = np.sum([counts[j - self.min_val] for j in range(b_i, b_i_1)])
+
             centroid = mass/total_counts_in_bin
             logger.debug(f"centroid={centroid}")
             centroids.append(centroid)
